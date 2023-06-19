@@ -1,0 +1,42 @@
+#nav-container{
+ display: flex;
+ border: dashed black 1 px;
+ height: 70px;
+ width: 100%;
+
+}
+#nav-logo{
+border: dashed black 1 px;
+}
+#logo-image{
+    width: 84px;
+    height: 66px;
+}
+#pizza-logo{
+    width: 100%;
+    height: 100%;
+    border: dashed black 1 px;
+
+}
+#logo-text{
+    
+    color: #C72026;
+    border: dashed black 1 px;
+
+
+}
+#logo-text-line-one{
+    border: dashed black 1 px;
+
+
+}
+#logo-text-line-two{
+    border: dashed black 1 px;
+
+    
+}
+#hamburger{
+    border: dashed black 1 px;
+
+
+}
