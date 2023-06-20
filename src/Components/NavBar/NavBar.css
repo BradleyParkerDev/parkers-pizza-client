@@ -1,4 +1,4 @@
-#nav-container{
+/* #nav-container{
  display: flex;
  border: dashed black 1 px;
  height: 70px;
@@ -35,8 +35,8 @@ border: dashed black 1 px;
 
     
 }
-#hamburger{
+#nav-hamburger{
     border: dashed black 1 px;
 
 
-}
+} */

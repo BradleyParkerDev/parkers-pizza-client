@@ -4,13 +4,15 @@ import './Layout.css'
 import '../App.css'
 const Layout = (props) => {
     return (
-        <div id="layoutDiv">
-
-            <NavBar/>
-            <div id="siteBackground">
-                <Outlet
-                />                
+        <div className="bg-red-pp h-screen flex justify-center "id="layoutDiv">
+            <div className="bg-yellow-pp h-screen w-7/12">
+                <NavBar/>
+                <div id="siteBackground">
+                    <Outlet
+                    />                
+                </div>                
             </div>
+
 
         </div>
     );
