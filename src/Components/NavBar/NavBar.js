@@ -2,7 +2,10 @@ import PizzaLogo from "./PizzaLogo.png"
 import Hamburger from "./Hamburger.png"
 import reject from "./reject.png"
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 const NavBar = (props) =>{
+    const navigate = useNavigate();
     const [sideNavWidth, setSideNavWidth] = useState('0px')
     const openNav = () =>{
 
@@ -15,6 +18,11 @@ const NavBar = (props) =>{
         setSideNavWidth('0px')
 
     }
+    const handleNav = (pageName) =>{
+        
+        navigate(`${pageName}`)
+        closeNav()
+    }
 
 
     return(
@@ -22,14 +30,14 @@ const NavBar = (props) =>{
             {/* Hidden Side Nav */}
             <div id="side-nav" style={{width:`${sideNavWidth}`,transition: "0.5s"}} className="top-0 right-0 h-full bg-white z-10 duration-500 overflow-x-hidden fixed font-sergioTrendy pt-[15px]  ">
                 
-                
+                {/* login/register with reject button */}
                 <div id="hidden-div-1" className='flex ml-[15px] mr-[15px]'>
                     <div id="login-register">
                         <div>
-                            <p style={{fontSize:"32px"}}>Login</p> 
+                            <p style={{fontSize:"32px"}} onClick={()=>{handleNav("/login")}}>Login</p> 
                         </div>
                         <div>
-                            <p style={{fontSize:"16px"}}>register</p>
+                            <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/register")}}>register</p>
                         </div>
                     </div> 
                     <div id="reject-div" className='flex justify-end w-full'>
@@ -41,18 +49,18 @@ const NavBar = (props) =>{
   
 
 
-
+                {/* Menu and Pizza Builder */}
                 <div id="hidden-div-2" className=' flex justify-center mt-[47px] mb-[30px]'>
-                    <p style={{fontSize:"32px"}}>Menu</p> 
+                    <p style={{fontSize:"32px"}} onClick={()=>{handleNav("/menu")}}>Menu</p> 
                 </div>
                 <div id="hidden-div-3" className=' flex justify-center'>
-                    <p style={{fontSize:"32px"}}>Pizza Builder</p>
+                    <p style={{fontSize:"32px"}} onClick={()=>{handleNav("/pizza-builder")}}>Pizza Builder</p>
                 </div>
             </div>
 
             {/* Visible NavBar */}
             <div id="nav-container" className="flex  h-[70px] bg-white" >
-                    <div id="nav-logo" className="flex ">
+                    <div id="nav-logo" className="flex " onClick={()=>{handleNav("/")}}>
                         <div id="logo-image" className="flex w-[84px] h-[66px]">
                             <img id="pizza-logo"  className='w-[84px] h-[66px]' src ={PizzaLogo} alt="Logo"/>
                         </div>
