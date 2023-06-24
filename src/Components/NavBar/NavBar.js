@@ -1,8 +1,22 @@
-import './NavBar.css'
 import '../../App.css';
 import PizzaLogo from "./PizzaLogo.png"
 import Hamburger from "./Hamburger.png"
 const NavBar = (props) =>{
+
+    const openNav = () =>{
+
+        return(
+            <div>
+                
+            </div>
+        )
+
+    }
+    const closeNav = () =>{
+        
+    }
+
+
 
 
     return(
@@ -22,7 +36,7 @@ const NavBar = (props) =>{
                 </div>
                 <div className='flex  w-full justify-end'>
                     <div id="nav-hamburger" style={{ marginRight:"22px", paddingTop:"15px"} } className="" >
-                        <img src={Hamburger} className='w-[36px] h-[35px]'/>
+                        <img src={Hamburger} className='w-[36px] h-[35px]' onClick={()=>{openNav()}}/>
                     </div>
                 </div>
 

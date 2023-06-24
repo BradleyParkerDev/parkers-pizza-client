@@ -1,5 +1,10 @@
 const HomePage = () =>{
-    return
+    return(
+
+        <div id="home-container" className="w-full h-[300px]">
+
+        </div>
+    )
 
 }
 
