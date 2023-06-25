@@ -1,5 +1,10 @@
+import PizzaBuilder from "../Components/PizzaBuilder/PizzaBuilder";
 const PizzaBuilderPage = () =>{
-    return
+    return(
+        <div>
+            <PizzaBuilder />
+        </div>
+    )
 
 }
 

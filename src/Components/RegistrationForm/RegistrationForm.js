@@ -98,7 +98,11 @@ const RegistrationForm = () => {
                         </div>
                         
                         <div>
-                            <p style={{fontSize:"16px", lineHeight:"16px"}}className=" mt-[18px] md:mt-[0px] mb-[10px] font-sergioTrendy">Unit / Apt</p>
+                            <div id="unit-form-line" style={{fontSize:"16px", lineHeight:"16px"}} className="flex mt-[18px] md:mt-[0px] mb-[10px] font-sergioTrendy">
+                               <div>Unit</div>
+                                <div className="font-sans ml-[5px] mr-[5px]">/</div> 
+                                <div>Apt</div>
+                            </div>
                             <input type="text" value={addressLineTwo} onChange={handleChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className=" w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px] "/>
                         </div>
 
