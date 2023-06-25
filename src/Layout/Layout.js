@@ -8,7 +8,7 @@ const Layout = (props) => {
             <div className="bg-yellow-pp h-screen w-full ml:w-[840px] ">
                 <NavBar/>
                 <Outlet/>                
-                <Footer/>               
+                {/* <Footer/>                */}
             </div>
 
 

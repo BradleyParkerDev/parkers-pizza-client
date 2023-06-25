@@ -53,8 +53,8 @@ const Footer = () =>{
                 </div>
                 <div className='flex justify-center md:justify-start md:pl-[66px]'>
                     <div id="newsletter-input" className='flex mt-[25px]' >
-                        <input type="text" className='font-sans border-black border-2 w-[187px] rounded'/>
-                        <div id="newsletter-button" style={{fontSize: "14px", lineHeight: "14px"}} className=' flex justify-center ml-[12px] font-sans border-solid border-2 border-black rounded w-[91px] h-[33px]'>
+                        <input type="text" className='font-sans border-black border-[1px] w-[187px] rounded'/>
+                        <div id="newsletter-button" style={{fontSize: "14px", lineHeight: "14px"}} className=' flex justify-center ml-[12px] font-sans border-solid border-[1px] border-black rounded w-[91px] h-[33px]'>
                             <p className='mt-[7px]'>Subscribe</p>
                         </div>                        
                     </div>
