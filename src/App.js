@@ -10,6 +10,7 @@ import MenuPage from './Pages/MenuPage';
 import PizzaBuilderPage from './Pages/PizzaBuilderPage'
 import LoginPage from './Pages/LoginPage';
 import RegistrationPage from './Pages/RegistrationPage';
+import CartPage from './Pages/CartPage';
 
 function App(props) {
   const router = createBrowserRouter([
@@ -37,6 +38,10 @@ function App(props) {
         {
           path: "/pizza-builder",
           element: <PizzaBuilderPage/>
+        },
+        {
+          path: "/cart",
+          element: <CartPage/>
         }
       ]      
     }  

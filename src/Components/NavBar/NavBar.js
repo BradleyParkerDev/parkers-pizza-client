@@ -28,7 +28,7 @@ const NavBar = (props) =>{
     return(
         <div>
             {/* Hidden Side Nav */}
-            <div id="side-nav" style={{width:`${sideNavWidth}`,transition: "0.5s"}} className="top-0 right-0 h-full bg-white z-10 duration-500 overflow-x-hidden fixed font-sergioTrendy pt-[15px]  ">
+            <div id="side-nav" style={{width:`${sideNavWidth}`,transition: "0.5s"}} className="md:w-[0px]top-0 right-0 h-full bg-white z-10 duration-500 overflow-x-hidden fixed font-sergioTrendy pt-[15px]  ">
                 
                 {/* login/register with reject button */}
                 <div id="hidden-div-1" className='flex ml-[15px] mr-[15px]'>
@@ -73,9 +73,26 @@ const NavBar = (props) =>{
                             </div>                        
                         </div>
                     </div>
-                    <div className='flex  w-full justify-end'>
-                        <div id="nav-hamburger" style={{ marginRight:"22px", paddingTop:"15px"} } className="" >
-                            <img src={Hamburger} className='w-[36px] h-[35px]' onClick={()=>{openNav()}}/>
+                    <div className='flex  w-full justify-end md:justify-start border-black border-dashed border-[1px]'>
+                        <div id="nav-hamburger" style={{ marginRight:"22px", paddingTop:"15px"} } className="md:hidden" >
+                            <img src={Hamburger} className=' w-[36px] h-[35px]' onClick={()=>{openNav()}}/>
+                        </div>
+
+                        {/* Navlinks for wider screen */}
+                        <div id="Nav-links" className="hidden md:contents md:border-black md:border-dashed md:border-[1px]">
+                            <div className="flex">
+
+                                <div id="hidden-div-2" className=' flex justify-center '>
+                                    <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/menu")}}>Menu</p> 
+                                </div>
+                                <div id="hidden-div-3" className=' flex justify-center'>
+                                    <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/pizza-builder")}}>Pizza Builder</p>
+                                </div>
+                                <div>
+                                    <p>Menu</p>
+                                </div>                                
+                            </div>
+
                         </div>
                     </div>
 
