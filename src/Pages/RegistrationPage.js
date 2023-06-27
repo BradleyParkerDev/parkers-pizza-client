@@ -27,7 +27,6 @@ const RegistrationPage = () =>{
                 <RegistrationForm />
 
             </div>
-            <Footer/>
         </div>
     )
 

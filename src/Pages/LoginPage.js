@@ -34,7 +34,7 @@ const LoginPage = () =>{
 
 
     return(
-        <div id="login-body" className="h-[90%] flex flex-col">
+        <div id="login-body" className="h-full flex flex-col">
             <div style={{fontSize:"32px", lineHeight:"32px"}} className="flex justify-center font-sergioTrendy mt-[34px] mb-[21px]">
                 <p>Login</p>
             </div>
@@ -74,9 +74,7 @@ const LoginPage = () =>{
 
             </div>
 
-            <div id="login-footer" className="flex flex-col justify-end  border-black border-2 border-dashed h-auto">
-                <Footer/>
-            </div>
+                {/* <Footer/> */}
 
 
         </div>

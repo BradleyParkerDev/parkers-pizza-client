@@ -1,7 +1,7 @@
 const HomePage = () =>{
     return(
 
-        <div id="home-container" className="w-full h-[300px]">
+        <div id="home-container" className="w-full h-screen">
 
         </div>
     )
