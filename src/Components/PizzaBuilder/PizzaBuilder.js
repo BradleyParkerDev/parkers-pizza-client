@@ -5,7 +5,7 @@ import handTossed from './handTossed.png'
 import deepDish from './deepDish.png'
 import thinCrust from './thinCrust.png'
 
-import { selectCrust, selectSize } from '../../Redux/pizzaBuilderSlice'
+import { selectCrust, selectSize, handleHam } from '../../Redux/pizzaBuilderSlice'
 
 import { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'; 
@@ -32,6 +32,16 @@ const PizzaBuilder = () => {
     const [sizeThreeStyle, setSizeThreeStyle] = useState('none')
 
     const [pizzaImage, setPizzaImage] = useState(deepDish)
+
+
+
+    const [ham, setHam] = useState(null);
+    const [beef, setBeef] = useState(null);
+    const [salami, setSalami] = useState(null);
+    const [pepperoni, setPepperoni] = useState(null);
+    const [italianSausage, setItalianSausage] = useState(null);
+    const [bacon, setBacon] = useState(null);
+
 
 
     const handleCrustChange = (crustType) => {
@@ -79,7 +89,7 @@ const PizzaBuilder = () => {
 
         }
 
-        // console.log(crust)
+        console.log(pizza)
     }
     const handleSizeChange = (value) => {
         if(value === 'Sm'){
@@ -125,8 +135,27 @@ const PizzaBuilder = () => {
 
         }
 
+
         // console.log(pizzaSize)  
     }
+
+
+
+    useEffect(()=>{
+
+        console.log(pizza)
+
+
+
+    },[pizza])
+
+
+
+
+
+
+
+
     return(
         //
         <div id ="form-total-button">
@@ -223,9 +252,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Ham</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input name="ham" type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input name="ham" type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input name="ham" type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleHam('left side'))}} checked={pizza.toppingsGrid.ham.left} type="checkbox"  className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleHam('whole pizza'))}} checked={pizza.toppingsGrid.ham.whole} name="ham-whole" type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleHam('right side'))}} checked={pizza.toppingsGrid.ham.right} name="ham-right" type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
