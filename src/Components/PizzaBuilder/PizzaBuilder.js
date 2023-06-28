@@ -5,14 +5,22 @@ import handTossed from './handTossed.png'
 import deepDish from './deepDish.png'
 import thinCrust from './thinCrust.png'
 
-import { selectCrust, selectSize, handleHam,handleBeef, handleSalami, handlePepperoni,handleItalianSausage,handleBacon, handleOnions, handleMushrooms, handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, handlePineapple,handleSpecialInstructions   } from '../../Redux/pizzaBuilderSlice'
-
+import { 
+    selectCrust, selectSize, 
+    handleHam,handleBeef, handleSalami,
+    handlePepperoni,handleItalianSausage,
+    handleBacon, handleOnions, handleMushrooms, 
+    handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, 
+    handlePineapple,handleSpecialInstructions, calculateTotal   
+} from '../../Redux/pizzaBuilderSlice'
+import { addItemToCart } from '../../Redux/cartSlice'
 import { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'; 
 
 const PizzaBuilder = () => {
     const dispatch = useDispatch();
     const pizza = useSelector((state)=>state.pizza)
+    const cart = useSelector((state)=>state.cart)
     //Crust
     const [crust, setCrust] = useState('Deep Dish')
     const [crustOneBg, setCrustOneBg] = useState('#D9D9D9')
@@ -32,6 +40,7 @@ const PizzaBuilder = () => {
     const [sizeThreeStyle, setSizeThreeStyle] = useState('none')
 
     const [pizzaImage, setPizzaImage] = useState(deepDish)
+    const [description, setDescription] = useState('')
 
 
 
@@ -143,11 +152,14 @@ const PizzaBuilder = () => {
 
     useEffect(()=>{
 
+
+        dispatch(calculateTotal())
         console.log(pizza)
+        console.log(cart)
 
 
 
-    },[pizza])
+    },[pizza, cart])
 
 
 
@@ -417,7 +429,7 @@ const PizzaBuilder = () => {
                                 Special Instructions
                             </p>
                         </div>
-                        <textarea onChange={(e)=>dispatch(handleSpecialInstructions(e))} id="special-instructions" className='p-[5px] w-full h-[106px] border-solid border-black border-[1px]'/>
+                        <textarea onChange={(e)=>dispatch(handleSpecialInstructions(e.target.value))} id="special-instructions" className='p-[5px] w-full h-[106px] border-solid border-black border-[1px]'/>
                     </div>
                 </div>
             </div>
@@ -435,7 +447,7 @@ const PizzaBuilder = () => {
 
                             </div>
                             <div className=' pt-[4px] justify-end font-sergioTrendy h-[24px] '>
-                                <p>15.00</p>
+                                <p>{pizza.totalCost}</p>
 
                             </div>                            
                         </div>
@@ -448,7 +460,7 @@ const PizzaBuilder = () => {
             <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px]'>
                 <div id="button-container" className='flex justify-end'>
                     <div id="button" className='bg-red-pp w-[202px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
-                        <p className='font-sergioTrendy text-white mt-[15px]'>
+                        <p onClick={()=>{dispatch(addItemToCart(pizza))}} className='font-sergioTrendy text-white mt-[15px]'>
                             Add to Cart
                         </p>
                     </div>

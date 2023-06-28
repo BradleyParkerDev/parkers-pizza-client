@@ -685,13 +685,31 @@ const pizzaBuilderSlice = createSlice({
         
         },
         handleSpecialInstructions: (state, action) => {
-            return state.specialInstructions = action.payload
+
+            state.specialInstructions = action.payload
+        },
+        calculateTotal: (state, action) => {
+
+            let total = 0;
+            for (const key in state.toppings) {
+
+                console.log(state.toppings[key].side)
+                if(state.toppings[key].side === 'whole pizza'){
+                    total+=1
+                }else{
+                    total+=.5
+                }
+                   
+                
+            }
+            console.log(total)
+            state.totalCost = total
         }
 
-    },
+    }
 });
 
 
-export const { selectCrust, selectSize, handleHam, handleBeef, handleSalami, handlePepperoni,handleItalianSausage,handleBacon, handleOnions, handleMushrooms, handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, handlePineapple, handleSpecialInstructions } = pizzaBuilderSlice.actions;
+export const { selectCrust, selectSize, handleHam, handleBeef, handleSalami, handlePepperoni,handleItalianSausage,handleBacon, handleOnions, handleMushrooms, handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, handlePineapple, handleSpecialInstructions, calculateTotal } = pizzaBuilderSlice.actions;
 export default pizzaBuilderSlice.reducer;
 

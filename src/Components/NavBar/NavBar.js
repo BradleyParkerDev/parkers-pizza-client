@@ -31,13 +31,23 @@ const NavBar = (props) =>{
             <div id="side-nav" style={{width:`${sideNavWidth}`,transition: "0.5s"}} className="md:w-[0px]top-0 right-0 h-full bg-white z-10 duration-500 overflow-x-hidden fixed font-sergioTrendy pt-[15px]  ">
                 
                 {/* login/register with reject button */}
-                <div id="hidden-div-1" className='flex ml-[15px] mr-[15px]'>
-                    <div id="login-register">
+                <div id="hidden-div-1" className='flex ml-[15px] mr-[15px] border-dashed border-[1px] border-black'>
+                    <div id="login-register" className="w-auto border-dashed border-[1px] border-black">
                         <div>
                             <p style={{fontSize:"32px"}} onClick={()=>{handleNav("/login")}}>Login</p> 
                         </div>
-                        <div>
-                            <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/register")}}>register</p>
+                        <div className="flex">
+                            <div>
+                                <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/register")}}>Register</p>
+                            </div>
+                            <div className="font-sans mr-[5px] ml-[5px]">
+                                <p>|</p>                                
+                            </div>
+                            <div className="w-[90px] flex border-dashed border-[1px] border-black">
+                                <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/cart")}}>View Cart</p>                                
+                            </div>
+
+
                         </div>
                     </div> 
                     <div id="reject-div" className='flex justify-end w-full'>
