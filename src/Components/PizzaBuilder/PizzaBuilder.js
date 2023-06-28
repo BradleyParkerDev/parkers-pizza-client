@@ -5,7 +5,7 @@ import handTossed from './handTossed.png'
 import deepDish from './deepDish.png'
 import thinCrust from './thinCrust.png'
 
-import { selectCrust, selectSize, handleHam } from '../../Redux/pizzaBuilderSlice'
+import { selectCrust, selectSize, handleHam,handleBeef } from '../../Redux/pizzaBuilderSlice'
 
 import { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'; 
@@ -252,9 +252,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Ham</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input onClick={()=>{dispatch(handleHam('left side'))}} checked={pizza.toppingsGrid.ham.left} type="checkbox"  className="w-[20px] h-[20px]"/>
-                                    <input onClick={()=>{dispatch(handleHam('whole pizza'))}} checked={pizza.toppingsGrid.ham.whole} name="ham-whole" type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input onClick={()=>{dispatch(handleHam('right side'))}} checked={pizza.toppingsGrid.ham.right} name="ham-right" type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleHam({side:'left side',price:.5}))}} checked={pizza.toppingsGrid.ham.left} type="checkbox"  className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleHam({side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.ham.whole} name="ham-whole" type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleHam({side:'right side',price:.5}))}} checked={pizza.toppingsGrid.ham.right} name="ham-right" type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -264,9 +264,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Beef</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBeef({side:'left side',price:.5}))}} checked={pizza.toppingsGrid.beef.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBeef({side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.beef.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBeef({side:'right side',price:.5}))}} checked={pizza.toppingsGrid.beef.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>

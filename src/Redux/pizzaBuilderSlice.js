@@ -31,7 +31,7 @@ const initialState ={
     toppings:{},
     toppingsGrid: toppingsGridObj,
     specialInstructions: '',
-    price: 0
+    totalCost: 0
 }
 
 
@@ -56,29 +56,30 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
 
 
-            if(action.payload === 'left side' && state.toppingsGrid.ham.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.ham.left == true){
                 state.toppingsGrid.ham.left = false
                 state.toppingsGrid.ham.whole = false
                 state.toppingsGrid.ham.right = false
                 delete state.toppings.ham
 
             }
-            else if(action.payload === 'left side'){
+            else if(action.payload.side === 'left side'){
                 state.toppingsGrid.ham.left = true
                 state.toppingsGrid.ham.whole = false
                 state.toppingsGrid.ham.right = false
                 state.toppings.ham = action.payload
+
             }
 
 
-            if(action.payload === 'whole pizza' && state.toppingsGrid.ham.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.ham.whole == true){
                 state.toppingsGrid.ham.left = false
                 state.toppingsGrid.ham.whole = false
                 state.toppingsGrid.ham.right = false
                 delete state.toppings.ham
 
             }
-            else if(action.payload === 'whole pizza'){
+            else if(action.payload.side === 'whole pizza'){
                 state.toppingsGrid.ham.left = false
                 state.toppingsGrid.ham.whole = true
                 state.toppingsGrid.ham.right = false
@@ -88,14 +89,14 @@ const pizzaBuilderSlice = createSlice({
 
 
 
-            if(action.payload === 'right side'  && state.toppingsGrid.ham.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.ham.right == true){
                 state.toppingsGrid.ham.left = false
                 state.toppingsGrid.ham.whole = false
                 state.toppingsGrid.ham.right = false
                 delete state.toppings.ham
 
             }
-            else if(action.payload === 'right side'){
+            else if(action.payload.side === 'right side'){
                 state.toppingsGrid.ham.left = false
                 state.toppingsGrid.ham.whole = false
                 state.toppingsGrid.ham.right = true
@@ -106,7 +107,56 @@ const pizzaBuilderSlice = createSlice({
 
 
         },
-        removeTopping: (state, action) => {
+        handleBeef:(state, action) => {
+            // console.log(action.payload)
+        
+        
+            if(action.payload.side === 'left side' && state.toppingsGrid.beef.left == true){
+                state.toppingsGrid.beef.left = false
+                state.toppingsGrid.beef.whole = false
+                state.toppingsGrid.beef.right = false
+                delete state.toppings.beef
+        
+            }
+            else if(action.payload.side === 'left side'){
+                state.toppingsGrid.beef.left = true
+                state.toppingsGrid.beef.whole = false
+                state.toppingsGrid.beef.right = false
+                state.toppings.beef = action.payload
+            }
+        
+        
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.beef.whole == true){
+                state.toppingsGrid.beef.left = false
+                state.toppingsGrid.beef.whole = false
+                state.toppingsGrid.beef.right = false
+                delete state.toppings.beef
+        
+            }
+            else if(action.payload.side === 'whole pizza'){
+                state.toppingsGrid.beef.left = false
+                state.toppingsGrid.beef.whole = true
+                state.toppingsGrid.beef.right = false
+                state.toppings.beef = action.payload
+        
+            }
+        
+        
+        
+            if(action.payload.side === 'right side'  && state.toppingsGrid.beef.right == true){
+                state.toppingsGrid.beef.left = false
+                state.toppingsGrid.beef.whole = false
+                state.toppingsGrid.beef.right = false
+                delete state.toppings.beef
+        
+            }
+            else if(action.payload.side === 'right side'){
+                state.toppingsGrid.beef.left = false
+                state.toppingsGrid.beef.whole = false
+                state.toppingsGrid.beef.right = true
+                state.toppings.beef = action.payload
+        
+            }
 
         },
         updatePrice: (state, action) => {
@@ -117,5 +167,7 @@ const pizzaBuilderSlice = createSlice({
 });
 
 
-export const { selectCrust, selectSize, handleHam } = pizzaBuilderSlice.actions;
+export const { selectCrust, selectSize, handleHam, handleBeef } = pizzaBuilderSlice.actions;
 export default pizzaBuilderSlice.reducer;
+
+
