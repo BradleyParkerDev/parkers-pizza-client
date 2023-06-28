@@ -5,7 +5,7 @@ import handTossed from './handTossed.png'
 import deepDish from './deepDish.png'
 import thinCrust from './thinCrust.png'
 
-import { selectCrust, selectSize, handleHam,handleBeef } from '../../Redux/pizzaBuilderSlice'
+import { selectCrust, selectSize, handleHam,handleBeef, handleSalami, handlePepperoni,handleItalianSausage,handleBacon, handleOnions, handleMushrooms, handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, handlePineapple,handleSpecialInstructions   } from '../../Redux/pizzaBuilderSlice'
 
 import { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'; 
@@ -252,9 +252,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Ham</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input onClick={()=>{dispatch(handleHam({side:'left side',price:.5}))}} checked={pizza.toppingsGrid.ham.left} type="checkbox"  className="w-[20px] h-[20px]"/>
-                                    <input onClick={()=>{dispatch(handleHam({side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.ham.whole} name="ham-whole" type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input onClick={()=>{dispatch(handleHam({side:'right side',price:.5}))}} checked={pizza.toppingsGrid.ham.right} name="ham-right" type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleHam({name: 'ham', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.ham.left} type="checkbox"  className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleHam({name: 'ham', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.ham.whole} name="ham-whole" type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleHam({name: 'ham', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.ham.right} name="ham-right" type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -264,9 +264,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Beef</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input onClick={()=>{dispatch(handleBeef({side:'left side',price:.5}))}} checked={pizza.toppingsGrid.beef.left} type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input onClick={()=>{dispatch(handleBeef({side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.beef.whole} type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input onClick={()=>{dispatch(handleBeef({side:'right side',price:.5}))}} checked={pizza.toppingsGrid.beef.right} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBeef({name: 'beef', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.beef.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBeef({name: 'beef', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.beef.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBeef({name: 'beef', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.beef.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -276,9 +276,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Salami</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleSalami({name: 'salami', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.salami.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleSalami({name: 'salami', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.salami.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleSalami({name: 'salami', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.salami.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -288,9 +288,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Pepperoni</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handlePepperoni({name: 'pepperoni', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.pepperoni.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handlePepperoni({name: 'pepperoni', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.pepperoni.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handlePepperoni({name: 'pepperoni', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.pepperoni.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -300,9 +300,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Italian Sausage</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleItalianSausage({name: 'italianSausage', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.italianSausage.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleItalianSausage({name: 'italianSausage', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.italianSausage.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleItalianSausage({name: 'italianSausage', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.italianSausage.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -312,9 +312,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Bacon</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBacon({name: 'bacon', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.bacon.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBacon({name: 'bacon', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.bacon.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBacon({name: 'bacon', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.bacon.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -342,9 +342,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Onions</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleOnions({name: 'onions', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.onions.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleOnions({name: 'onions', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.onions.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleOnions({name: 'onions', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.onions.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -354,9 +354,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Mushrooms</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleMushrooms({name: 'mushrooms', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.mushrooms.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleMushrooms({name: 'mushrooms', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.mushrooms.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleMushrooms({name: 'mushrooms', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.mushrooms.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -366,9 +366,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Black Olives</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                <input onClick={()=>{dispatch(handleBlackOlives({name: 'blackOlives', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.blackOlives.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBlackOlives({name: 'blackOlives', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.blackOlives.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleBlackOlives({name: 'blackOlives', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.blackOlives.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -378,9 +378,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Green Peppers</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleGreenPeppers({name: 'greenPeppers', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.greenPeppers.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleGreenPeppers({name: 'greenPeppers', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.greenPeppers.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleGreenPeppers({name: 'greenPeppers', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.greenPeppers.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -390,9 +390,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Jalapeno Peppers</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleJalapenoPeppers({name: 'jalapenoPeppers', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.jalapenoPeppers.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleJalapenoPeppers({name: 'jalapenoPeppers', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.jalapenoPeppers.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handleJalapenoPeppers({name: 'jalapenoPeppers', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.jalapenoPeppers.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -402,9 +402,9 @@ const PizzaBuilder = () => {
                                     <p style={{fontSize:'16px'}} className="font-sergioTrendy">Pineapple</p>
                                 </div>
                                 <div className="flex justify-evenly w-[108px] h-[21px] border-dashed">
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
-                                    <input type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handlePineapple({name: 'pineapple', side:'left side',price:.5}))}} checked={pizza.toppingsGrid.pineapple.left} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handlePineapple({name: 'pineapple', side:'whole pizza',price:1}))}} checked={pizza.toppingsGrid.pineapple.whole} type="checkbox" className="w-[20px] h-[20px]"/>
+                                    <input onClick={()=>{dispatch(handlePineapple({name: 'pineapple', side:'right side',price:.5}))}} checked={pizza.toppingsGrid.pineapple.right} type="checkbox" className="w-[20px] h-[20px]"/>
                                 </div>
 
                             </div>
@@ -417,7 +417,7 @@ const PizzaBuilder = () => {
                                 Special Instructions
                             </p>
                         </div>
-                        <textarea id="special-instructions" className='p-[5px] w-full h-[106px] border-solid border-black border-[1px]'/>
+                        <textarea onChange={(e)=>dispatch(handleSpecialInstructions(e))} id="special-instructions" className='p-[5px] w-full h-[106px] border-solid border-black border-[1px]'/>
                     </div>
                 </div>
             </div>
