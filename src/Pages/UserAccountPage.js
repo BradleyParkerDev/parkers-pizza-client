@@ -37,7 +37,7 @@ const UserAccountPage = (props) => {
                     <div id="order-history-container-2" className="flex justify-center">
                         {/* Order History Container */}
                         <div id="order-history-items-outer-container" className="w-[361px] md:w-[680px]  bg-grey-pp rounded-[5px] p-[6px] min-h-[300px] md:min-h-[170px] h-[auto]">
-                            <div id="order-history-items-inner-container" className="w-[full] bg-white rounded-[5px] p-[9px]  h-[100%]">
+                            <div id="order-history-items-inner-container" className="w-[full] bg-white rounded-[5px] p-[5px]  h-[100%]">
                         
 
 
@@ -64,7 +64,7 @@ const UserAccountPage = (props) => {
 
                 <div id="user-account-body-div4" className='flex justify-center'>
                     <div className='flex justify-center'>
-                        <div id='sign-up-button' className="w-[191px] h-[47px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
+                        <div id='sign-up-button' className="w-[191px] h-[47px] mb-[46px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
                             <p className="mt-[15px] ml-[29px]">Delete Account</p>
                         </div>
                         <div id="button-outer-container" className="flex justify-center">
