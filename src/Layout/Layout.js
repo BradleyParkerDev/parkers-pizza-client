@@ -5,7 +5,7 @@ import '../App.css'
 const Layout = (props) => {
     return (
         <div className="bg-red-pp h-full flex justify-center " id="layoutDiv">
-            <div className="bg-yellow-pp h-full w-full ml:w-[840px] ">
+            <div className="bg-yellow-pp h-full w-full ml:w-[940px] ">
                 <NavBar/>
                 <Outlet/>                
                 <Footer/>               

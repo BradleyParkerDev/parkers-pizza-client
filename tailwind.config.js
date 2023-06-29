@@ -11,7 +11,8 @@ module.exports = {
         'grey-pp':'#D9D9D9'
       },
       fontFamily:{
-        sergioTrendy: ['Sergio Trendy', 'normal']
+        sergioTrendy: ['Sergio Trendy', 'normal'],
+        coiny: ['Coiny-Cyrillic','normal']
       }
     },
     screens: {
@@ -21,7 +22,7 @@ module.exports = {
 
       'md': '768px',
       // => @media (min-width: 768px) { ... }
-      'ml':'840px',
+      'ml':'940px',
       'lg': '1024px',
       // => @media (min-width: 1024px) { ... }
 

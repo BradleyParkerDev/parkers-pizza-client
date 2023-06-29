@@ -1,4 +1,4 @@
-import RegistrationForm from '../Components/RegistrationForm/RegistrationForm'
+import UserForm from '../Components/UserForm/UserForm'
 import Footer from '../Components/Footer/Footer'
 import { useState, useEffect } from "react";
 
@@ -24,7 +24,7 @@ const RegistrationPage = () =>{
             </div>            
             <div id="registration-body-div1" className='flex justify-center'>
 
-                <RegistrationForm />
+                <UserForm />
 
             </div>
         </div>

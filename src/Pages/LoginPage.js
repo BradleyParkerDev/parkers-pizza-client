@@ -62,7 +62,7 @@ const LoginPage = () =>{
             </div>
             <div id='register-div' className="flex justify-center">
                 <div style={{fontSize:"14px", lineHeight:"14px"}}id='register-inner-div ' className=" mt-[10px] w-[275px] se:w-[320px] flex justify-end font-sergioTrendy">
-                    <p onClick={()=>{navigate('/register')}}>Register</p>
+                    <p onClick={()=>{navigate('/registration')}}>Register</p>
                 </div>                
             </div>
             <div id="button-col-div" className="flex justify-center">

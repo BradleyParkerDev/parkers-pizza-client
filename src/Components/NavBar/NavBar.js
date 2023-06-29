@@ -31,19 +31,19 @@ const NavBar = (props) =>{
             <div id="side-nav" style={{width:`${sideNavWidth}`,transition: "0.5s"}} className="md:w-[0px]top-0 right-0 h-full bg-white z-10 duration-500 overflow-x-hidden fixed font-sergioTrendy pt-[15px]  ">
                 
                 {/* login/register with reject button */}
-                <div id="hidden-div-1" className='flex ml-[15px] mr-[15px] border-dashed border-[1px] border-black'>
-                    <div id="login-register" className="w-auto border-dashed border-[1px] border-black">
+                <div id="hidden-div-1" className='flex ml-[15px] mr-[15px] '>
+                    <div id="login-register" className="w-auto ">
                         <div>
                             <p style={{fontSize:"32px"}} onClick={()=>{handleNav("/login")}}>Login</p> 
                         </div>
                         <div className="flex">
                             <div>
-                                <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/register")}}>Register</p>
+                                <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/registration")}}>Register</p>
                             </div>
                             <div className="font-sans mr-[5px] ml-[5px]">
                                 <p>|</p>                                
                             </div>
-                            <div className="w-[90px] flex border-dashed border-[1px] border-black">
+                            <div className="w-[90px] flex ">
                                 <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/cart")}}>View Cart</p>                                
                             </div>
 
@@ -83,25 +83,49 @@ const NavBar = (props) =>{
                             </div>                        
                         </div>
                     </div>
-                    <div className='flex  w-full justify-end md:justify-start border-black border-dashed border-[1px]'>
+                    <div className='flex  w-full justify-end md:justify-start '>
                         <div id="nav-hamburger" style={{ marginRight:"22px", paddingTop:"15px"} } className="md:hidden" >
                             <img src={Hamburger} className=' w-[36px] h-[35px]' onClick={()=>{openNav()}}/>
                         </div>
 
                         {/* Navlinks for wider screen */}
-                        <div id="Nav-links" className="hidden md:contents md:border-black md:border-dashed md:border-[1px]">
-                            <div className="flex">
+                        <div id="Nav-links" style={{fontSize:'24px', lineHeight:'24px'}} className=" font-sergioTrendy hidden md:contents  ">
+                            
+                            
+                            <div id="hidden-container-outer-div" className="flex justify-end w-[100%]">
 
-                                <div id="hidden-div-2" className=' flex justify-center '>
-                                    <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/menu")}}>Menu</p> 
+                                <div id="hidden-container-inner-div" className="flex mr-[18px] ">
+
+                                    <div id="hidden-div-menu" className=' flex justify-center mr-[34px] mt-[22px]'>
+                                        <p  onClick={()=>{handleNav("/menu")}}>Menu</p> 
+                                    </div>
+                                    <div id="hidden-div-pizza-builder" className='mr-[85px] flex justify-center mt-[22px]'>
+                                        <p  onClick={()=>{handleNav("/pizza-builder")}}>Pizza Builder</p>
+                                    </div>
+                                    <div id='login-account'>
+                                        <div onClick={()=>{handleNav("/login")}} className="pb-[4px] mt-[14px]">
+                                            <p style={{fontSize:'22px', lineHeight:'22px'}}>Login</p>
+                                        </div>
+
+                                        <div style={{fontSize:'14px', lineHeight:'14px'}} id='register-view-cart' className="flex">
+                                            <div onClick={()=>{handleNav("/registration")}}>
+                                                <p>Register</p>
+                                            </div>
+                                            <div className="font-sans mr-[5px] ml-[5px]">
+                                                <p>|</p>
+                                            </div>
+                                            <div onClick={()=>{handleNav("/cart")}}>
+                                                <p>View Cart</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>                                
                                 </div>
-                                <div id="hidden-div-3" className=' flex justify-center'>
-                                    <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/pizza-builder")}}>Pizza Builder</p>
-                                </div>
-                                <div>
-                                    <p>Menu</p>
-                                </div>                                
                             </div>
+                            
+                            
+                            
+
 
                         </div>
                     </div>
