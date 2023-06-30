@@ -16,7 +16,7 @@ const RegistrationPage = () =>{
 
 
     return(
-        <div id="registration-page-body">
+        <div id="registration-page-body" className='min-h-screen'>
             <div style={{fontSize:"32px", lineHeight:"32px"}}className='flex justify-center font-sergioTrendy mt-[36px] mb-[21px] md:mb-[30px]'>
                 <p>
                     Registration

@@ -56,7 +56,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
 
 
-            if(action.payload.side === 'left side' && state.toppingsGrid.ham.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.ham.left === true){
                 state.toppingsGrid.ham.left = false
                 state.toppingsGrid.ham.whole = false
                 state.toppingsGrid.ham.right = false
@@ -72,7 +72,7 @@ const pizzaBuilderSlice = createSlice({
             }
 
 
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.ham.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.ham.whole === true){
                 state.toppingsGrid.ham.left = false
                 state.toppingsGrid.ham.whole = false
                 state.toppingsGrid.ham.right = false
@@ -89,7 +89,7 @@ const pizzaBuilderSlice = createSlice({
 
 
 
-            if(action.payload.side === 'right side'  && state.toppingsGrid.ham.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.ham.right === true){
                 state.toppingsGrid.ham.left = false
                 state.toppingsGrid.ham.whole = false
                 state.toppingsGrid.ham.right = false
@@ -111,7 +111,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.beef.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.beef.left === true){
                 state.toppingsGrid.beef.left = false
                 state.toppingsGrid.beef.whole = false
                 state.toppingsGrid.beef.right = false
@@ -126,7 +126,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.beef.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.beef.whole === true){
                 state.toppingsGrid.beef.left = false
                 state.toppingsGrid.beef.whole = false
                 state.toppingsGrid.beef.right = false
@@ -143,7 +143,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.beef.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.beef.right === true){
                 state.toppingsGrid.beef.left = false
                 state.toppingsGrid.beef.whole = false
                 state.toppingsGrid.beef.right = false
@@ -164,7 +164,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.salami.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.salami.left === true){
                 state.toppingsGrid.salami.left = false
                 state.toppingsGrid.salami.whole = false
                 state.toppingsGrid.salami.right = false
@@ -179,7 +179,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.salami.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.salami.whole === true){
                 state.toppingsGrid.salami.left = false
                 state.toppingsGrid.salami.whole = false
                 state.toppingsGrid.salami.right = false
@@ -196,7 +196,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.salami.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.salami.right === true){
                 state.toppingsGrid.salami.left = false
                 state.toppingsGrid.salami.whole = false
                 state.toppingsGrid.salami.right = false
@@ -216,7 +216,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.pepperoni.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.pepperoni.left === true){
                 state.toppingsGrid.pepperoni.left = false
                 state.toppingsGrid.pepperoni.whole = false
                 state.toppingsGrid.pepperoni.right = false
@@ -231,7 +231,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.pepperoni.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.pepperoni.whole === true){
                 state.toppingsGrid.pepperoni.left = false
                 state.toppingsGrid.pepperoni.whole = false
                 state.toppingsGrid.pepperoni.right = false
@@ -248,7 +248,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.pepperoni.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.pepperoni.right === true){
                 state.toppingsGrid.pepperoni.left = false
                 state.toppingsGrid.pepperoni.whole = false
                 state.toppingsGrid.pepperoni.right = false
@@ -268,7 +268,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.italianSausage.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.italianSausage.left === true){
                 state.toppingsGrid.italianSausage.left = false
                 state.toppingsGrid.italianSausage.whole = false
                 state.toppingsGrid.italianSausage.right = false
@@ -283,7 +283,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.italianSausage.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.italianSausage.whole === true){
                 state.toppingsGrid.italianSausage.left = false
                 state.toppingsGrid.italianSausage.whole = false
                 state.toppingsGrid.italianSausage.right = false
@@ -300,7 +300,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.italianSausage.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.italianSausage.right === true){
                 state.toppingsGrid.italianSausage.left = false
                 state.toppingsGrid.italianSausage.whole = false
                 state.toppingsGrid.italianSausage.right = false
@@ -320,7 +320,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.bacon.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.bacon.left === true){
                 state.toppingsGrid.bacon.left = false
                 state.toppingsGrid.bacon.whole = false
                 state.toppingsGrid.bacon.right = false
@@ -335,7 +335,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.bacon.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.bacon.whole === true){
                 state.toppingsGrid.bacon.left = false
                 state.toppingsGrid.bacon.whole = false
                 state.toppingsGrid.bacon.right = false
@@ -352,7 +352,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.bacon.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.bacon.right === true){
                 state.toppingsGrid.bacon.left = false
                 state.toppingsGrid.bacon.whole = false
                 state.toppingsGrid.bacon.right = false
@@ -372,7 +372,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.onions.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.onions.left === true){
                 state.toppingsGrid.onions.left = false
                 state.toppingsGrid.onions.whole = false
                 state.toppingsGrid.onions.right = false
@@ -388,7 +388,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.onions.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.onions.whole === true){
                 state.toppingsGrid.onions.left = false
                 state.toppingsGrid.onions.whole = false
                 state.toppingsGrid.onions.right = false
@@ -405,7 +405,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.onions.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.onions.right === true){
                 state.toppingsGrid.onions.left = false
                 state.toppingsGrid.onions.whole = false
                 state.toppingsGrid.onions.right = false
@@ -427,7 +427,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.mushrooms.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.mushrooms.left === true){
                 state.toppingsGrid.mushrooms.left = false
                 state.toppingsGrid.mushrooms.whole = false
                 state.toppingsGrid.mushrooms.right = false
@@ -442,7 +442,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.mushrooms.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.mushrooms.whole === true){
                 state.toppingsGrid.mushrooms.left = false
                 state.toppingsGrid.mushrooms.whole = false
                 state.toppingsGrid.mushrooms.right = false
@@ -459,7 +459,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.mushrooms.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.mushrooms.right === true){
                 state.toppingsGrid.mushrooms.left = false
                 state.toppingsGrid.mushrooms.whole = false
                 state.toppingsGrid.mushrooms.right = false
@@ -480,7 +480,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.blackOlives.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.blackOlives.left === true){
                 state.toppingsGrid.blackOlives.left = false
                 state.toppingsGrid.blackOlives.whole = false
                 state.toppingsGrid.blackOlives.right = false
@@ -495,7 +495,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.blackOlives.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.blackOlives.whole === true){
                 state.toppingsGrid.blackOlives.left = false
                 state.toppingsGrid.blackOlives.whole = false
                 state.toppingsGrid.blackOlives.right = false
@@ -512,7 +512,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.blackOlives.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.blackOlives.right === true){
                 state.toppingsGrid.blackOlives.left = false
                 state.toppingsGrid.blackOlives.whole = false
                 state.toppingsGrid.blackOlives.right = false
@@ -532,7 +532,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.greenPeppers.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.greenPeppers.left === true){
                 state.toppingsGrid.greenPeppers.left = false
                 state.toppingsGrid.greenPeppers.whole = false
                 state.toppingsGrid.greenPeppers.right = false
@@ -547,7 +547,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.greenPeppers.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.greenPeppers.whole === true){
                 state.toppingsGrid.greenPeppers.left = false
                 state.toppingsGrid.greenPeppers.whole = false
                 state.toppingsGrid.greenPeppers.right = false
@@ -564,7 +564,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.greenPeppers.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.greenPeppers.right === true){
                 state.toppingsGrid.greenPeppers.left = false
                 state.toppingsGrid.greenPeppers.whole = false
                 state.toppingsGrid.greenPeppers.right = false
@@ -584,7 +584,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.jalapenoPeppers.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.jalapenoPeppers.left === true){
                 state.toppingsGrid.jalapenoPeppers.left = false
                 state.toppingsGrid.jalapenoPeppers.whole = false
                 state.toppingsGrid.jalapenoPeppers.right = false
@@ -599,7 +599,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.jalapenoPeppers.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.jalapenoPeppers.whole === true){
                 state.toppingsGrid.jalapenoPeppers.left = false
                 state.toppingsGrid.jalapenoPeppers.whole = false
                 state.toppingsGrid.jalapenoPeppers.right = false
@@ -616,7 +616,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.jalapenoPeppers.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.jalapenoPeppers.right === true){
                 state.toppingsGrid.jalapenoPeppers.left = false
                 state.toppingsGrid.jalapenoPeppers.whole = false
                 state.toppingsGrid.jalapenoPeppers.right = false
@@ -636,7 +636,7 @@ const pizzaBuilderSlice = createSlice({
             // console.log(action.payload)
         
         
-            if(action.payload.side === 'left side' && state.toppingsGrid.pineapple.left == true){
+            if(action.payload.side === 'left side' && state.toppingsGrid.pineapple.left === true){
                 state.toppingsGrid.pineapple.left = false
                 state.toppingsGrid.pineapple.whole = false
                 state.toppingsGrid.pineapple.right = false
@@ -651,7 +651,7 @@ const pizzaBuilderSlice = createSlice({
             }
         
         
-            if(action.payload.side === 'whole pizza' && state.toppingsGrid.pineapple.whole == true){
+            if(action.payload.side === 'whole pizza' && state.toppingsGrid.pineapple.whole === true){
                 state.toppingsGrid.pineapple.left = false
                 state.toppingsGrid.pineapple.whole = false
                 state.toppingsGrid.pineapple.right = false
@@ -668,7 +668,7 @@ const pizzaBuilderSlice = createSlice({
         
         
         
-            if(action.payload.side === 'right side'  && state.toppingsGrid.pineapple.right == true){
+            if(action.payload.side === 'right side'  && state.toppingsGrid.pineapple.right === true){
                 state.toppingsGrid.pineapple.left = false
                 state.toppingsGrid.pineapple.whole = false
                 state.toppingsGrid.pineapple.right = false
@@ -685,7 +685,7 @@ const pizzaBuilderSlice = createSlice({
         
         },
         handleSpecialInstructions: (state, action) => {
-
+ 
             state.specialInstructions = action.payload
         },
         calculateTotal: (state, action) => {

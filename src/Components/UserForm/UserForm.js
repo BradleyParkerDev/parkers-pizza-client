@@ -1,36 +1,100 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux'; 
+import { registerUser } from "../../Redux/usersSlice";
+
+
 const UserForm = (props) => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [addressLineOne, setAddressLineOne] = useState('');
-    const [addressLineTwo, setAddressLineTwo] = useState('');
+    const [streetAddress, setStreetAddress] = useState('');
+    const [unitApartment, setUnitApartment] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
 
-    const { updateInfo } = props;
-    console.log(updateInfo)
+    const { 
+        updateInfo,
+        auth,
+        user
+    
+    } = props;
+    // console.log(updateInfo)
 
-    const navigate = useNavigate();
+    const userObj = {
 
-    const handleChange = (e) =>{
-        if(e === email){
-            setEmail(e.target.value)
+        
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        phoneNumber: phoneNumber,
+        streetAddress: streetAddress,
+        unitApartment: unitApartment,
+        city: city,
+        state: state,
+
+    }
+
+    useEffect((props)=>{
+
+
+        if(updateInfo === 'update'){
+            console.log(user.firstName)
+
+            setFirstName(user.firstName)  
+            setLastName(user.lastName)  
+            setEmail(user.email)
+            setPassword()
+            setStreetAddress(user.streetAddress)
+            setUnitApartment(user.unitApartment)
+            setPhoneNumber(user.phoneNumber)
+            setCity(user.city)
+            setState(user.state)
+             
         }
 
+        console.log(auth)
+    },[userObj,auth])
+
+    const signUp = () =>{
+        dispatch(registerUser(userObj))
+        navigate('/login');
+
+    }
+
+    // Change Handlers
+    const handleFirstNameChange = (e) =>{
+        setFirstName(e.target.value)  
+    }
+    const handleLastNameChange = (e) =>{
+        setLastName(e.target.value)  
     }
     const handleEmailChange = (e) =>{
         setEmail(e.target.value)
     } 
-
-
     const handlePasswordChange = (e) =>{
         setPassword(e.target.value)
     } 
-
+    const handleStreetAddressChange = (e) =>{
+        setStreetAddress(e.target.value)
+    } 
+    const handleUnitApartmentChange = (e) =>{
+        setUnitApartment(e.target.value)
+    } 
+    const handlePhoneNumberChange = (e) =>{
+        setPhoneNumber(e.target.value)
+    } 
+    const handleCityChange = (e) =>{
+        setCity(e.target.value)
+    } 
+    const handleStateChange = (e) =>{
+        setState(e.target.value)
+    } 
 
     const showButton = (buttonType) =>{
         
@@ -48,7 +112,7 @@ const UserForm = (props) => {
             return(
                 <div id="button-outer-container" className="flex justify-center">
                     <div id="button-inner-container" className="w-[95%] flex justify-end">
-                        <div id='sign-up-button' className="mt-[26px] w-[120px] h-[50px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
+                        <div onClick={()=>{signUp()}} id='sign-up-button' className="mt-[26px] w-[120px] h-[50px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
                             <p className="mt-[15px] ml-[29px]">Sign Up</p>
                         </div>
                     </div>
@@ -68,13 +132,13 @@ const UserForm = (props) => {
                     <div id="user-form-div1" className="flex">
                         <div>
                             <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Email</p>
-                            <input type="text" value={email} onChange={handleEmailChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                            <input type="text" value={email} onChange={handleEmailChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                         
                         </div>
                         
                         <div>
                             <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Password</p>
-                            <input type="password" value={password} onChange={handlePasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                            <input type="password" value={password} onChange={handlePasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                             <div id="show-password" className="flex mt-[5px]">
                                 <input type="checkbox" />
                                 
@@ -93,13 +157,13 @@ const UserForm = (props) => {
                         <div id="user-form-div2-inner1" className="flex">
                             <div>
                                 <p style={{fontSize:"16px", lineHeight:"16px"}}className=" mb-[10px] font-sergioTrendy">First Name</p>
-                                <input type="text" value={firstName} onChange={handleChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                                <input type="text" value={firstName} onChange={handleFirstNameChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                             
                             </div>
                             
                             <div>
                                 <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Last Name</p>
-                                <input type="text" value={lastName} onChange={handleChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="md:mr-[26px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                                <input type="text" value={lastName} onChange={handleLastNameChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                             </div>
 
                         </div>
@@ -107,7 +171,7 @@ const UserForm = (props) => {
                         <div id="user-form-div2-inner2" className="mt-[18px] md:mt-[0px]">
                             <div>
                                 <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Phone Number</p>
-                                <input type="text" value={phoneNumber} onChange={handleChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                                <input type="text" value={phoneNumber} onChange={handlePhoneNumberChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                             
                             </div>
 
@@ -120,7 +184,7 @@ const UserForm = (props) => {
                     <div id="user-form-div3" className="md:flex mt-[18px]">
                         <div>
                             <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Street Address</p>
-                            <input type="text" value={addressLineOne} onChange={handleChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className=" md:w-[406px] md:mr-[26px] border-black border-[1px] border-solid w-full rounded-[5px]"/>
+                            <input type="text" value={streetAddress} onChange={handleStreetAddressChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:w-[406px] md:mr-[26px] border-black border-[1px] border-solid w-full rounded-[5px]"/>
                         
                         </div>
                         
@@ -130,7 +194,7 @@ const UserForm = (props) => {
                                 <div className="font-sans ml-[5px] mr-[5px]">/</div> 
                                 <div>Apt</div>
                             </div>
-                            <input type="text" value={addressLineTwo} onChange={handleChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className=" w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px] "/>
+                            <input type="text" value={unitApartment} onChange={handleUnitApartmentChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px] "/>
                         </div>
 
                     </div>
@@ -139,13 +203,13 @@ const UserForm = (props) => {
                     <div id="user-form-div4" className="flex mt-[18px] ">
                         <div>
                             <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">City</p>
-                            <input type="text" value={city} onChange={handleChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                            <input type="text" value={city} onChange={handleCityChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                         
                         </div>
                         
                         <div>
                             <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">State</p>
-                            <input type="text" value={state} onChange={handleChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                            <input type="text" value={state} onChange={handleStateChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                         </div>
                     </div>
 
@@ -161,3 +225,13 @@ const UserForm = (props) => {
 }
 
 export default UserForm;
+
+// const [email, setEmail] = useState(user.email);
+// const [password, setPassword] = useState();
+// const [firstName, setFirstName] = useState(user.firstName);
+// const [lastName, setLastName] = useState(user.lastName);
+// const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
+// const [streetAddress, setStreetAddress] = useState(user.streetAddress);
+// const [unitApartment, setUnitApartment] = useState(user.unitApartment);
+// const [city, setCity] = useState(user.city);
+// const [state, setState] = useState(user.state);

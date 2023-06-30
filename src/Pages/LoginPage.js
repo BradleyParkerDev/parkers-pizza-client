@@ -1,23 +1,35 @@
 import Footer from "../Components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { loginUser } from "../Redux/usersSlice";
+import { useDispatch, useSelector } from "react-redux";
 const LoginPage = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const user = useSelector((state)=>state.users)
+    
+    const userLoginObj = {
+        email: email,
+        password: password
 
-    // useEffect(()=>{
+    }    
+    
+    
+    
+    useEffect(()=>{
+
+        console.log(userLoginObj)
 
 
+    },[userLoginObj])
 
 
-    // },[email,password])
+    const login = (obj) => {
 
-
-    const login = () => {
-        console.log(email)
-        console.log(password)
-        navigate("/");
+        dispatch(loginUser(obj))
+        // navigate("/user-account");
 
     }
 
@@ -67,7 +79,7 @@ const LoginPage = () =>{
             </div>
             <div id="button-col-div" className="flex justify-center">
                 <div id="button-holder" className="flex justify-end w-[275px] se:w-[320px] mb-[400px] md:mb-[280px]">
-                    <div id="login-button" onClick={()=>{login()}} className="w-[85px] h-[50px] bg-red-pp rounded-[5px] mt-[30px]">
+                    <div id="login-button" onClick={()=>{login(userLoginObj)}} className="w-[85px] h-[50px] bg-red-pp rounded-[5px] mt-[30px]">
                         <p className="text-white font-sergioTrendy mt-[12px] ml-[17px]">Login</p>
                     </div>
                 </div>

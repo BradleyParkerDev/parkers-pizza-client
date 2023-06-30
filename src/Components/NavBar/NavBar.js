@@ -3,10 +3,17 @@ import Hamburger from "./Hamburger.png"
 import reject from "./reject.png"
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'; 
 
 const NavBar = (props) =>{
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const user = useSelector((state)=>state.users)
+    const auth = useSelector((state)=>state.auth.isAuth)
+
     const [sideNavWidth, setSideNavWidth] = useState('0px')
+
     const openNav = () =>{
 
         setSideNavWidth('100%')

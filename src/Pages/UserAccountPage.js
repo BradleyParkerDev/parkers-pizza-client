@@ -1,9 +1,9 @@
 import UserForm from "../Components/UserForm/UserForm";
 import { useState } from "react";
-
-
-
+import { useDispatch, useSelector } from 'react-redux'; 
 const UserAccountPage = (props) => {
+    const auth = useSelector((state)=>state.auth.isAuth)
+    const user = useSelector((state)=>state.users)
 
     const [updateInfo, setUpdateInfo] = useState('update')
 
@@ -19,7 +19,11 @@ const UserAccountPage = (props) => {
                 </div>            
                 <div id="user-account-body-div1" className='flex justify-center'>
 
-                    <UserForm updateInfo={updateInfo}/>
+                    <UserForm 
+                        updateInfo={updateInfo}
+                        auth={auth}
+                        user={user}
+                    />
 
                 </div>
 
@@ -65,7 +69,7 @@ const UserAccountPage = (props) => {
                 <div id="user-account-body-div4" className='flex justify-center'>
                     <div className='flex justify-center'>
                         <div id='sign-up-button' className="w-[191px] h-[47px] mb-[46px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
-                            <p className="mt-[15px] ml-[29px]">Delete Account</p>
+                            <p className="mt-[12px] ml-[31px]">Delete Account</p>
                         </div>
                         <div id="button-outer-container" className="flex justify-center">
                             <div id="button-inner-container" className="w-[95%] flex justify-end">
