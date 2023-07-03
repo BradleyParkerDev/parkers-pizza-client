@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import Axios from '../Lib/Axios';
 import { checkAuthToken } from '../Lib/checkAuthToken';
 import { resetUser, setUser } from './usersSlice'
+// import { useDispatch } from 'react-redux';
 
+// const dispatch = useDispatch()
 export const logout = createAsyncThunk('auth/logout', async(_, thunkAPI) => {
     await localStorage.removeItem('jwtToken')
     thunkAPI.dispatch(resetUser())
@@ -36,8 +38,21 @@ export const authSlice = createSlice({
         authFailure: (state, action) => {
             return false
         }
+    },
+    extraReducers: builder => {
+      builder
+        .addCase(authCheck.fulfilled, (state,action) => {
+          state.isAuth = true
+        })
+        .addCase(authCheck.rejected, (state, action) => {
+          state.isAuth = false
+          console.log('!@-------authCheck-------@!')
+          console.log(action.payload)
+        })
+        .addCase(logout.fulfilled, (state) => {
+          state.isAuth = false
+        })
     }
-    
  
 })
 

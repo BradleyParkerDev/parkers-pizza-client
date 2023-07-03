@@ -21,7 +21,6 @@ export const loginUser = createAsyncThunk('user/login', async(userData, thunkAPI
         console.log(response.data)
 
         localStorage.setItem('jwtToken', response.data.token)
-
         thunkAPI.dispatch(authSuccess())
         return response.data
 
@@ -30,20 +29,33 @@ export const loginUser = createAsyncThunk('user/login', async(userData, thunkAPI
     }
 })
 
+export const updateUser = createAsyncThunk('user/updateUser', async(userData, thunkAPI) =>{
 
+    try{
+        let response = await Axios.put(`/user/update-user/${userData.id}`)
+        console.log(response.data)
+    }catch(error){
+        return thunkAPI.rejectWithValue(error.response.data)
+    }
+})
+export const deleteUser = createAsyncThunk('user/deleteUser', async(id, thunkAPI) =>{
 
-
-
-
-
+    try{
+        let response = await Axios.delete(`/users/delete-user/${id}`)
+        console.log(response.data)
+    }catch(error){
+        return thunkAPI.rejectWithValue(error.response.data)
+    }
+})
 
 
 export const usersSlice = createSlice({
     name: 'user',
     initialState: {
+        id: '',
         email: '',
         password: '',
-        firstName: 'Bradley',
+        firstName: '',
         lastName: '',
         phoneNumber:'',
         streetAddress:'',
@@ -63,6 +75,7 @@ export const usersSlice = createSlice({
         },
         resetUser: (state) => {
             return {
+                id: '',
                 email: '',
                 password: '',
                 firstname: '',

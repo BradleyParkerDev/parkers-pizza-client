@@ -102,7 +102,7 @@ const UserForm = (props) => {
             return(
                 <div id="button-outer-container" className="flex justify-center">
                     <div id="button-inner-container" className="w-[95%] flex justify-end">
-                        <div id='sign-up-button' className="mt-[26px] w-[120px] h-[50px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
+                        <div onClick={()=>{}} id='update-button' className="mt-[26px] w-[120px] h-[50px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
                             <p className="mt-[15px] ml-[29px]">Update</p>
                         </div>
                     </div>

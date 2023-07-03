@@ -1,9 +1,10 @@
 import PizzaLogo from "./PizzaLogo.png"
 import Hamburger from "./Hamburger.png"
 import reject from "./reject.png"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'; 
+import { authCheck } from "../../Redux/authSlice"
 
 const NavBar = (props) =>{
     const navigate = useNavigate();
@@ -11,6 +12,11 @@ const NavBar = (props) =>{
 
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
+    
+    useEffect(()=>{
+        dispatch(authCheck())
+
+    },[auth])
 
     const [sideNavWidth, setSideNavWidth] = useState('0px')
 
@@ -39,25 +45,25 @@ const NavBar = (props) =>{
                 
                 {/* login/register with reject button */}
                 <div id="hidden-div-1" className='flex ml-[15px] mr-[15px] '>
-                    <div id="login-register" className="w-auto ">
+                    <div id="login-register" className="min-w-[90%] w-auto border-black border-dashed border-[1px]">
                         <div>
-                            <p style={{fontSize:"32px"}} onClick={()=>{handleNav("/login")}}>Login</p> 
+                            {auth && <p onClick={()=>{handleNav("/user-account")}} style={{fontSize:"32px"}}>{`Hi, ${user.firstName}`}</p>} 
+                            {!auth && <p style={{fontSize:"32px"}} onClick={()=>{handleNav("/login")}}>Login</p>} 
                         </div>
                         <div className="flex">
                             <div>
-                                <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/registration")}}>Register</p>
+                                {auth && <p style={{fontSize:"16px"}} >{`Logout`}</p>} 
+                                {!auth && <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/registration")}}>Register</p>}
                             </div>
                             <div className="font-sans mr-[5px] ml-[5px]">
                                 <p>|</p>                                
                             </div>
                             <div className="w-[90px] flex ">
-                                <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/cart")}}>View Cart</p>                                
+                                <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/cart")}}>Cart</p>                                
                             </div>
-
-
                         </div>
                     </div> 
-                    <div id="reject-div" className='flex justify-end w-full'>
+                    <div id="reject-div" className='flex justify-end w-full  border-black border-dashed border-[1px]'>
                         <div id="reject-image">
                             <img src={reject} className='w-[25px] h-[25px]' onClick={()=>{closeNav()}}/>
                         </div>
@@ -97,8 +103,6 @@ const NavBar = (props) =>{
 
                         {/* Navlinks for wider screen */}
                         <div id="Nav-links" style={{fontSize:'24px', lineHeight:'24px'}} className=" font-sergioTrendy hidden md:contents  ">
-                            
-                            
                             <div id="hidden-container-outer-div" className="flex justify-end w-[100%]">
 
                                 <div id="hidden-container-inner-div" className="flex mr-[18px] ">
@@ -110,19 +114,17 @@ const NavBar = (props) =>{
                                         <p  onClick={()=>{handleNav("/pizza-builder")}}>Pizza Builder</p>
                                     </div>
                                     <div id='login-account'>
-                                        <div onClick={()=>{handleNav("/login")}} className="pb-[4px] mt-[14px]">
-                                            <p style={{fontSize:'22px', lineHeight:'22px'}}>Login</p>
-                                        </div>
+                                        {auth && <p style={{fontSize:"22px"}} onClick={()=>{handleNav("/user-account")}} className="pb-[4px] mt-[14px]" >{`Hi, ${user.firstName}`}</p>} 
+                                        {!auth && <div onClick={()=>{handleNav("/login")}} className="pb-[4px] mt-[14px]"><p style={{fontSize:'22px', lineHeight:'22px'}}>Login</p></div>}
 
                                         <div style={{fontSize:'14px', lineHeight:'14px'}} id='register-view-cart' className="flex">
-                                            <div onClick={()=>{handleNav("/registration")}}>
-                                                <p>Register</p>
-                                            </div>
+                                            {auth && <div ><p>Logout</p></div>}
+                                            {!auth && <div onClick={()=>{handleNav("/registration")}}><p>Register</p></div>}
                                             <div className="font-sans mr-[5px] ml-[5px]">
                                                 <p>|</p>
                                             </div>
                                             <div onClick={()=>{handleNav("/cart")}}>
-                                                <p>View Cart</p>
+                                                <p>Cart</p>
                                             </div>
                                         </div>
                                         
