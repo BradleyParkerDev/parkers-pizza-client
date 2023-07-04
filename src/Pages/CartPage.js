@@ -19,11 +19,8 @@ const CartPage = () =>{
                     <div id="cart-items-inner-container" className="w-[full] bg-white rounded-[5px] p-[9px]  h-[100%]">
                     
                         <CartOrderCard/>
-                        <CartOrderCard/>
 
-                        <CartOrderCard/>
 
-                        <CartOrderCard/>
 
 
 

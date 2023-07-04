@@ -4,7 +4,8 @@ import reject from "./reject.png"
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'; 
-import { authCheck } from "../../Redux/authSlice"
+import { authCheck, logout } from "../../Redux/authSlice"
+import { loginUser } from "../../Redux/usersSlice"
 
 const NavBar = (props) =>{
     const navigate = useNavigate();
@@ -52,7 +53,7 @@ const NavBar = (props) =>{
                         </div>
                         <div className="flex">
                             <div>
-                                {auth && <p style={{fontSize:"16px"}} >{`Logout`}</p>} 
+                                {auth && <p style={{fontSize:"16px"}} onClick={()=>{dispatch(logout())}} >{`Logout`}</p>} 
                                 {!auth && <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/registration")}}>Register</p>}
                             </div>
                             <div className="font-sans mr-[5px] ml-[5px]">
@@ -118,7 +119,7 @@ const NavBar = (props) =>{
                                         {!auth && <div onClick={()=>{handleNav("/login")}} className="pb-[4px] mt-[14px]"><p style={{fontSize:'22px', lineHeight:'22px'}}>Login</p></div>}
 
                                         <div style={{fontSize:'14px', lineHeight:'14px'}} id='register-view-cart' className="flex">
-                                            {auth && <div ><p>Logout</p></div>}
+                                            {auth && <div onClick={()=>{dispatch(logout())}}><p>Logout</p></div>}
                                             {!auth && <div onClick={()=>{handleNav("/registration")}}><p>Register</p></div>}
                                             <div className="font-sans mr-[5px] ml-[5px]">
                                                 <p>|</p>
