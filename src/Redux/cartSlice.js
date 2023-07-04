@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import {v4 as uuidv4} from 'uuid'
 
 const initialState = {
+    cartId: uuidv4(),
+    // dateCreated: Date,
     items: [],
     total: 0
 }

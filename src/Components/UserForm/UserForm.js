@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'; 
-import { registerUser } from "../../Redux/usersSlice";
+import { registerUser, updateUser } from "../../Redux/usersSlice";
+import Axios from "../../Lib/Axios";
+const urlEndPoint = process.env.REACT_APP_BASE_URL;
 
 
 const UserForm = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [id, setId] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -27,7 +30,7 @@ const UserForm = (props) => {
 
     const userObj = {
 
-        
+        id: id,
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -45,7 +48,7 @@ const UserForm = (props) => {
 
         if(updateInfo === 'update'){
             console.log(user.firstName)
-
+            setId(user.id)
             setFirstName(user.firstName)  
             setLastName(user.lastName)  
             setEmail(user.email)
@@ -59,7 +62,7 @@ const UserForm = (props) => {
         }
 
         console.log(auth)
-    },[userObj,auth])
+    },[auth])
 
     const signUp = () =>{
         dispatch(registerUser(userObj))
@@ -67,9 +70,23 @@ const UserForm = (props) => {
 
     }
 
+    const updateUserInfo = () =>{
+        // dispatch(updateUser(userObj))
+        let req = userObj
+        Axios.put(`/users/update-user/${req.id}`, req)
+        .then(function (response) {
+        },{
+          'Content-Type': 'application/x-www-form-urlencoded'
+        })
+        .catch(function (error) {
+          console.log(error);
+        }); 
+    }
+
     // Change Handlers
     const handleFirstNameChange = (e) =>{
-        setFirstName(e.target.value)  
+        setFirstName(e.target.value) 
+        console.log(firstName) 
     }
     const handleLastNameChange = (e) =>{
         setLastName(e.target.value)  
@@ -102,7 +119,7 @@ const UserForm = (props) => {
             return(
                 <div id="button-outer-container" className="flex justify-center">
                     <div id="button-inner-container" className="w-[95%] flex justify-end">
-                        <div onClick={()=>{}} id='update-button' className="mt-[26px] w-[120px] h-[50px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
+                        <div onClick={()=>{updateUserInfo()}} id='update-button' className="mt-[26px] w-[120px] h-[50px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
                             <p className="mt-[15px] ml-[29px]">Update</p>
                         </div>
                     </div>

@@ -11,7 +11,7 @@ import {
     handlePepperoni,handleItalianSausage,
     handleBacon, handleOnions, handleMushrooms, 
     handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, 
-    handlePineapple,handleSpecialInstructions, calculateTotal   
+    handlePineapple,handleSpecialInstructions, calculateTotal, resetPizza   
 } from '../../Redux/pizzaBuilderSlice'
 import { addItemToCart } from '../../Redux/cartSlice'
 import { useState,useEffect } from 'react'
@@ -163,7 +163,14 @@ const PizzaBuilder = () => {
 
 
 
+    const addPizzaToCart = () =>{
 
+        dispatch(addItemToCart(pizza))
+        dispatch(resetPizza())
+        handleCrustChange('Deep Dish')
+        handleSizeChange('Sm')
+
+    }
 
 
 
@@ -447,7 +454,7 @@ const PizzaBuilder = () => {
 
                             </div>
                             <div className=' pt-[4px] justify-end font-sergioTrendy h-[24px] '>
-                                <p>{pizza.totalCost}</p>
+                                <p>{pizza.price.toFixed(2)}</p>
 
                             </div>                            
                         </div>
@@ -460,7 +467,7 @@ const PizzaBuilder = () => {
             <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px]'>
                 <div id="button-container" className='flex justify-end'>
                     <div id="button" className='bg-red-pp w-[202px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
-                        <p onClick={()=>{dispatch(addItemToCart(pizza))}} className='font-sergioTrendy text-white mt-[15px]'>
+                        <p onClick={()=>{addPizzaToCart()}} className='font-sergioTrendy text-white mt-[15px]'>
                             Add to Cart
                         </p>
                     </div>

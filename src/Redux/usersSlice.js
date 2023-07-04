@@ -30,14 +30,40 @@ export const loginUser = createAsyncThunk('user/login', async(userData, thunkAPI
 })
 
 export const updateUser = createAsyncThunk('user/updateUser', async(userData, thunkAPI) =>{
-
+    console.log(userData)
     try{
-        let response = await Axios.put(`/user/update-user/${userData.id}`)
+        let response = await Axios.put(`/users/update-user/${userData.id}`,userData, 
+        {
+          headers:{
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          
+        })
         console.log(response.data)
     }catch(error){
         return thunkAPI.rejectWithValue(error.response.data)
     }
 })
+
+
+
+
+// axios.put(`${urlEndPoint}/listings/update-listing/${params.listingId}`, req)
+// .then(function (response) {
+//     // navigate('/')
+//     setShouldRefresh(false);
+
+// },{
+//   'Content-Type': 'application/x-www-form-urlencoded'
+// })
+// .catch(function (error) {
+//   console.log(error);
+// }); 
+
+
+
+
+
 export const deleteUser = createAsyncThunk('user/deleteUser', async(id, thunkAPI) =>{
 
     try{

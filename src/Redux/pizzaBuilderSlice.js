@@ -31,7 +31,7 @@ const initialState ={
     toppings:{},
     toppingsGrid: toppingsGridObj,
     specialInstructions: '',
-    totalCost: 0
+    price: 0
 }
 
 
@@ -702,14 +702,48 @@ const pizzaBuilderSlice = createSlice({
                    
                 
             }
+            if(state.crust === 'Deep Dish'){
+                total+= 7.50
+            }
+            if(state.crust === 'Hand Tossed'){
+                total+= 5.00
+
+            }
+            if(state.crust === 'Thin Crust'){
+                total+= 2.50
+ 
+            }
+            
+            if(state.size === 'Sm'){
+                total+= 5
+            }
+            if(state.size === 'Med'){
+                total+= 10
+
+            }
+            if(state.size === 'Lg'){
+                total+= 15
+ 
+            }
+
             console.log(total)
-            state.totalCost = total
+            state.price = total
+        },
+        resetPizza: (state) => {
+            state.id = uuidv4()
+            state.crust= 'Deep Dish'
+            state.size= 'Sm'
+            state.toppings= {}
+            state.toppingsGrid= toppingsGridObj
+            state.specialInstructions= ''
+            state.price= 0
+            return state ;
         }
 
     }
 });
 
 
-export const { selectCrust, selectSize, handleHam, handleBeef, handleSalami, handlePepperoni,handleItalianSausage,handleBacon, handleOnions, handleMushrooms, handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, handlePineapple, handleSpecialInstructions, calculateTotal } = pizzaBuilderSlice.actions;
+export const { selectCrust, selectSize, handleHam, handleBeef, handleSalami, handlePepperoni,handleItalianSausage,handleBacon, handleOnions, handleMushrooms, handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, handlePineapple, handleSpecialInstructions, calculateTotal, resetPizza } = pizzaBuilderSlice.actions;
 export default pizzaBuilderSlice.reducer;
 
