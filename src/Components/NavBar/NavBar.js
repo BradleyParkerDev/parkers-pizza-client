@@ -46,7 +46,7 @@ const NavBar = (props) =>{
                 
                 {/* login/register with reject button */}
                 <div id="hidden-div-1" className='flex ml-[15px] mr-[15px] '>
-                    <div id="login-register" className="min-w-[90%] w-auto border-black border-dashed border-[1px]">
+                    <div id="login-register" className="min-w-[90%] w-auto ">
                         <div>
                             {auth && <p onClick={()=>{handleNav("/user-account")}} style={{fontSize:"32px"}}>{`Hi, ${user.firstName}`}</p>} 
                             {!auth && <p style={{fontSize:"32px"}} onClick={()=>{handleNav("/login")}}>Login</p>} 
@@ -64,7 +64,7 @@ const NavBar = (props) =>{
                             </div>
                         </div>
                     </div> 
-                    <div id="reject-div" className='flex justify-end w-full  border-black border-dashed border-[1px]'>
+                    <div id="reject-div" className='flex justify-end w-full '>
                         <div id="reject-image">
                             <img src={reject} className='w-[25px] h-[25px]' onClick={()=>{closeNav()}}/>
                         </div>

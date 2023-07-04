@@ -9,7 +9,7 @@ const UserAccountPage = (props) => {
     const [updateInfo, setUpdateInfo] = useState('update')
 
     return(
-        <div id='user-account-page-container' className="min-h-screen w-full border-black border-dashed border-[1px]">
+        <div id='user-account-page-container' className="min-h-screen w-full ">
             
             {/* User Info */}
             <div id="user-account-page-body">
