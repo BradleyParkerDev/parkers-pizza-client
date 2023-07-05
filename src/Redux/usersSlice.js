@@ -32,13 +32,7 @@ export const loginUser = createAsyncThunk('user/login', async(userData, thunkAPI
 export const updateUser = createAsyncThunk('user/updateUser', async(userData, thunkAPI) =>{
     console.log(userData)
     try{
-        let response = await Axios.put(`/users/update-user/${userData.id}`,userData, 
-        {
-          headers:{
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          
-        })
+        let response = await Axios.put(`/users/update-user/${userData.id}`,userData)
         console.log(response.data)
     }catch(error){
         return thunkAPI.rejectWithValue(error.response.data)

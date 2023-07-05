@@ -32,11 +32,11 @@ export const authSlice = createSlice({
     //syncronous set state
     reducers: {
         authSuccess: (state, action) => {
-            return true
+          state.isAuth = true
 
         },
         authFailure: (state, action) => {
-            return false
+          state.isAuth = false
         }
     },
     extraReducers: builder => {

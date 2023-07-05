@@ -52,7 +52,7 @@ const UserForm = (props) => {
             setFirstName(user.firstName)  
             setLastName(user.lastName)  
             setEmail(user.email)
-            setPassword()
+            setPassword('')
             setStreetAddress(user.streetAddress)
             setUnitApartment(user.unitApartment)
             setPhoneNumber(user.phoneNumber)
@@ -71,16 +71,16 @@ const UserForm = (props) => {
     }
 
     const updateUserInfo = () =>{
-        // dispatch(updateUser(userObj))
-        let req = userObj
-        Axios.put(`/users/update-user/${req.id}`, req)
-        .then(function (response) {
-        },{
-          'Content-Type': 'application/x-www-form-urlencoded'
-        })
-        .catch(function (error) {
-          console.log(error);
-        }); 
+        dispatch(updateUser(userObj))
+        // let req = userObj
+        // Axios.put(`/users/update-user/${req.id}`, req)
+        // .then(function (response) {
+        // },{
+        //   'Content-Type': 'application/x-www-form-urlencoded'
+        // })
+        // .catch(function (error) {
+        //   console.log(error);
+        // }); 
     }
 
     // Change Handlers
