@@ -1,4 +1,3 @@
-import Footer from "../Components/Footer/Footer";
 import CartOrderCard from "../Components/CartOrderCard/CartOrderCard";
 
 
@@ -18,7 +17,7 @@ const CartPage = () =>{
                 <div id="cart-items-outer-container" className="w-[370px] md:w-[680px]  bg-grey-pp rounded-[5px] p-[6px] min-h-[300px] md:min-h-[170px] h-[auto]">
                     <div id="cart-items-inner-container" className="w-[full] bg-white rounded-[5px] p-[9px]  h-[100%]">
                     
-                        {/* <CartOrderCard/> */}
+                        <CartOrderCard/>
 
 
 

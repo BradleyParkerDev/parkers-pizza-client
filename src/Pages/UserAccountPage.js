@@ -1,4 +1,5 @@
 import UserForm from "../Components/UserForm/UserForm";
+import OrderHistoryCard from "../Components/OrderHistoryCard/OrderHistoryCard";
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { deleteUser } from "../Redux/usersSlice";
@@ -41,10 +42,11 @@ const UserAccountPage = (props) => {
                     </div>
                     <div id="order-history-container-2" className="flex justify-center">
                         {/* Order History Container */}
-                        <div id="order-history-items-outer-container" className="w-[361px] md:w-[680px]  bg-grey-pp rounded-[5px] p-[6px] min-h-[300px] md:min-h-[170px] h-[auto]">
-                            <div id="order-history-items-inner-container" className="w-[full] bg-white rounded-[5px] p-[5px]  h-[100%]">
+                        <div id="order-history-items-outer-container" className="w-[361px] md:w-[680px]  bg-grey-pp rounded-[5px] p-[6px] min-h-[80px] md:min-h-[80px] h-[auto]">
+                            <div id="order-history-items-inner-container" className="w-[full] bg-white rounded-[5px] p-[5px] pb-[0px] h-[100%]">
                         
-
+                                <OrderHistoryCard/>
+                                <OrderHistoryCard/>
 
 
                             </div>
