@@ -37,6 +37,12 @@ const NavBar = (props) =>{
         navigate(`${pageName}`)
         closeNav()
     }
+    const logoutUser = () =>{
+        dispatch(logout())
+        navigate('/')
+        closeNav()
+
+    }
 
 
     return(
@@ -53,7 +59,7 @@ const NavBar = (props) =>{
                         </div>
                         <div className="flex">
                             <div>
-                                {auth && <p style={{fontSize:"16px"}} onClick={()=>{dispatch(logout())}} >{`Logout`}</p>} 
+                                {auth && <p style={{fontSize:"16px"}} onClick={()=>{logoutUser()}} >{`Logout`}</p>} 
                                 {!auth && <p style={{fontSize:"16px"}} onClick={()=>{handleNav("/registration")}}>Register</p>}
                             </div>
                             <div className="font-sans mr-[5px] ml-[5px]">
@@ -119,7 +125,7 @@ const NavBar = (props) =>{
                                         {!auth && <div onClick={()=>{handleNav("/login")}} className="pb-[4px] mt-[14px]"><p style={{fontSize:'22px', lineHeight:'22px'}}>Login</p></div>}
 
                                         <div style={{fontSize:'14px', lineHeight:'14px'}} id='register-view-cart' className="flex">
-                                            {auth && <div onClick={()=>{dispatch(logout())}}><p>Logout</p></div>}
+                                            {auth && <div onClick={()=>{logoutUser()}}><p>Logout</p></div>}
                                             {!auth && <div onClick={()=>{handleNav("/registration")}}><p>Register</p></div>}
                                             <div className="font-sans mr-[5px] ml-[5px]">
                                                 <p>|</p>
@@ -132,7 +138,6 @@ const NavBar = (props) =>{
                                     </div>                                
                                 </div>
                             </div>
-                            
                             
                             
 

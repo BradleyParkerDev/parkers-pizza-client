@@ -1,7 +1,10 @@
 import CartOrderCard from "../Components/CartOrderCard/CartOrderCard";
+import { useDispatch, useSelector } from 'react-redux'; 
 
 
 const CartPage = () =>{
+    const user = useSelector((state)=>state.users)
+
     return(
         // Page Container
         <div id="cartPage-container" className="w-full min-h-screen">
@@ -47,12 +50,51 @@ const CartPage = () =>{
             </div>
             <div id="cp-container-4" className="flex justify-center ">
                 <div id='orderType-checkout' className="w-[370px] md:w-[680px]  border-black border-dashed border-[1px]">
-                    <div id='delivery' className="w-[195px] h-[195px] border-black border-dashed border-[1px]">
+                    {/* Delivery */}
+                    <div id='delivery' className="font-sergioTrendy  w-[100%] h-[195px] border-black border-dashed border-[1px]">
+                        <div className='flex mb-[21px]' id='delivery-radio-line'>
+                            <div id='delivery-radio' className="mr-[6px]">
+                                <input name ='delivery-pickup' type='radio'/>
+                            </div>
+                            <div id='delivery-text'>
+                                <p>Delivery</p>
+                            </div>
+                        </div>
+                        <div id='user-delivery-name' className="mb-[17px]">
+                            <p>Bradley Parker</p>
+                        </div>
+                        <div id='user-address'>
+                            <div id='address-line-one'>
+                                <p>5000 S East End Ave</p>
+                            </div>
+                            <div id='address-line-two'>
+                                <p>Chicago, Illinois 60615</p>
+                            </div>
+                            <div id='delivery-phone-number'>
+                                <p>312.555.5555</p>
+                            </div>
+                        </div>
+                    </div>
 
+                    {/* Pickup */}
+                    <div id='pickup' className="font-sergioTrendy w-[100%] h-[195px] border-black border-dashed border-[1px]">
+                        <div className='flex mb-[21px]' id='pickup-radio-line'>
+                            <div id='pickup-radio' className="mr-[6px]">
+                                <input name ='delivery-pickup' type='radio'/>
+                            </div>
+                            <div id='pickup-text'>
+                                <p>Pickup</p>
+                            </div>
+                        </div> 
+                        <div id = 'user-pickup-name' className="mb-[11px]">
+                            <p>Bradley Parker</p>
+                        </div> 
+                        <div id='pickup-phone-number'>
+                            <p>312.555.5555</p>
+                        </div> 
                     </div>
-                    <div id='pickup' className="w-[195px] h-[195px] border-black border-dashed border-[1px]">
-                        
-                    </div>
+
+                    {/* Checkout */}
                     <div id='checkout' className="w-[100%] flex justify-end border-black border-dashed border-[1px]">
 
 

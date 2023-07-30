@@ -8,6 +8,7 @@ import { resetUser, setUser } from './usersSlice'
 export const logout = createAsyncThunk('auth/logout', async(_, thunkAPI) => {
     await localStorage.removeItem('jwtToken')
     thunkAPI.dispatch(resetUser())
+
 })
 
 export const authCheck = createAsyncThunk('auth/authCheck', async(_, thunkAPI) => {

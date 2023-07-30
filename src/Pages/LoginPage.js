@@ -29,7 +29,7 @@ const LoginPage = () =>{
     const login = (obj) => {
 
         dispatch(loginUser(obj))
-        // navigate("/user-account");
+        navigate("/");
 
     }
 
