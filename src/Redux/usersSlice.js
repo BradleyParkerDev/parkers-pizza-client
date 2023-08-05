@@ -82,6 +82,7 @@ export const usersSlice = createSlice({
         unitApartment:'',
         city:'',
         state:'',
+        zipcode:'',
         cart:[],
         orders:[]
     },
@@ -104,7 +105,10 @@ export const usersSlice = createSlice({
                 streetAddress:'',
                 unitApartment:'',
                 city:'',
-                state:''
+                state:'',
+                zipcode:'',
+                cart:[],
+                orders:[]
             }
         }
     },

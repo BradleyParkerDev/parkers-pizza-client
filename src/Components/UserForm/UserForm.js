@@ -12,6 +12,7 @@ const UserForm = (props) => {
     const [id, setId] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [reEnteredPassword, setReEnteredPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,6 +20,7 @@ const UserForm = (props) => {
     const [unitApartment, setUnitApartment] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
+    const [zipcode, setZipcode] = useState('');
 
     const { 
         updateInfo,
@@ -40,6 +42,7 @@ const UserForm = (props) => {
         unitApartment: unitApartment,
         city: city,
         state: state,
+        zipcode: zipcode
 
     }
 
@@ -58,6 +61,7 @@ const UserForm = (props) => {
             setPhoneNumber(user.phoneNumber)
             setCity(user.city)
             setState(user.state)
+            setZipcode(user.zipcode)
              
         }
 
@@ -97,6 +101,9 @@ const UserForm = (props) => {
     const handlePasswordChange = (e) =>{
         setPassword(e.target.value)
     } 
+    const handleReEnteredPasswordChange = (e) =>{
+        setReEnteredPassword(e.target.value)
+    } 
     const handleStreetAddressChange = (e) =>{
         setStreetAddress(e.target.value)
     } 
@@ -112,7 +119,9 @@ const UserForm = (props) => {
     const handleStateChange = (e) =>{
         setState(e.target.value)
     } 
-
+    const handleZipcodeChange = (e) =>{
+        setZipcode(e.target.value)
+    } 
     const showButton = (buttonType) =>{
         
         if(buttonType === 'update'){
@@ -142,95 +151,69 @@ const UserForm = (props) => {
     return(
         <div id='form-and-button'>
             {/* Form */}
-            <div id="user-form-form-outer-container" className="  h-[510px] w-[95%] se:w-[365px] md:w-[680px] md:h-[360px] bg-grey-pp rounded-[5px] p-[5px]">
+            <div id="user-form-form-outer-container" className="  h-[635px] w-[95%] se:w-[365px] md:w-[680px] md:h-[360px] bg-grey-pp rounded-[5px] p-[5px]">
                 <div id="user-form-form-inner-container" className="pt-[11px] pl-[18px] pr-[18px] h-full w-full bg-white">
 
-                    {/* UserForm Div 1 */}
-                    <div id="user-form-div1" className="flex">
-                        <div>
-                            <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Email</p>
-                            <input type="text" value={email} onChange={handleEmailChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
-                        
+
+
+
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                    {/* Div 1 - Email and Password */}
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+
+                    <div id='Div1-email-password' className="md:flex">
+                        {/* Email */}
+                        <div id='email'>
+                            <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">Email Address</p>
+                            <input type="text" value={email} onChange={handleEmailChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[318px] h-[33px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                         </div>
-                        
-                        <div>
-                            <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Password</p>
-                            <input type="password" value={password} onChange={handlePasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
-                            <div id="show-password" className="flex mt-[5px]">
-                                <input type="checkbox" />
-                                
-                                <p className="pl-[5px] ">
+                        {/* Password and Re-enter Password */}
+                        <div id='password-reenterPassword' className="mt-[18px] md:mt-[0px] flex">
+                            <div id='password'>
+                                <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">Password</p>
+                                <input type="password" value={password} onChange={handlePasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                                <div id="show-password" className="flex mt-[5px]">
+                                    <input type="checkbox" />
+
+                                    <p className="pl-[5px] ">
                                     Show Password
-                                </p>
+                                    </p>
 
+                                </div>
+                            </div>
+                            <div id='reenter-password'>
+                                <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy"> Reenter Password</p>
+                                <input type="password" value={password} onChange={handleReEnteredPasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                             </div>
                         </div>
-                    </div>
+                    </div>   
 
-                    {/* UserForm Div 2 */}
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                    {/* Div 2 - First Name, Last Name, and Phone Number*/}
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
-                    <div id="user-form-div2" className="md:flex mt-[18px]" >
-
-                        <div id="user-form-div2-inner1" className="flex">
-                            <div>
-                                <p style={{fontSize:"16px", lineHeight:"16px"}}className=" mb-[10px] font-sergioTrendy">First Name</p>
-                                <input type="text" value={firstName} onChange={handleFirstNameChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
-                            
+                    <div id='Div2-firstName-lastName-phoneNumber' className="mt-[13px] md:flex">
+                        {/* First Name and Last name */}
+                        <div id='first-last-name' className="flex">
+                            <div id='first-Name'>
+                                <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">First Name</p>
+                                <input type="text" value={firstName} onChange={handleFirstNameChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                             </div>
-                            
-                            <div>
-                                <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Last Name</p>
-                                <input type="text" value={lastName} onChange={handleLastNameChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                            <div id='last-Name'>
+                                <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">Last Name</p>
+                                <input type="text" value={lastName} onChange={handleLastNameChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                             </div>
-
                         </div>
 
-                        <div id="user-form-div2-inner2" className="mt-[18px] md:mt-[0px]">
-                            <div>
-                                <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Phone Number</p>
-                                <input type="text" value={phoneNumber} onChange={handlePhoneNumberChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
-                            
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    {/* UserForm Div 3 */}
-
-                    <div id="user-form-div3" className="md:flex mt-[18px]">
-                        <div>
-                            <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Street Address</p>
-                            <input type="text" value={streetAddress} onChange={handleStreetAddressChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:w-[406px] md:mr-[26px] border-black border-[1px] border-solid w-full rounded-[5px]"/>
-                        
-                        </div>
-                        
-                        <div>
-                            <div id="unit-form-line" style={{fontSize:"16px", lineHeight:"16px"}} className="flex mt-[18px] md:mt-[0px] mb-[10px] font-sergioTrendy">
-                               <div>Unit</div>
-                                <div className="font-sans ml-[5px] mr-[5px]">/</div> 
-                                <div>Apt</div>
-                            </div>
-                            <input type="text" value={unitApartment} onChange={handleUnitApartmentChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px] "/>
+                        {/* Phone Number */}
+                        <div id='phoneNumber' className="mt-[18px] md:mt-[0px] w-[100%]">
+                            <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">Phone Number</p>
+                            <input type="text" value={phoneNumber} onChange={handlePhoneNumberChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[318px] h-[33px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                         </div>
 
                     </div>
 
-                    {/* UserForm Div 4 */}
-                    <div id="user-form-div4" className="flex mt-[18px] ">
-                        <div>
-                            <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">City</p>
-                            <input type="text" value={city} onChange={handleCityChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
-                        
-                        </div>
-                        
-                        <div>
-                            <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">State</p>
-                            <input type="text" value={state} onChange={handleStateChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
-                        </div>
-                    </div>
 
-                    
 
                 </div>
             </div>
@@ -252,3 +235,117 @@ export default UserForm;
 // const [unitApartment, setUnitApartment] = useState(user.unitApartment);
 // const [city, setCity] = useState(user.city);
 // const [state, setState] = useState(user.state);
+
+
+
+
+
+// <div id='user-form'>
+
+
+
+//     {/* Div 3 - Street Address and Unit / Apartment */}
+//     <div id='streetAddress-unitApartment'>
+
+//     </div>
+
+//     {/* Div 4 - City, State, Zipcode  */}
+//     <div id ='city-state-zipcode'>
+
+//     </div>
+// </div>
+
+
+
+
+
+
+//   {/* UserForm Div 1 */}
+//   <div id="user-form-div1" className="flex">
+//   <div>
+//       <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Email</p>
+//       <input type="text" value={email} onChange={handleEmailChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+  
+//   </div>
+  
+//   <div>
+//       <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Password</p>
+//       <input type="password" value={password} onChange={handlePasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+//       <div id="show-password" className="flex mt-[5px]">
+//           <input type="checkbox" />
+          
+//           <p className="pl-[5px] ">
+//               Show Password
+//           </p>
+
+//       </div>
+//   </div>
+//   <div>
+//       <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">ReEnter Password</p>
+//       <input type="password" value={password} onChange={handlePasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+//   </div>
+// </div>
+
+// {/* UserForm Div 2 */}
+
+// <div id="user-form-div2" className="md:flex mt-[18px]" >
+
+//   <div id="user-form-div2-inner1" className="flex">
+//       <div>
+//           <p style={{fontSize:"16px", lineHeight:"16px"}}className=" mb-[10px] font-sergioTrendy">First Name</p>
+//           <input type="text" value={firstName} onChange={handleFirstNameChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+      
+//       </div>
+      
+//       <div>
+//           <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Last Name</p>
+//           <input type="text" value={lastName} onChange={handleLastNameChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+//       </div>
+
+//   </div>
+
+//   <div id="user-form-div2-inner2" className="mt-[18px] md:mt-[0px]">
+//       <div>
+//           <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Phone Number</p>
+//           <input type="text" value={phoneNumber} onChange={handlePhoneNumberChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+      
+//       </div>
+
+
+//   </div>
+// </div>
+
+// {/* UserForm Div 3 */}
+
+// <div id="user-form-div3" className="md:flex mt-[18px]">
+//   <div>
+//       <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Street Address</p>
+//       <input type="text" value={streetAddress} onChange={handleStreetAddressChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:w-[406px] md:mr-[26px] border-black border-[1px] border-solid w-full rounded-[5px]"/>
+  
+//   </div>
+  
+//   <div>
+//       <div id="unit-form-line" style={{fontSize:"16px", lineHeight:"16px"}} className="flex mt-[18px] md:mt-[0px] mb-[10px] font-sergioTrendy">
+//          <div>Unit</div>
+//           <div className="font-sans ml-[5px] mr-[5px]">/</div> 
+//           <div>Apt</div>
+//       </div>
+//       <input type="text" value={unitApartment} onChange={handleUnitApartmentChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px] "/>
+//   </div>
+
+// </div>
+
+// {/* UserForm Div 4 */}
+// <div id="user-form-div4" className="flex mt-[18px] ">
+//   <div>
+//       <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">City</p>
+//       <input type="text" value={city} onChange={handleCityChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+  
+//   </div>
+  
+//   <div>
+//       <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">State</p>
+//       <input type="text" value={state} onChange={handleStateChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+//   </div>
+// </div>
+
