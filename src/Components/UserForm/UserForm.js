@@ -161,7 +161,7 @@ const UserForm = (props) => {
                     {/* Div 1 - Email and Password */}
                     {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
-                    <div id='Div1-email-password' className="md:flex">
+                    <div id='Div1-email-password' className="md:mt-[5px] md:flex">
                         {/* Email */}
                         <div id='email'>
                             <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">Email Address</p>
@@ -213,7 +213,48 @@ const UserForm = (props) => {
 
                     </div>
 
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                    {/* Div 3 - Street Address and Unit / Apartment */}
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
+                    <div id='streetAddress-unitApartment' className="mt-[18px] md:flex">
+                        <div id='streetAddress'>
+                            <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">Street Address</p>
+                            <input type="text" value={streetAddress} onChange={handleStreetAddressChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:w-[406px] md:mr-[26px] border-black border-[1px] border-solid w-full rounded-[5px]"/>
+                        </div>
+                        <div id='unitApartment'>
+                            <div id="unit-form-line" style={{fontSize:"14px", lineHeight:"14px"}} className="flex mt-[18px] md:mt-[0px] mb-[10px] font-sergioTrendy">
+                                <div>Unit</div>
+                                <div className="font-sans ml-[5px] mr-[5px]">/</div> 
+                                <div>Apt</div>
+                            </div>
+                            <input type="text" value={unitApartment} onChange={handleUnitApartmentChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-full md:w-[190px] border-black border-[1px] border-solid  rounded-[5px] "/>
+                        </div>
+                    </div>
+
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                    {/* Div 4 - City, State, Zipcode  */}
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+
+                    <div id ='city-state-zipcode' className="mt-[18px] md:flex">
+                        <div id='city-state' className="flex">
+                            <div id='city'>
+                                <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">City</p>
+                                <input type="text" value={city} onChange={handleCityChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+
+                            </div>
+
+                            <div id='state'>
+                                <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">State</p>
+                                <input type="text" value={state} onChange={handleStateChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                            </div>
+                        </div>
+                        <div id='zipcode' className="mt-[18px] md:mt-[0px]">
+                            <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">Zipcode</p>
+                            <input type="text" value={state} onChange={handleZipcodeChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>
@@ -239,21 +280,6 @@ export default UserForm;
 
 
 
-
-// <div id='user-form'>
-
-
-
-//     {/* Div 3 - Street Address and Unit / Apartment */}
-//     <div id='streetAddress-unitApartment'>
-
-//     </div>
-
-//     {/* Div 4 - City, State, Zipcode  */}
-//     <div id ='city-state-zipcode'>
-
-//     </div>
-// </div>
 
 
 
