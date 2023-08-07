@@ -9,13 +9,13 @@ const LoginPage = () =>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state)=>state.users)
+    const [loginInputType, setLoginInputType] = useState('password')
     
     const userLoginObj = {
         email: email,
         password: password
 
     }    
-    
     
     
     useEffect(()=>{
@@ -43,7 +43,15 @@ const LoginPage = () =>{
     } 
 
 
+    const showLoginPassword = () =>{
+        if(loginInputType === 'password')
+        {
+            setLoginInputType('text')
+        }else{
+            setLoginInputType('password')
 
+        }
+    }
 
     return(
         <div id="login-body" className="h-full flex flex-col">
@@ -59,9 +67,9 @@ const LoginPage = () =>{
                         </div>
                         <div id="login-form-line2" className="w-full h-1/2">
                             <p style={{fontSize:"16px", lineHeight:"16px"}}className="mb-[10px] font-sergioTrendy">Password</p>
-                            <input type="password" value={password} onChange={handlePasswordChange} style={{height:"55px", fontSize:"24px", lineHeight:"24px"}} className="border-black border-[1px] border-solid w-full rounded-[5px]"/>
+                            <input type={`${loginInputType}`} value={password} onChange={handlePasswordChange} style={{height:"55px", fontSize:"24px", lineHeight:"24px"}} className="border-black border-[1px] border-solid w-full rounded-[5px]"/>
                             <div id="show-password" className="flex mt-[5px]">
-                                <input type="checkbox" />
+                                <input onClick={()=>{showLoginPassword()}} type="checkbox" />
                                 
                                 <p className="pl-[5px] ">
                                     Show Password
