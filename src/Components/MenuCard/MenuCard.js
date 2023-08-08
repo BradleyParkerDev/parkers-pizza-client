@@ -33,6 +33,11 @@ const MenuCard = (props) =>{
     const [inCart, setInCart] = useState(true)
     const user = useSelector((state)=>state.users)
 
+    const {
+        beverage
+    } = props
+    console.log(beverage.type)
+    // console.log(props)
     const handleQuantityChange = (change) => {
 
         if(change === 'decrease'  && quantity > 1){
@@ -57,6 +62,15 @@ const MenuCard = (props) =>{
         }
 
     }
+    
+
+
+
+
+
+
+
+
 
     const showViewButton = () =>{
         
@@ -101,13 +115,13 @@ const MenuCard = (props) =>{
                 
                 {/* Upper Card Area */}
                 <div id='upper-card-area' className="flex justify-center h-[140px] w-full rounded-tl-[20px] rounded-tr-[20px] border-black border-[1px] border-dashed">
-                    <img style={{height:'128px', width:'122px'}} src={deepDish}/>
+                    <img style={{height:`${beverage.imageHeight}`, width:`${beverage.imageWidth}`}} src={`${beverage.image}`}/>
                 </div>
 
                 {/* Lower Card Area */}
                 <div id='lower-card-area' className="h-[65px] w-full rounded-bl-[20px] rounded-br-[20px] border-black border-[1px] border-dashed">
                     <div id='card-title' className="h-[15px] w-full flex justify-center border-black border-[1px] border-dashed">
-                        <p style={{fontSize:'14px', lineHeight:'14px'}}  className="font-sergioTrendy">Deep Dish Pizza</p>
+                        <p style={{fontSize:'14px', lineHeight:'14px'}}  className="font-sergioTrendy">{`${beverage.name}`}</p>
                     </div>
                     <div id='card-price-button' className="flex ">
 
@@ -118,7 +132,7 @@ const MenuCard = (props) =>{
                                     <p style={{fontSize:'24px', lineHeight:'24px'}} className="mr-[4px]">$</p>
                                 </div>
                                 <div id='price'>
-                                    <p style={{fontSize:'24px', lineHeight:'24px'}} className="font-sergioTrendy">7.50</p>
+                                    <p style={{fontSize:'24px', lineHeight:'24px'}} className="font-sergioTrendy">{`${beverage.price}`}</p>
                                 </div>
                                 <div id='asterisk'>
                                     <p style={{fontSize:'24px', lineHeight:'24px', fontFamily:'Arial'}} className="ml-[4px]">*</p>
@@ -146,19 +160,4 @@ const MenuCard = (props) =>{
 
 export default MenuCard;
 
-// const twoLiterSprite = {
-//     name: '2 Liter Sprite',
-//     image: 'Sprite 2 Liter.png',
-//     imageHeight:'121.67px',
-//     imageWidth:'50px',
-//     price: 2.50
 
-// }
-// const spriteCan = {
-//     name: 'Sprite Can',
-//     image: 'Sprite Can.png',
-//     imageHeight:'90px',
-//     imageWidth:'49.93px',
-//     price: 1
-
-// }

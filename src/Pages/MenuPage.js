@@ -1,174 +1,101 @@
 import MenuCard from "../Components/MenuCard/MenuCard"
 
-const MenuPage = () =>{
+const MenuPage = (props) =>{
 
-    const pizzas = [
-        {
-            name: 'Deep Dish Pizza',
-            price: 12.50,
-            crust: 'Deep Dish',
-            size: 'Sm',
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Hand Tossed Pizza',
-            price: 10,
-            crust: 'Hand Tossed',
-            size: 'Sm',
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Thin Crust Pizza',
-            price: 7.50,
-            crust: 'Thin Crust',
-            size: 'Sm',
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        }
+    // Pizzas
 
-    ]
+    // Sides
 
+    // Desserts
 
-    const sides = [
-        {
-            name: '12 Piece Hot Wings',
-            price: 12,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Bread Sticks',
-            price: 5,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Mozzarella Sticks',
-            price: 5,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Calamari',
-            price: 8,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        }
+    // Beverages
+    const twoLiterSpriteObj = {
+        type: 'beverage',
+        name: '2 Liter Sprite',
+        image: 'spriteTwoLiter',
+        imageHeight:'121.67px',
+        imageWidth:'50px',
+        price: 2.50
+    
+    }
+    const spriteCanObj = {
+        type: 'beverage',
+        name: 'Sprite Can',
+        image: 'spriteCan',
+        imageHeight:'90px',
+        imageWidth:'49.93px',
+        price: 1
+    
+    }
+    const twoLiterCokeObj = {
+        type: 'beverage',
+        name: '2 Liter Coke',
+        image: 'cokeTwoLiter',
+        imageHeight:'121.67px',
+        imageWidth:'40.47px',
+        price: 2.50
+    
+    }
+    const cokeCanObj = {
+        type: 'beverage',
+        name: 'Coke Can',
+        image: 'cokeCan',
+        imageHeight:'90px',
+        imageWidth:'60.15px',
+        price: 1
+    
+    }
+    const twoLiterDietCokeObj = {
+        type: 'beverage',
+        name: '2 Liter Diet Coke',
+        image: 'dietCokeTwoLiter',
+        imageHeight:'121.67px',
+        imageWidth:'41.14px',
+        price: 2.50
+    
+    }
+    const dietCokeCanObj = {
+        type: 'beverage',
+        name: 'Diet Coke Can',
+        image: 'dietCokeCan',
+        imageHeight:'90px',
+        imageWidth:'47.71px',
+        price: 1
+    
+    }
+    const twoLiterFantaObj = {
+        type: 'beverage',
+        name: '2 Liter Fanta',
+        image: 'fantaTwoLiter',
+        imageHeight:'121.67px',
+        imageWidth:'41.66px',
+        price: 2.50
+    
+    }
+    const fantaCanObj = {
+        type: 'beverage',
+        name: 'Fanta Can',
+        image: 'fantaCan',
+        imageHeight:'90px',
+        imageWidth:'47.36px',
+        price: 1
+    
+    }
 
-    ]
-
-    const desserts = [
-        {
-            name: 'Chocolate Cake',
-            price: 6,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Chocolate Chip Cookie',
-            price: 1.50,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Vanilla Ice Cream',
-            price: 3,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        }
-    ]
 
     const beverages = [
-        {
-            name: '2 Liter Sprite',
-            price: 2.50,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Sprite Can',
-            price: 1,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: '2 Liter Coke',
-            price: 2.50,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Coke Can',
-            price: 1,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: '2 Liter Diet Coke',
-            price: 2.50,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Diet Coke Can',
-            price: 1,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: '2 Liter Fanta',
-            price: 2.50,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-            name: 'Fanta Can',
-            price: 1,
-            image: '',
-            imageHeight: '',
-            imageWidth: '',
-        }
-
+        twoLiterSpriteObj,
+        spriteCanObj,
+        twoLiterCokeObj,
+        cokeCanObj,
+        twoLiterDietCokeObj,
+        dietCokeCanObj,
+        twoLiterFantaObj,
+        fantaCanObj
     ]
 
 
-
+    console.log(beverages)
     return(
 
         <div id="menu-container" className="w-full min-h-screen">
@@ -183,8 +110,7 @@ const MenuPage = () =>{
                 <div id='pizza-title' className="font-sergioTrendy border-black border-dashed border-[1px]">
                     <p>Pizzas</p>
                 </div>
-                <div id='pizza-row' className="flex overflow-x-scroll mt-[21px] h-[220px] border-black border-dashed border-[1px]">
-                    <MenuCard/>
+                <div id='pizza-row' className="flex  overflow-x-scroll mt-[21px] h-[220px] border-black border-dashed border-[1px]">
    
 
 
@@ -199,7 +125,7 @@ const MenuPage = () =>{
                 <div id='sides-title' className="font-sergioTrendy border-black border-dashed border-[1px]">
                     <p>Sides</p>
                 </div>
-                <div id='sides-row'  className="flex mt-[21px] h-[220px] border-black border-dashed border-[1px]">
+                <div id='sides-row'  className="flex overflow-x-scroll mt-[21px] h-[220px] border-black border-dashed border-[1px]">
 
                 </div>
             </div>
@@ -211,7 +137,7 @@ const MenuPage = () =>{
                 <div id='desserts-title' className="font-sergioTrendy border-black border-dashed border-[1px]">
                     <p>Desserts</p>
                 </div>
-                <div id='desserts-row'  className="flex mt-[21px] h-[220px] border-black border-dashed border-[1px]">
+                <div id='desserts-row'  className="flex overflow-x-scroll mt-[21px] h-[220px] border-black border-dashed border-[1px]">
 
                 </div>
             </div>
@@ -223,8 +149,8 @@ const MenuPage = () =>{
                 <div id='beverages-title' className="font-sergioTrendy border-black border-dashed border-[1px]">
                     <p>Beverages</p>
                 </div>
-                <div id='beverages-row'  className="flex mt-[21px] h-[220px] border-black border-dashed border-[1px]">
-
+                <div id='beverages-row'  className="flex overflow-x-scroll mt-[21px] h-[220px] border-black border-dashed border-[1px]">
+                    {beverages.map(beverage=>(<MenuCard beverage = {beverage}/>))}
                 </div>
             </div>
         </div>
