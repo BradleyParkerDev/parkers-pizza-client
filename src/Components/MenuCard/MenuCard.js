@@ -1,28 +1,5 @@
 import minus from './minus.png'
 import plus from './plus.png'
-import breadSticks from '../../MenuImages/Breadsticks.png'
-import calamari from '../../MenuImages/Calamari.png'
-import chocolateCake from '../../MenuImages/chocolate cake.png'
-import chocolateChipCookie from '../../MenuImages/chocolate chip cookie.png'
-import cokeTwoLiter from '../../MenuImages/Coke 2 Liter.png'
-import cokeCan from '../../MenuImages/Coke Can.png'
-import deepDish from '../../MenuImages/deep dish.png'
-import dietCokeTwoLiter from '../../MenuImages/Diet Coke 2 Liter.png'
-import dietCokeCan from '../../MenuImages/Diet Coke Can.png'
-import fantaTwoLiter from '../../MenuImages/Fanta 2 liter.png'
-import fantaCan from '../../MenuImages/Fanta Can.png'
-import handTossed from '../../MenuImages/Hand Tossed.png'
-import hotWings from '../../MenuImages/Hotwings.png'
-import mozzarellaSticks from '../../MenuImages/Mozzarella Sticks.png'
-import spriteTwoLiter from '../../MenuImages/Sprite 2 Liter.png'
-import spriteCan from '../../MenuImages/Sprite Can.png'
-import thinCrust from '../../MenuImages/Thin crust.png'
-import vanillaIceCream from '../../MenuImages/Vanilla Ice Cream.png'
-
-
-
-
-
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -31,8 +8,10 @@ const MenuCard = (props) =>{
     const navigate = useNavigate()
     const [quantity, setQuantity] = useState(0);
     const [inCart, setInCart] = useState(false)
+    const cart = useSelector((state)=>state.cart)
     const user = useSelector((state)=>state.users)
 
+    console.log(cart)
     const {
         pizza,
         beverage,
@@ -40,6 +19,7 @@ const MenuCard = (props) =>{
         side
     } = props
 
+    //Quantity Change
     const handleQuantityChange = (change) => {
         if(change === 'decrease'  && quantity > 1){
             setQuantity(quantity-1)            

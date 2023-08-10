@@ -21,8 +21,9 @@ import thinCrust from '../MenuImages/Thin crust.png'
 import vanillaIceCream from '../MenuImages/Vanilla Ice Cream.png'
 
 
-
+/////////////////////////////////////////////////////////////////////////
 // Pizzas
+/////////////////////////////////////////////////////////////////////////
 const deepDishObj = {
     cartQuantity: 0,
     type: 'pizza',
@@ -62,7 +63,9 @@ export const pizzas = [
     thinCrustObj
 ]
 
+/////////////////////////////////////////////////////////////////////////
 // Sides
+/////////////////////////////////////////////////////////////////////////
 const hotWingsObj = {
     cartQuantity: 0,
     type: 'side',
@@ -115,7 +118,9 @@ export const sides = [
     calamariObj
 ]
 
+/////////////////////////////////////////////////////////////////////////
 // Desserts
+/////////////////////////////////////////////////////////////////////////
 const chocolateCakeObj = {
     cartQuantity: 0,
     type: 'dessert',
@@ -156,7 +161,9 @@ export const desserts = [
     vanillaIceCreamObj
 ]
 
+/////////////////////////////////////////////////////////////////////////
 // Beverages
+/////////////////////////////////////////////////////////////////////////
 const twoLiterSpriteObj = {
     cartQuantity: 0,
     type: 'beverage',
@@ -258,20 +265,12 @@ export const beverages = [
 ]
 
 
-
-
-
-
-
-
-
 const cartSideItems = {
     cartHotWings: hotWingsObj,
     cartBreadSticks: breadSticksObj,
     cartMozzarellaSticks: mozzarellaSticksObj,
     cartCalamari: calamariObj
 }
-
 
 const cartDessertItems = {
     cartChocolateCake: chocolateCakeObj,
@@ -291,50 +290,15 @@ const cartBeverageItems = {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const initialState = {
     cartId: uuidv4(),
-    // dateCreated: Date,
-
+    dateCreated: Date(),
     cartSideItems,
     cartDessertItems,
     cartBeverageItems,
     items: [],
     total: 0
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 export const cartSlice = createSlice({
@@ -362,9 +326,14 @@ export const cartSlice = createSlice({
         },
         checkOut:(state, action) =>{
 
+        },
+        calculateCartTotal: (state, action) => {
+            let cartTotal = 0;
+            
+
         }  
     }
 })
 
-export const { addItemToCart, updateQuantity, checkOut} = cartSlice.actions;
+export const { addItemToCart, updateQuantity, checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;
