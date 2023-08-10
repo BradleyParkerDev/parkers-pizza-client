@@ -69,8 +69,8 @@ const MenuCard = (props) =>{
                 <p onClick={()=>{navigate('/pizza-builder')}} style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">View</p>
             </div>                
         )  
-
     }
+
     const showAddQuantity = () =>{
         if(!inCart){
             return(
@@ -105,7 +105,6 @@ const MenuCard = (props) =>{
                     {side && <img style={{height:`${side.imageHeight}`, width:`${side.imageWidth}`,marginTop:`${side.imageMarginTop}`}} src={side.image}/>}                 
                     {dessert && <img style={{height:`${dessert.imageHeight}`, width:`${dessert.imageWidth}`,marginTop:`${dessert.imageMarginTop}`}} src={dessert.image}/>}                 
                     {beverage && <img style={{height:`${beverage.imageHeight}`, width:`${beverage.imageWidth}`,marginTop:`${beverage.imageMarginTop}`}} src={beverage.image}/>}
-
                 </div>
 
                 {/* Lower Card Area */}

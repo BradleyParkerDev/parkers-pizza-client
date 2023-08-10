@@ -29,12 +29,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 const CartOrderCard = () =>{
-
     const [quantity, setQuantity] = useState(1);
-
-
     const handleQuantityChange = (change) => {
-
         if(change === 'decrease'  && quantity > 0){
             setQuantity(quantity-1)
         }
@@ -44,7 +40,6 @@ const CartOrderCard = () =>{
         if(change === 'remove'){
             setQuantity(0)
         }
-
     }
 
     return(
@@ -53,6 +48,7 @@ const CartOrderCard = () =>{
                 <div id='coc-image-div' className="h-[auto] w-[160px] ">
                     <img className='w-[159px] h-[153px]' src={deepDish}/>
                 </div>
+
                 <div id='coc-title-details-price-div' className='md:flex ml-[10px] md:ml-[15px]' >
                     <div id='coc-title-details' className=' md:w-[175px] w-[140px] h-[110px] '>
                         <div id='coc-item-title' className='mt-[20px]'>
@@ -63,8 +59,8 @@ const CartOrderCard = () =>{
                         <div id='coc-item-details' className='mt-[5px]'>
                             <p>Details</p>
                         </div>
-                        
                     </div>
+
                     <div id="coc-price" className='md:mt-[20px]  md:w-[80px]'>
                         <div  id="price-inner-container" style={{fontSize:'16px', lineHeight:'16px'}} className=''>
                             <div id="price-text" className='md:flex md:pt-[5px] md:justify-center w-[70px] font-sergioTrendy '>
@@ -82,7 +78,7 @@ const CartOrderCard = () =>{
                             </div>
                         </div>
                     </div>
-
+                    
                 </div>
             </div>
             <div id="coc-div-2" className=" flex mt-[5px] md:ml-[15px] md:mt-[20px] h-[65px] md:h-[100%] w-[100%] ">
