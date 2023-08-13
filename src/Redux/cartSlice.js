@@ -20,13 +20,12 @@ import spriteCan from '../MenuImages/Sprite Can.png'
 import thinCrust from '../MenuImages/Thin crust.png'
 import vanillaIceCream from '../MenuImages/Vanilla Ice Cream.png'
 
+console.log(typeof(deepDish))
 
 /////////////////////////////////////////////////////////////////////////
 // Pizzas
 /////////////////////////////////////////////////////////////////////////
 const deepDishObj = {
-    cartQuantity: 0,
-    type: 'pizza',
     name: 'Deep Dish Pizza',
     image: deepDish,
     imageHeight:'117.4px',
@@ -36,8 +35,6 @@ const deepDishObj = {
 
 }
 const handTossedObj = {
-    cartQuantity: 0,
-    type: 'pizza',
     name: 'Hand Tossed Pizza',
     image: handTossed,
     imageHeight:'125px',
@@ -47,8 +44,6 @@ const handTossedObj = {
 
 }
 const thinCrustObj = {
-    cartQuantity: 0,
-    type: 'pizza',
     name: 'Thin Crust Pizza',
     image: thinCrust,
     imageHeight:'122.64px',
@@ -67,8 +62,6 @@ export const pizzas = [
 // Sides
 /////////////////////////////////////////////////////////////////////////
 const hotWingsObj = {
-    cartQuantity: 0,
-    type: 'side',
     name: '12 Piece Hot Wings',
     image: hotWings,
     imageHeight:'115px',
@@ -78,8 +71,6 @@ const hotWingsObj = {
 
 }
 const breadSticksObj = {
-    cartQuantity: 0,
-    type: 'side',
     name: 'Bread Sticks',
     image: breadSticks,
     imageHeight:'106.8px',
@@ -89,8 +80,6 @@ const breadSticksObj = {
 
 }
 const mozzarellaSticksObj = {
-    cartQuantity: 0,
-    type: 'side',
     name: 'Mozzarella Sticks',
     image: mozzarellaSticks,
     imageHeight:'105.47px',
@@ -100,8 +89,6 @@ const mozzarellaSticksObj = {
 
 }
 const calamariObj = {
-    cartQuantity: 0,
-    type: 'side',
     name: 'Calamari',
     image: calamari,
     imageHeight:'127.32px',
@@ -122,8 +109,6 @@ export const sides = [
 // Desserts
 /////////////////////////////////////////////////////////////////////////
 const chocolateCakeObj = {
-    cartQuantity: 0,
-    type: 'dessert',
     name: 'Chocolate Cake',
     image: chocolateCake,
     imageHeight:'128px',
@@ -133,8 +118,6 @@ const chocolateCakeObj = {
 
 }
 const chocolateChipCookieObj = {
-    cartQuantity: 0,
-    type: 'dessert',
     name: 'Chocolate Chip Cookie',
     image: chocolateChipCookie,
     imageHeight:'105.01px',
@@ -144,8 +127,6 @@ const chocolateChipCookieObj = {
 
 }
 const vanillaIceCreamObj = {
-    cartQuantity: 0,
-    type: 'dessert',
     name: 'Vanilla Ice Cream',
     image: vanillaIceCream,
     imageHeight:'90px',
@@ -165,19 +146,16 @@ export const desserts = [
 // Beverages
 /////////////////////////////////////////////////////////////////////////
 const twoLiterSpriteObj = {
-    cartQuantity: 0,
-    type: 'beverage',
     name: '2 Liter Sprite',
     image: spriteTwoLiter,
     imageHeight:'121.67px',
     imageWidth:'50px',
+    imageMarginTop: '6.05px',
     price: 2.50,
-    imageMarginTop: '6.05px'
+    quantity:0
 
 }
 const spriteCanObj = {
-    cartQuantity: 0,
-    type: 'beverage',
     name: 'Sprite Can',
     image: spriteCan,
     imageHeight:'90px',
@@ -187,8 +165,6 @@ const spriteCanObj = {
 
 }
 const twoLiterCokeObj = {
-    cartQuantity: 0,
-    type: 'beverage',
     name: '2 Liter Coke',
     image: cokeTwoLiter,
     imageHeight:'121.67px',
@@ -198,8 +174,6 @@ const twoLiterCokeObj = {
 
 }
 const cokeCanObj = {
-    cartQuantity: 0,
-    type: 'beverage',
     name: 'Coke Can',
     image: cokeCan,
     imageHeight:'90px',
@@ -209,8 +183,6 @@ const cokeCanObj = {
 
 }
 const twoLiterDietCokeObj = {
-    cartQuantity: 0,
-    type: 'beverage',
     name: '2 Liter Diet Coke',
     image: dietCokeTwoLiter,
     imageHeight:'121.67px',
@@ -220,8 +192,6 @@ const twoLiterDietCokeObj = {
 
 }
 const dietCokeCanObj = {
-    cartQuantity: 0,
-    type: 'beverage',
     name: 'Diet Coke Can',
     image: dietCokeCan,
     imageHeight:'90px',
@@ -231,8 +201,6 @@ const dietCokeCanObj = {
 
 }
 const twoLiterFantaObj = {
-    cartQuantity: 0,
-    type: 'beverage',
     name: '2 Liter Fanta',
     image: fantaTwoLiter,
     imageHeight:'121.67px',
@@ -242,8 +210,6 @@ const twoLiterFantaObj = {
 
 }
 const fantaCanObj = {
-    cartQuantity: 0,
-    type: 'beverage',
     name: 'Fanta Can',
     image: fantaCan,
     imageHeight:'90px',
@@ -292,11 +258,7 @@ const cartBeverageItems = {
 
 const initialState = {
     cartId: uuidv4(),
-    dateCreated: Date(),
-    cartSideItems,
-    cartDessertItems,
-    cartBeverageItems,
-    items: [],
+    items: {},
     total: 0
 }
 
@@ -306,30 +268,43 @@ export const cartSlice = createSlice({
     initialState,
     reducers:{
         addItemToCart: (state, action) => {
-            console.log(action)
-            let newItem = {
-                item: action.payload,
-                quantity: 1                
+            console.log(action.payload.name)
+            console.log(action.payload.type)
+
+            // let cartItem = {
+            //     item:{},
+            //     quantity: 0,
+            //     itemTotal:0
+            // }
+
+            if(action.payload.type === 'add' && action.payload.name === '2 Liter Sprite'){
+                state.items.twoLiterSpriteObj = twoLiterSpriteObj;
+                state.items.twoLiterSpriteObj.quantity = 1;
             }
 
-            state.items.push(newItem)
+            // console.log(state.items)
+
 
         },
         updateQuantity:(state, action) =>{
             
-            let itemToUpdate = action.payload;
-            if(action.type === 'increase'){
-                itemToUpdate.quantity+=1
-            }else if(action.type === 'decrease'){
-                itemToUpdate.quantity-=1
+            // let itemToUpdate = action.payload.name;
+            if(action.payload.type === 'increase' && action.payload.name === '2 Liter Sprite'){
+                state.items.twoLiterSpriteObj.quantity +=1;
+
             }
+            if(action.payload.type === 'decrease' && action.payload.name === '2 Liter Sprite'){
+                state.items.twoLiterSpriteObj.quantity -=1;
+
+            }
+
         },
         checkOut:(state, action) =>{
 
         },
         calculateCartTotal: (state, action) => {
             let cartTotal = 0;
-            
+
 
         }  
     }
