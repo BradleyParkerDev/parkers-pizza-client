@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {v4 as uuidv4} from 'uuid'
-
 import breadSticks from '../MenuImages/Breadsticks.png'
 import calamari from '../MenuImages/Calamari.png'
 import chocolateCake from '../MenuImages/chocolate cake.png'
@@ -20,12 +19,12 @@ import spriteCan from '../MenuImages/Sprite Can.png'
 import thinCrust from '../MenuImages/Thin crust.png'
 import vanillaIceCream from '../MenuImages/Vanilla Ice Cream.png'
 
-console.log(typeof(deepDish))
 
 /////////////////////////////////////////////////////////////////////////
 // Pizzas
 /////////////////////////////////////////////////////////////////////////
 const deepDishObj = {
+    quantity: 1,
     name: 'Deep Dish Pizza',
     image: deepDish,
     imageHeight:'117.4px',
@@ -35,6 +34,7 @@ const deepDishObj = {
 
 }
 const handTossedObj = {
+    quantity: 1,
     name: 'Hand Tossed Pizza',
     image: handTossed,
     imageHeight:'125px',
@@ -44,6 +44,7 @@ const handTossedObj = {
 
 }
 const thinCrustObj = {
+    quantity: 1,
     name: 'Thin Crust Pizza',
     image: thinCrust,
     imageHeight:'122.64px',
@@ -62,6 +63,7 @@ export const pizzas = [
 // Sides
 /////////////////////////////////////////////////////////////////////////
 const hotWingsObj = {
+    quantity: 1,
     name: '12 Piece Hot Wings',
     image: hotWings,
     imageHeight:'115px',
@@ -71,6 +73,7 @@ const hotWingsObj = {
 
 }
 const breadSticksObj = {
+    quantity: 1,
     name: 'Bread Sticks',
     image: breadSticks,
     imageHeight:'106.8px',
@@ -80,6 +83,7 @@ const breadSticksObj = {
 
 }
 const mozzarellaSticksObj = {
+    quantity: 1,
     name: 'Mozzarella Sticks',
     image: mozzarellaSticks,
     imageHeight:'105.47px',
@@ -89,6 +93,7 @@ const mozzarellaSticksObj = {
 
 }
 const calamariObj = {
+    quantity: 1,
     name: 'Calamari',
     image: calamari,
     imageHeight:'127.32px',
@@ -109,6 +114,7 @@ export const sides = [
 // Desserts
 /////////////////////////////////////////////////////////////////////////
 const chocolateCakeObj = {
+    quantity: 1,
     name: 'Chocolate Cake',
     image: chocolateCake,
     imageHeight:'128px',
@@ -118,6 +124,7 @@ const chocolateCakeObj = {
 
 }
 const chocolateChipCookieObj = {
+    quantity: 1,
     name: 'Chocolate Chip Cookie',
     image: chocolateChipCookie,
     imageHeight:'105.01px',
@@ -127,6 +134,7 @@ const chocolateChipCookieObj = {
 
 }
 const vanillaIceCreamObj = {
+    quantity: 1,
     name: 'Vanilla Ice Cream',
     image: vanillaIceCream,
     imageHeight:'90px',
@@ -146,16 +154,17 @@ export const desserts = [
 // Beverages
 /////////////////////////////////////////////////////////////////////////
 const twoLiterSpriteObj = {
+    quantity: 1,
     name: '2 Liter Sprite',
     image: spriteTwoLiter,
     imageHeight:'121.67px',
     imageWidth:'50px',
     imageMarginTop: '6.05px',
     price: 2.50,
-    quantity:0
 
 }
 const spriteCanObj = {
+    quantity: 1,
     name: 'Sprite Can',
     image: spriteCan,
     imageHeight:'90px',
@@ -165,6 +174,7 @@ const spriteCanObj = {
 
 }
 const twoLiterCokeObj = {
+    quantity: 1,
     name: '2 Liter Coke',
     image: cokeTwoLiter,
     imageHeight:'121.67px',
@@ -174,6 +184,7 @@ const twoLiterCokeObj = {
 
 }
 const cokeCanObj = {
+    quantity: 1,
     name: 'Coke Can',
     image: cokeCan,
     imageHeight:'90px',
@@ -183,6 +194,7 @@ const cokeCanObj = {
 
 }
 const twoLiterDietCokeObj = {
+    quantity: 1,
     name: '2 Liter Diet Coke',
     image: dietCokeTwoLiter,
     imageHeight:'121.67px',
@@ -192,6 +204,7 @@ const twoLiterDietCokeObj = {
 
 }
 const dietCokeCanObj = {
+    quantity: 1,
     name: 'Diet Coke Can',
     image: dietCokeCan,
     imageHeight:'90px',
@@ -201,6 +214,7 @@ const dietCokeCanObj = {
 
 }
 const twoLiterFantaObj = {
+    quantity: 1,
     name: '2 Liter Fanta',
     image: fantaTwoLiter,
     imageHeight:'121.67px',
@@ -210,6 +224,7 @@ const twoLiterFantaObj = {
 
 }
 const fantaCanObj = {
+    quantity: 1,
     name: 'Fanta Can',
     image: fantaCan,
     imageHeight:'90px',
@@ -265,13 +280,13 @@ const initialState = {
 }
 
 
+
 export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers:{
         addItemToCart: (state, action) => {
-            console.log(action.payload.name)
-            console.log(action.payload.type)
+
 
             ///////////////////////////////////////////////////////////////////////////////////
             // Sides
@@ -281,25 +296,21 @@ export const cartSlice = createSlice({
             // 12 Piece Hot Wings
             if(action.payload.type === 'add' && action.payload.name === '12 Piece Hot Wings'){
                 state.items.hotWingsObj = hotWingsObj;
-                state.items.hotWingsObj.quantity = 1;
             }
 
             // Bread Sticks
             if(action.payload.type === 'add' && action.payload.name === 'Bread Sticks'){
                 state.items.breadSticksObj = breadSticksObj;
-                state.items.breadSticksObj.quantity = 1;
             }
 
             // Mozzarella Sticks
             if(action.payload.type === 'add' && action.payload.name === 'Mozzarella Sticks'){
                 state.items.mozzarellaSticksObj = mozzarellaSticksObj;
-                state.items.mozzarellaSticksObj.quantity = 1;
             }
 
             // Calamari
             if(action.payload.type === 'add' && action.payload.name === 'Calamari'){
                 state.items.calamariObj = calamariObj;
-                state.items.calamariObj.quantity = 1;
             }
             ///////////////////////////////////////////////////////////////////////////////////
             // Desserts
@@ -309,19 +320,16 @@ export const cartSlice = createSlice({
             // Chocolate Cake
             if(action.payload.type === 'add' && action.payload.name === 'Chocolate Cake'){
                 state.items.chocolateCakeObj = chocolateCakeObj;
-                state.items.chocolateCakeObj.quantity = 1;
             }
 
             // Chocolate Chip Cookie
             if(action.payload.type === 'add' && action.payload.name === 'Chocolate Chip Cookie'){
                 state.items.chocolateChipCookieObj = chocolateChipCookieObj;
-                state.items.chocolateChipCookieObj.quantity = 1;
             }
 
             // Vanilla Ice Cream
             if(action.payload.type === 'add' && action.payload.name === 'Vanilla Ice Cream'){
                 state.items.vanillaIceCreamObj = vanillaIceCreamObj;
-                state.items.vanillaIceCreamObj.quantity = 1;
             }
 
 
@@ -335,41 +343,33 @@ export const cartSlice = createSlice({
             // Sprite
             if(action.payload.type === 'add' && action.payload.name === '2 Liter Sprite'){
                 state.items.twoLiterSpriteObj = twoLiterSpriteObj;
-                state.items.twoLiterSpriteObj.quantity = 1;
             }
             if(action.payload.type === 'add' && action.payload.name === 'Sprite Can'){
                 state.items.spriteCanObj = spriteCanObj;
-                state.items.spriteCanObj.quantity = 1;
             }
 
             // Coke
             if(action.payload.type === 'add' && action.payload.name === '2 Liter Coke'){
                 state.items.twoLiterCokeObj = twoLiterCokeObj;
-                state.items.twoLiterCokeObj.quantity = 1;
             }
             if(action.payload.type === 'add' && action.payload.name === 'Coke Can'){
                 state.items.cokeCanObj = cokeCanObj;
-                state.items.cokeCanObj.quantity = 1;
             }
 
             // Diet Coke
             if(action.payload.type === 'add' && action.payload.name === '2 Liter Diet Coke'){
                 state.items.twoLiterDietCokeObj = twoLiterDietCokeObj;
-                state.items.twoLiterDietCokeObj.quantity = 1;
             }
             if(action.payload.type === 'add' && action.payload.name === 'Diet Coke Can'){
                 state.items.dietCokeCanObj = dietCokeCanObj;
-                state.items.dietCokeCanObj.quantity = 1;
             }
 
             // Fanta
             if(action.payload.type === 'add' && action.payload.name === '2 Liter Fanta'){
                 state.items.twoLiterFantaObj = twoLiterFantaObj;
-                state.items.twoLiterFantaObj.quantity = 1;
             }
             if(action.payload.type === 'add' && action.payload.name === 'Fanta Can'){
                 state.items.fantaCanObj = fantaCanObj;
-                state.items.fantaCanObj.quantity = 1;
             }
         },
         updateQuantity:(state, action) =>{
@@ -608,8 +608,13 @@ export const cartSlice = createSlice({
                     delete state.items.fantaCanObj;
                 }
             }
-
+            
         },
+        removeItemFromCart:(state,action)=>{
+            if(action.payload.type === 'remove' && action.payload.name === '2 Liter Sprite'){
+                delete state.items.twoLiterSpriteObj; 
+            }
+        },        
         addDealToCart:(state,action)=>{
 
         },
@@ -624,5 +629,5 @@ export const cartSlice = createSlice({
     }
 })
 
-export const { addItemToCart, updateQuantity,addDealToCart, checkOut, calculateCartTotal} = cartSlice.actions;
+export const { addItemToCart, updateQuantity,removeItemFromCart,addDealToCart, checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;

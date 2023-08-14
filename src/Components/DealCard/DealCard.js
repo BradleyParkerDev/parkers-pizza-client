@@ -15,7 +15,7 @@ const DealCard = (props) =>{
       <div id='deal-card-outer-container' className='bg-grey-pp p-[5px] min-h-[346px]  w-[100%] rounded-[20px]'>
         <div id='deal-card-inner-container' className='bg-white w-full h-full rounded-[20px]'>
             <div id ='deal-title' className='flex font-sergioTrendy justify-center'>
-                <p>Hand Tossed Deal</p>
+                <p >Hand Tossed Deal</p>
             </div>
         </div>
       </div>

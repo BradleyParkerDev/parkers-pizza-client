@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, updateQuantity } from '../../Redux/cartSlice'
+
 const MenuCard = (props) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -18,7 +19,6 @@ const MenuCard = (props) =>{
         beverage,
         dessert,
         side,
-        favorite
     } = props
 
     //Quantity Change

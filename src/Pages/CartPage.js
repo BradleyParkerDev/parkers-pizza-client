@@ -1,6 +1,6 @@
 import CartOrderCard from "../Components/CartOrderCard/CartOrderCard";
 import { useDispatch, useSelector } from 'react-redux'; 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const CartPage = () =>{
     const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const CartPage = () =>{
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
 
-    
+
 
 
 
@@ -153,7 +153,36 @@ const CartPage = () =>{
             </div>
         )
     }
- 
+    let cartItemsArr =[]
+    const displayCartCards = (cartItems) =>{
+        // const cartItemsArr = Object.values(cartItems.items)
+        // console.log(cartItemsArr)
+
+        for (const key in cart.items) {
+
+            console.log(cart.items[key].name)
+            
+                
+            cartItemsArr.push(cart.items[key])
+
+                
+        
+            // {<CartOrderCard item={cart.items[key]}/>}
+        }
+
+        return (
+
+            cartItemsArr.map(cartItem=>(<CartOrderCard cartItem = {cartItem}/>))
+        )
+        
+        
+    }   
+
+
+
+
+
+
     return(
         // Page Container
         <div id="cartPage-container" className="w-full min-h-screen">
@@ -168,7 +197,8 @@ const CartPage = () =>{
                 {/* Container for CartOrderCards */}
                 <div id="cart-items-outer-container" className="w-[370px] md:w-[680px]  bg-grey-pp rounded-[5px] p-[6px] min-h-[300px] md:min-h-[170px] h-[auto]">
                     <div id="cart-items-inner-container" className="w-[full] bg-white rounded-[5px] p-[9px]  h-[100%]">
-                        <CartOrderCard/>
+                        {displayCartCards(cart)}
+ 
                     </div>
                 </div>
             </div>

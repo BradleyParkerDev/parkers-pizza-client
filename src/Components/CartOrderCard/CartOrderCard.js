@@ -1,50 +1,38 @@
 import minus from './minus.png'
 import plus from './plus.png'
 import trash from './trash.png'
-import breadSticks from '../../MenuImages/Breadsticks.png'
-import calamari from '../../MenuImages/Calamari.png'
-import chocolateCake from '../../MenuImages/chocolate cake.png'
-import chocolateChipCookie from '../../MenuImages/chocolate chip cookie.png'
-import cokeTwoLiter from '../../MenuImages/Coke 2 Liter.png'
-import cokeCan from '../../MenuImages/Coke Can.png'
-import deepDish from '../../MenuImages/deep dish.png'
-import dietCokeTwoLiter from '../../MenuImages/Diet Coke 2 Liter.png'
-import dietCokeCan from '../../MenuImages/Diet Coke Can.png'
-import fantaTwoLiter from '../../MenuImages/Fanta 2 liter.png'
-import fantaCan from '../../MenuImages/Fanta Can.png'
-import handTossed from '../../MenuImages/Hand Tossed.png'
-import hotWings from '../../MenuImages/Hotwings.png'
-import mozzarellaSticks from '../../MenuImages/Mozzarella Sticks.png'
-import spriteTwoLiter from '../../MenuImages/Sprite 2 Liter.png'
-import spriteCan from '../../MenuImages/Sprite Can.png'
-import thinCrust from '../../MenuImages/Thin crust.png'
-import vanillaIceCream from '../../MenuImages/Vanilla Ice Cream.png'
-
-
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { addItemToCart, updateQuantity, removeItemFromCart } from '../../Redux/cartSlice'
+import { useNavigate } from 'react-router-dom'
 
 
 
 
 
 const CartOrderCard = (props) =>{
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const {
-        item
+        cartItem
     } = props;
 
     const [isPizza, setIsPizza] = useState(true)
     const [quantity, setQuantity] = useState(1);
-    const handleQuantityChange = (change) => {
+    const handleQuantityChange = (change, cartItemObj) => {
         if(change === 'decrease'  && quantity > 0){
             setQuantity(quantity-1)
         }
         if(change === 'increase'  && quantity < 10){
             setQuantity(quantity+1)
         }
-        if(change === 'remove'){
+        if(change === 'remove' && cartItemObj.name === '2 Liter Sprite'){
+            let payload = {
+                type: change,
+                name: cartItemObj.name
+            }
+            dispatch(removeItemFromCart(payload))
             setQuantity(0)
         }
     }
@@ -53,14 +41,14 @@ const CartOrderCard = (props) =>{
         <div id='cart-order-card-container' className=" md:flex font-sergioTrendy border-solid border-black border-[1px] rounded-[5px] w-[342px] md:w-[100%] h-[250px] md:h-[160px] mb-[9px] p-[10px] md:p-[0px]">
             <div id="coc-div-1" className="flex h-[160px] md:h-[100%] w-[100%] ">
                 <div id='coc-image-div' className="flex justify-center h-[auto] w-[170px] border-black border-dashed border-[1px] ">
-                    <img style={{marginTop:'21px'}} className='w-[50px] h-[121.67px]' src={spriteTwoLiter}/>
+                    <img style={{marginTop:'21px', height:`${cartItem.height}`, width:`${cartItem.width}`}} className='' src={cartItem.image}/>
                 </div>
 
                 <div id='coc-title-details-price-div' className='md:flex ml-[10px] md:ml-[15px]' >
                     <div id='coc-title-details' className=' md:w-[175px] w-[140px] h-[110px] '>
                         <div id='coc-item-title' className='mt-[20px]'>
                             <p>
-                                Mozzarella Sticks
+                                {cartItem.name}
                             </p>
                         </div>
                         {isPizza && <div id='coc-item-details' className='mt-[5px]'><p>Details</p></div>}
@@ -77,7 +65,7 @@ const CartOrderCard = (props) =>{
 
                                 </div>
                                 <div className=' pt-[4px] md:pt-[0px] font-sergioTrendy h-[24px] '>
-                                    <p>15.00</p>
+                                    <p>{cartItem.price.toFixed(2)}</p>
 
                                 </div>                            
                             </div>
@@ -108,7 +96,7 @@ const CartOrderCard = (props) =>{
                     </div>
                 </div>
                 <div id='coc-remove-div' className='flex md:ml-[35px] justify-end h-[100%] w-[162px] md:w-[auto] '>
-                    <img onClick={()=>{handleQuantityChange('remove')}} className='mt-[30px] md:mt-[50px] h-[30px] w-[30px] md:h-[40px] md:w-[40px]' src={trash}/>
+                    <img onClick={()=>{handleQuantityChange('remove', cartItem)}} className='mt-[30px] md:mt-[50px] h-[30px] w-[30px] md:h-[40px] md:w-[40px]' src={trash}/>
                 </div>
             </div>
         </div>

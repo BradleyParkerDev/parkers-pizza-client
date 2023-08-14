@@ -154,8 +154,8 @@ const PizzaBuilder = () => {
 
 
         dispatch(calculateTotal())
-        console.log(pizza)
-        console.log(cart)
+        // console.log(pizza)
+        // console.log(cart)
 
 
 
