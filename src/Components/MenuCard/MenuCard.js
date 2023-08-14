@@ -17,7 +17,8 @@ const MenuCard = (props) =>{
         pizza,
         beverage,
         dessert,
-        side
+        side,
+        favorite
     } = props
 
     //Quantity Change
@@ -39,21 +40,21 @@ const MenuCard = (props) =>{
             setInCart(true)
             setQuantity(1)
         }
-        if(change === 'add' && itemObj.name === '2 Liter Sprite'){
+        if(change === 'add'){
             let payload = {
                 type: change,
                 name: itemObj.name
             }
             dispatch(addItemToCart(payload))
         }
-        if(change === 'increase' && itemObj.name === '2 Liter Sprite'){
+        if(change === 'increase'){
             let payload = {
                 type: change,
                 name: itemObj.name
             }
             dispatch(updateQuantity(payload))
         }
-        if(change === 'decrease' && itemObj.name === '2 Liter Sprite'){
+        if(change === 'decrease'){
             let payload = {
                 type: change,
                 name: itemObj.name
@@ -80,7 +81,7 @@ const MenuCard = (props) =>{
 
             <div>
             {side && <div onClick={()=>{handleQuantityChange('add',side)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}
-            {dessert && <div onClick={()=>{handleQuantityChange('add', beverage)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}   
+            {dessert && <div onClick={()=>{handleQuantityChange('add', dessert)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}   
             {beverage && <div onClick={()=>{handleQuantityChange('add', beverage)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}   
 
             
@@ -92,15 +93,15 @@ const MenuCard = (props) =>{
         }else{
             return(
                 <div id='quantity-container' className='flex w-[70px] h-[50px] rounded-br-[20px]'>
-                        {!beverage && <div onClick={()=>{handleQuantityChange('decrease')}} id='minus-button' className='mt-[11px]'><img src={minus} className='h-[15px] w-[15px]'/></div>}
+                        {side && <div onClick={()=>{handleQuantityChange('decrease', side)}} id='minus-button' className='mt-[11px]'><img src={minus} className='h-[15px] w-[15px]'/></div>}
+                        {dessert && <div onClick={()=>{handleQuantityChange('decrease', dessert)}} id='minus-button' className='mt-[11px]'><img src={minus} className='h-[15px] w-[15px]'/></div>}
                         {beverage && <div onClick={()=>{handleQuantityChange('decrease', beverage)}} id='minus-button' className='mt-[11px]'><img src={minus} className='h-[15px] w-[15px]'/></div>}
-
                         <div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'>
                             <p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{quantity} </p>
                         </div>
-                        {!beverage && <div onClick={()=>{handleQuantityChange('increase')}} id='plus-button' className='mt-[11px]'><img src={plus} className='h-[15px] w-[15px]'/></div>}
+                        {side && <div onClick={()=>{handleQuantityChange('increase', side)}} id='plus-button' className='mt-[11px]'><img src={plus} className='h-[15px] w-[15px]'/></div>}
+                        {dessert && <div onClick={()=>{handleQuantityChange('increase', dessert)}} id='plus-button' className='mt-[11px]'><img src={plus} className='h-[15px] w-[15px]'/></div>}
                         {beverage && <div onClick={()=>{handleQuantityChange('increase', beverage)}} id='plus-button' className='mt-[11px]'><img src={plus} className='h-[15px] w-[15px]'/></div>}
-   
                 </div>
             )
         }

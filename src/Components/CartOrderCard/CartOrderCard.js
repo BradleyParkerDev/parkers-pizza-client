@@ -28,7 +28,14 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 
-const CartOrderCard = () =>{
+const CartOrderCard = (props) =>{
+
+
+    const {
+        item
+    } = props;
+
+    const [isPizza, setIsPizza] = useState(true)
     const [quantity, setQuantity] = useState(1);
     const handleQuantityChange = (change) => {
         if(change === 'decrease'  && quantity > 0){
@@ -45,20 +52,18 @@ const CartOrderCard = () =>{
     return(
         <div id='cart-order-card-container' className=" md:flex font-sergioTrendy border-solid border-black border-[1px] rounded-[5px] w-[342px] md:w-[100%] h-[250px] md:h-[160px] mb-[9px] p-[10px] md:p-[0px]">
             <div id="coc-div-1" className="flex h-[160px] md:h-[100%] w-[100%] ">
-                <div id='coc-image-div' className="h-[auto] w-[160px] ">
-                    <img className='w-[159px] h-[153px]' src={deepDish}/>
+                <div id='coc-image-div' className="flex justify-center h-[auto] w-[170px] border-black border-dashed border-[1px] ">
+                    <img style={{marginTop:'21px'}} className='w-[50px] h-[121.67px]' src={spriteTwoLiter}/>
                 </div>
 
                 <div id='coc-title-details-price-div' className='md:flex ml-[10px] md:ml-[15px]' >
                     <div id='coc-title-details' className=' md:w-[175px] w-[140px] h-[110px] '>
                         <div id='coc-item-title' className='mt-[20px]'>
                             <p>
-                                Deep Dish Pizza
+                                Mozzarella Sticks
                             </p>
                         </div>
-                        <div id='coc-item-details' className='mt-[5px]'>
-                            <p>Details</p>
-                        </div>
+                        {isPizza && <div id='coc-item-details' className='mt-[5px]'><p>Details</p></div>}
                     </div>
 
                     <div id="coc-price" className='md:mt-[20px]  md:w-[80px]'>

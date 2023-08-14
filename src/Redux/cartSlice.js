@@ -258,7 +258,9 @@ const cartBeverageItems = {
 
 const initialState = {
     cartId: uuidv4(),
+    pizzas:{},
     items: {},
+    deals:{},
     total: 0
 }
 
@@ -271,32 +273,344 @@ export const cartSlice = createSlice({
             console.log(action.payload.name)
             console.log(action.payload.type)
 
-            // let cartItem = {
-            //     item:{},
-            //     quantity: 0,
-            //     itemTotal:0
-            // }
+            ///////////////////////////////////////////////////////////////////////////////////
+            // Sides
+            ///////////////////////////////////////////////////////////////////////////////////
 
+
+            // 12 Piece Hot Wings
+            if(action.payload.type === 'add' && action.payload.name === '12 Piece Hot Wings'){
+                state.items.hotWingsObj = hotWingsObj;
+                state.items.hotWingsObj.quantity = 1;
+            }
+
+            // Bread Sticks
+            if(action.payload.type === 'add' && action.payload.name === 'Bread Sticks'){
+                state.items.breadSticksObj = breadSticksObj;
+                state.items.breadSticksObj.quantity = 1;
+            }
+
+            // Mozzarella Sticks
+            if(action.payload.type === 'add' && action.payload.name === 'Mozzarella Sticks'){
+                state.items.mozzarellaSticksObj = mozzarellaSticksObj;
+                state.items.mozzarellaSticksObj.quantity = 1;
+            }
+
+            // Calamari
+            if(action.payload.type === 'add' && action.payload.name === 'Calamari'){
+                state.items.calamariObj = calamariObj;
+                state.items.calamariObj.quantity = 1;
+            }
+            ///////////////////////////////////////////////////////////////////////////////////
+            // Desserts
+            ///////////////////////////////////////////////////////////////////////////////////
+
+
+            // Chocolate Cake
+            if(action.payload.type === 'add' && action.payload.name === 'Chocolate Cake'){
+                state.items.chocolateCakeObj = chocolateCakeObj;
+                state.items.chocolateCakeObj.quantity = 1;
+            }
+
+            // Chocolate Chip Cookie
+            if(action.payload.type === 'add' && action.payload.name === 'Chocolate Chip Cookie'){
+                state.items.chocolateChipCookieObj = chocolateChipCookieObj;
+                state.items.chocolateChipCookieObj.quantity = 1;
+            }
+
+            // Vanilla Ice Cream
+            if(action.payload.type === 'add' && action.payload.name === 'Vanilla Ice Cream'){
+                state.items.vanillaIceCreamObj = vanillaIceCreamObj;
+                state.items.vanillaIceCreamObj.quantity = 1;
+            }
+
+
+
+
+            ///////////////////////////////////////////////////////////////////////////////////
+            // Beverages
+            ///////////////////////////////////////////////////////////////////////////////////
+
+
+            // Sprite
             if(action.payload.type === 'add' && action.payload.name === '2 Liter Sprite'){
                 state.items.twoLiterSpriteObj = twoLiterSpriteObj;
                 state.items.twoLiterSpriteObj.quantity = 1;
             }
+            if(action.payload.type === 'add' && action.payload.name === 'Sprite Can'){
+                state.items.spriteCanObj = spriteCanObj;
+                state.items.spriteCanObj.quantity = 1;
+            }
 
-            // console.log(state.items)
+            // Coke
+            if(action.payload.type === 'add' && action.payload.name === '2 Liter Coke'){
+                state.items.twoLiterCokeObj = twoLiterCokeObj;
+                state.items.twoLiterCokeObj.quantity = 1;
+            }
+            if(action.payload.type === 'add' && action.payload.name === 'Coke Can'){
+                state.items.cokeCanObj = cokeCanObj;
+                state.items.cokeCanObj.quantity = 1;
+            }
 
+            // Diet Coke
+            if(action.payload.type === 'add' && action.payload.name === '2 Liter Diet Coke'){
+                state.items.twoLiterDietCokeObj = twoLiterDietCokeObj;
+                state.items.twoLiterDietCokeObj.quantity = 1;
+            }
+            if(action.payload.type === 'add' && action.payload.name === 'Diet Coke Can'){
+                state.items.dietCokeCanObj = dietCokeCanObj;
+                state.items.dietCokeCanObj.quantity = 1;
+            }
 
+            // Fanta
+            if(action.payload.type === 'add' && action.payload.name === '2 Liter Fanta'){
+                state.items.twoLiterFantaObj = twoLiterFantaObj;
+                state.items.twoLiterFantaObj.quantity = 1;
+            }
+            if(action.payload.type === 'add' && action.payload.name === 'Fanta Can'){
+                state.items.fantaCanObj = fantaCanObj;
+                state.items.fantaCanObj.quantity = 1;
+            }
         },
         updateQuantity:(state, action) =>{
-            
-            // let itemToUpdate = action.payload.name;
-            if(action.payload.type === 'increase' && action.payload.name === '2 Liter Sprite'){
-                state.items.twoLiterSpriteObj.quantity +=1;
 
+
+            ///////////////////////////////////////////////////////////////////////////////////
+            // Sides
+            ///////////////////////////////////////////////////////////////////////////////////
+
+
+            // 12 Piece Hot Wings
+            if(action.payload.type === 'increase' && action.payload.name === '12 Piece Hot Wings'){
+                if(state.items.hotWingsObj.quantity !== 10){
+                    state.items.hotWingsObj.quantity += 1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === '12 Piece Hot Wings'){
+                if(state.items.hotWingsObj.quantity !== 0){
+                    state.items.hotWingsObj.quantity -= 1;
+                }
+                if(state.items.hotWingsObj.quantity === 0){
+                    delete state.items.hotWingsObj;
+                }
+            }
+
+            // Bread Sticks
+            if(action.payload.type === 'increase' && action.payload.name === 'Bread Sticks'){
+                if(state.items.breadSticksObj.quantity !== 10){
+                    state.items.breadSticksObj.quantity += 1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Bread Sticks'){
+                if(state.items.breadSticksObj.quantity !== 0){
+                    state.items.breadSticksObj.quantity -= 1;
+                }
+                if(state.items.breadSticksObj.quantity === 0){
+                    delete state.items.breadSticksObj;
+                }
+            }
+            // Mozzarella Sticks
+            if(action.payload.type === 'increase' && action.payload.name === 'Mozzarella Sticks'){
+                if(state.items.mozzarellaSticksObj.quantity !== 10){
+                    state.items.mozzarellaSticksObj.quantity += 1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Mozzarella Sticks'){
+                if(state.items.mozzarellaSticksObj.quantity !== 0){
+                    state.items.mozzarellaSticksObj.quantity -= 1;
+                }
+                if(state.items.mozzarellaSticksObj.quantity === 0){
+                    delete state.items.mozzarellaSticksObj;
+                }
+            }
+            // Calamari
+            if(action.payload.type === 'increase' && action.payload.name === 'Calamari'){
+                if(state.items.calamariObj.quantity !== 10){
+                    state.items.calamariObj.quantity += 1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Calamari'){
+                if(state.items.calamariObj.quantity !== 0){
+                    state.items.calamariObj.quantity -= 1;
+                }
+                if(state.items.calamariObj.quantity === 0){
+                    delete state.items.calamariObj
+                }
+            }
+            ///////////////////////////////////////////////////////////////////////////////////
+            // Desserts
+            ///////////////////////////////////////////////////////////////////////////////////
+
+
+            // Chocolate Cake
+            if(action.payload.type === 'increase' && action.payload.name === 'Chocolate Cake'){
+                if(state.items.chocolateCakeObj.quantity !== 10){
+                    state.items.chocolateCakeObj.quantity += 1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Chocolate Cake'){
+                if(state.items.chocolateCakeObj.quantity !== 0){
+                    state.items.chocolateCakeObj.quantity -= 1;
+                }
+                if(state.items.chocolateCakeObj.quantity === 0){
+                    delete state.items.chocolateCakeObj;
+                }
+            }
+
+            // Chocolate Chip Cookie
+            if(action.payload.type === 'increase' && action.payload.name === 'Chocolate Chip Cookie'){
+                if(state.items.chocolateChipCookieObj.quantity !== 10){
+                    state.items.chocolateChipCookieObj.quantity += 1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Chocolate Chip Cookie'){
+                if(state.items.chocolateChipCookieObj.quantity !== 0){
+                    state.items.chocolateChipCookieObj.quantity -= 1;
+                }
+                if(state.items.chocolateChipCookieObj.quantity === 0){
+                    delete state.items.chocolateChipCookieObj;
+                }
+            }
+
+            // Vanilla Ice Cream
+            if(action.payload.type === 'increase' && action.payload.name === 'Vanilla Ice Cream'){
+                if(state.items.vanillaIceCreamObj.quantity !== 10){
+                    state.items.vanillaIceCreamObj.quantity += 1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Vanilla Ice Cream'){
+                if(state.items.vanillaIceCreamObj.quantity !== 0){
+                    state.items.vanillaIceCreamObj.quantity -= 1;
+                }
+                if(state.items.vanillaIceCreamObj.quantity === 0){
+                    delete state.items.vanillaIceCreamObj;
+                }
+            }
+
+
+
+            ///////////////////////////////////////////////////////////////////////////////////
+            // Beverages
+            ///////////////////////////////////////////////////////////////////////////////////
+
+            // Sprite
+            if(action.payload.type === 'increase' && action.payload.name === '2 Liter Sprite'){
+                if(state.items.twoLiterSpriteObj.quantity !== 10){
+                    state.items.twoLiterSpriteObj.quantity +=1;
+                }
             }
             if(action.payload.type === 'decrease' && action.payload.name === '2 Liter Sprite'){
-                state.items.twoLiterSpriteObj.quantity -=1;
-
+                if(state.items.twoLiterSpriteObj.quantity !== 0){
+                    state.items.twoLiterSpriteObj.quantity -=1;
+                }
+                if(state.items.twoLiterSpriteObj.quantity === 0){
+                    delete state.items.twoLiterSpriteObj;
+                }
             }
+
+
+            if(action.payload.type === 'increase' && action.payload.name === 'Sprite Can'){
+                if(state.items.spriteCanObj.quantity !== 10){
+                    state.items.spriteCanObj.quantity +=1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Sprite Can'){
+                if(state.items.spriteCanObj.quantity !== 0){
+                    state.items.spriteCanObj.quantity -=1;
+                }
+                if(state.items.spriteCanObj.quantity === 0){
+                    delete state.items.spriteCanObj;
+                }
+            }
+
+            // Coke
+            if(action.payload.type === 'increase' && action.payload.name === '2 Liter Coke'){
+                if(state.items.twoLiterCokeObj.quantity !== 10){
+                    state.items.twoLiterCokeObj.quantity +=1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === '2 Liter Coke'){
+                if(state.items.twoLiterCokeObj.quantity !== 0){
+                    state.items.twoLiterCokeObj.quantity -=1;
+                }
+                if(state.items.twoLiterCokeObj.quantity === 0){
+                    delete state.items.twoLiterCokeObj;
+                }
+            }
+            if(action.payload.type === 'increase' && action.payload.name === 'Coke Can'){
+                if(state.items.cokeCanObj.quantity !== 10){
+                    state.items.cokeCanObj.quantity +=1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Coke Can'){
+                if(state.items.cokeCanObj.quantity !== 0){
+                    state.items.cokeCanObj.quantity -=1;
+                }
+                if(state.items.cokeCanObj.quantity === 0){
+                    delete state.items.cokeCanObj;
+                }
+            }
+
+
+            // Diet Coke
+            if(action.payload.type === 'increase' && action.payload.name === '2 Liter Diet Coke'){
+                if(state.items.twoLiterDietCokeObj.quantity !== 10){
+                    state.items.twoLiterDietCokeObj.quantity +=1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === '2 Liter Diet Coke'){
+                if(state.items.twoLiterDietCokeObj.quantity !== 0){
+                    state.items.twoLiterDietCokeObj.quantity -=1;
+                }
+                if(state.items.twoLiterDietCokeObj.quantity === 0){
+                    delete state.items.twoLiterDietCokeObj;
+                }
+            }
+            if(action.payload.type === 'increase' && action.payload.name === 'Diet Coke Can'){
+                if(state.items.dietCokeCanObj.quantity !== 10){
+                    state.items.dietCokeCanObj.quantity +=1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Diet Coke Can'){
+                if(state.items.dietCokeCanObj.quantity !== 0){
+                    state.items.dietCokeCanObj.quantity -=1;
+                }
+                if(state.items.dietCokeCanObj.quantity === 0){
+                    delete state.items.dietCokeCanObj;
+                }
+            }
+
+
+            // Fanta
+            if(action.payload.type === 'increase' && action.payload.name === '2 Liter Fanta'){
+                if(state.items.twoLiterFantaObj.quantity !== 10){
+                    state.items.twoLiterFantaObj.quantity +=1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === '2 Liter Fanta'){
+                if(state.items.twoLiterFantaObj.quantity !== 0){
+                    state.items.twoLiterFantaObj.quantity -=1;
+                }
+                if(state.items.twoLiterFantaObj.quantity === 0){
+                    delete state.items.twoLiterFantaObj;
+                }
+            }
+            if(action.payload.type === 'increase' && action.payload.name === 'Fanta Can'){
+                if(state.items.fantaCanObj.quantity !== 10){
+                    state.items.fantaCanObj.quantity +=1;
+                }
+            }
+            if(action.payload.type === 'decrease' && action.payload.name === 'Fanta Can'){
+                if(state.items.fantaCanObj.quantity !== 0){
+                    state.items.fantaCanObj.quantity -=1;
+                }
+                if(state.items.fantaCanObj.quantity === 0){
+                    delete state.items.fantaCanObj;
+                }
+            }
+
+        },
+        addDealToCart:(state,action)=>{
 
         },
         checkOut:(state, action) =>{
@@ -310,5 +624,5 @@ export const cartSlice = createSlice({
     }
 })
 
-export const { addItemToCart, updateQuantity, checkOut, calculateCartTotal} = cartSlice.actions;
+export const { addItemToCart, updateQuantity,addDealToCart, checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;

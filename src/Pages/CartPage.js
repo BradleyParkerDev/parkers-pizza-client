@@ -3,16 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const CartPage = () =>{
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const cart = useSelector((state)=>state.cart)
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
 
-    console.log(user)
+    
 
+
+
+
+    // Allows user to choose delivery or pickup
     const showDeliveryPickup = () =>{
         return(
-
-
             <div>
                 <div id='orderType-checkout' className="md:flex w-[370px] md:w-[680px]  border-black border-dashed border-[1px]">
                     {/* Delivery */}
@@ -108,7 +112,7 @@ const CartPage = () =>{
 
     }
 
-
+    // Button Changes; user has to login to checkout
     const showLoginToCheckout = () =>{
         return(
             <div >
