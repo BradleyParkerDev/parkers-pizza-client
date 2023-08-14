@@ -12,9 +12,11 @@ const DealCard = (props) =>{
     const user = useSelector((state)=>state.users)
 
     return(
-      <div id='deal-card-outer-container' className='bg-grey-pp p-[5px] min-h-[211px] min-w-[357px] rounded-[20px]'>
+      <div id='deal-card-outer-container' className='bg-grey-pp p-[5px] min-h-[346px]  w-[100%] rounded-[20px]'>
         <div id='deal-card-inner-container' className='bg-white w-full h-full rounded-[20px]'>
-            deal
+            <div id ='deal-title' className='flex font-sergioTrendy justify-center'>
+                <p>Hand Tossed Deal</p>
+            </div>
         </div>
       </div>
     )
