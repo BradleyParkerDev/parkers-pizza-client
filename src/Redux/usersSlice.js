@@ -83,7 +83,7 @@ export const usersSlice = createSlice({
         city:'',
         state:'',
         zipcode:'',
-        cart:[],
+        cart:{},
         orders:[]
     },
     //syncronous set state

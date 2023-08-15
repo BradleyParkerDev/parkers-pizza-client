@@ -1,7 +1,7 @@
 import minus from './minus.png'
 import plus from './plus.png'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, updateQuantity } from '../../Redux/cartSlice'
 
@@ -63,7 +63,43 @@ const MenuCard = (props) =>{
         }
 
     }
-    
+    const checkCartStatusQuantity = () =>{
+
+
+        if(side){
+            for (const key in cart.items) {
+                if(cart.items[key].name === side.name){
+                    setInCart(true)
+                    setQuantity(cart.items[key].quantity)
+                }
+      
+            }            
+        }
+        if(dessert){
+            for (const key in cart.items) {
+                if(cart.items[key].name === dessert.name){
+                    setInCart(true)
+                    setQuantity(cart.items[key].quantity)
+                }
+     
+            }            
+        }
+        if(beverage){
+            for (const key in cart.items) {
+                if(cart.items[key].name === beverage.name){
+                    setInCart(true)
+                    setQuantity(cart.items[key].quantity)
+                }    
+            }            
+        }
+
+    }    
+    useEffect(()=>{
+
+        checkCartStatusQuantity()
+
+    },[cart])
+
 
 
 
@@ -76,6 +112,7 @@ const MenuCard = (props) =>{
     }
 
     const showAddQuantity = () =>{
+        
         if(!inCart){
             return(
 
@@ -92,13 +129,20 @@ const MenuCard = (props) =>{
             )
         }else{
             return(
-                <div id='quantity-container' className='flex w-[70px] h-[50px] rounded-br-[20px]'>
+                <div id='quantity-container' className='flex w-[70px] h-[50px] rounded-br-[20px]'>    
+                        {/* Decrease Buttons */}
                         {side && <div onClick={()=>{handleQuantityChange('decrease', side)}} id='minus-button' className='mt-[11px]'><img src={minus} className='h-[15px] w-[15px]'/></div>}
                         {dessert && <div onClick={()=>{handleQuantityChange('decrease', dessert)}} id='minus-button' className='mt-[11px]'><img src={minus} className='h-[15px] w-[15px]'/></div>}
                         {beverage && <div onClick={()=>{handleQuantityChange('decrease', beverage)}} id='minus-button' className='mt-[11px]'><img src={minus} className='h-[15px] w-[15px]'/></div>}
-                        <div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'>
-                            <p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{quantity} </p>
-                        </div>
+                        
+                        {/* Quantity Number */}
+                        {/* {side && <div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'><p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{side.quantity} </p></div>}
+                        {dessert && <div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'><p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{dessert.quantity} </p></div>}
+                        {beverage && <div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'><p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{beverage.quantity} </p></div>}
+                         */}
+                        {<div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'><p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{quantity} </p></div>}
+
+                        {/* Increase Buttons */}
                         {side && <div onClick={()=>{handleQuantityChange('increase', side)}} id='plus-button' className='mt-[11px]'><img src={plus} className='h-[15px] w-[15px]'/></div>}
                         {dessert && <div onClick={()=>{handleQuantityChange('increase', dessert)}} id='plus-button' className='mt-[11px]'><img src={plus} className='h-[15px] w-[15px]'/></div>}
                         {beverage && <div onClick={()=>{handleQuantityChange('increase', beverage)}} id='plus-button' className='mt-[11px]'><img src={plus} className='h-[15px] w-[15px]'/></div>}

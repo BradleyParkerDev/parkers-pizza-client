@@ -19,7 +19,7 @@ const CartOrderCard = (props) =>{
     } = props;
 
     const [isPizza, setIsPizza] = useState(true)
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(cartItem.quantity);
     const handleQuantityChange = (change, cartItemObj) => {
         if(change === 'decrease'  && quantity > 0){
             setQuantity(quantity-1)
@@ -37,6 +37,7 @@ const CartOrderCard = (props) =>{
         }
     }
 
+    
     return(
         <div id='cart-order-card-container' className=" md:flex font-sergioTrendy border-solid border-black border-[1px] rounded-[5px] w-[342px] md:w-[100%] h-[250px] md:h-[160px] mb-[9px] p-[10px] md:p-[0px]">
             <div id="coc-div-1" className="flex h-[160px] md:h-[100%] w-[100%] ">
