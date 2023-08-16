@@ -99,7 +99,7 @@ const MenuCard = (props) =>{
         }
 
     }
-    
+
     //Sets local storage cart to contents from cart slice
     const setLocalCart = () =>{
         localStorage.setItem('localCart', JSON.stringify(cart))
@@ -109,7 +109,9 @@ const MenuCard = (props) =>{
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
         console.log(JSON.parse(localCart))
-        dispatch(setCart(JSON.parse(localCart)))   
+        if(localCart){
+            dispatch(setCart(JSON.parse(localCart)))   
+        }
     } 
 
     useEffect(()=>{
