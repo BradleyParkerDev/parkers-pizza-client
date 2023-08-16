@@ -270,6 +270,24 @@ const cartBeverageItems = {
     cartFantaCan: fantaCan
 }
 
+// export const setLocalCart = ()=> {
+
+
+//     localStorage.setItem('local cart', state)
+
+
+
+// }
+
+// export const getLocalCart = ()=> {
+
+
+//     localStorage.getItem('local cart', state)
+
+
+
+// }
+
 
 const initialState = {
     cartId: uuidv4(),
@@ -286,7 +304,6 @@ export const cartSlice = createSlice({
     initialState,
     reducers:{
         addItemToCart: (state, action) => {
-
 
             ///////////////////////////////////////////////////////////////////////////////////
             // Sides
@@ -614,7 +631,12 @@ export const cartSlice = createSlice({
             if(action.payload.type === 'remove' && action.payload.name === '2 Liter Sprite'){
                 delete state.items.twoLiterSpriteObj; 
             }
-        },        
+        },
+        setCart:(state,action)=>{
+            console.log(action.payload.items)
+            state.items = action.payload.items;
+            // console.log(state)
+        },      
         addDealToCart:(state,action)=>{
 
         },
@@ -629,5 +651,5 @@ export const cartSlice = createSlice({
     }
 })
 
-export const { addItemToCart, updateQuantity,removeItemFromCart,addDealToCart, checkOut, calculateCartTotal} = cartSlice.actions;
+export const { addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;

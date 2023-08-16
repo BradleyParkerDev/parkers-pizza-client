@@ -1,4 +1,3 @@
-import Footer from "../Components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { loginUser } from "../Redux/usersSlice";

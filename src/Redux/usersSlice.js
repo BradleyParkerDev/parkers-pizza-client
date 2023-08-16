@@ -41,23 +41,6 @@ export const updateUser = createAsyncThunk('user/updateUser', async(userData, th
 
 
 
-
-// axios.put(`${urlEndPoint}/listings/update-listing/${params.listingId}`, req)
-// .then(function (response) {
-//     // navigate('/')
-//     setShouldRefresh(false);
-
-// },{
-//   'Content-Type': 'application/x-www-form-urlencoded'
-// })
-// .catch(function (error) {
-//   console.log(error);
-// }); 
-
-
-
-
-
 export const deleteUser = createAsyncThunk('user/deleteUser', async(id, thunkAPI) =>{
 
     try{

@@ -1,9 +1,9 @@
 import minus from './minus.png'
 import plus from './plus.png'
 import trash from './trash.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart, updateQuantity, removeItemFromCart } from '../../Redux/cartSlice'
+import { addItemToCart, updateQuantity ,removeItemFromCart } from '../../Redux/cartSlice'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 const CartOrderCard = (props) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const cart = useSelector((state)=>state.cart)
 
     const {
         cartItem
@@ -38,6 +39,7 @@ const CartOrderCard = (props) =>{
     }
 
     
+
     return(
         <div id='cart-order-card-container' className=" md:flex font-sergioTrendy border-solid border-black border-[1px] rounded-[5px] w-[342px] md:w-[100%] h-[250px] md:h-[160px] mb-[9px] p-[10px] md:p-[0px]">
             <div id="coc-div-1" className="flex h-[160px] md:h-[100%] w-[100%] ">

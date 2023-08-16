@@ -2,16 +2,13 @@ import CartOrderCard from "../Components/CartOrderCard/CartOrderCard";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { setCart } from "../Redux/cartSlice";
 const CartPage = () =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cart = useSelector((state)=>state.cart)
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
-
-
-
-
 
 
     // Allows user to choose delivery or pickup
@@ -111,6 +108,26 @@ const CartPage = () =>{
     )
 
     }
+    
+    //Sets local storage cart to contents from cart slice
+    const setLocalCart = () =>{
+        localStorage.setItem('localCart', JSON.stringify(cart))
+    }
+
+    //Gets cart slice items from local storage
+    const getLocalCart = () =>{
+        let localCart = localStorage.getItem('localCart')
+        console.log(JSON.parse(localCart))
+        dispatch(setCart(JSON.parse(localCart)))   
+    } 
+
+    useEffect(()=>{
+        // checkCartStatusQuantity()
+        {Object.entries(cart.items).length > 0 && setLocalCart()}
+        {Object.entries(cart.items).length === 0 && getLocalCart()}
+    },[cart])
+
+
 
     // Button Changes; user has to login to checkout
     const showLoginToCheckout = () =>{
@@ -160,7 +177,7 @@ const CartPage = () =>{
 
         for (const key in cart.items) {
 
-            console.log(cart.items[key].name)
+            // console.log(cart.items[key].name)
             
                 
             cartItemsArr.push(cart.items[key])

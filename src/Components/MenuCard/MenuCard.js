@@ -3,13 +3,14 @@ import plus from './plus.png'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart, updateQuantity } from '../../Redux/cartSlice'
-
+import { addItemToCart, updateQuantity,setCart } from '../../Redux/cartSlice'
+// import { checkLocalCart } from '../../Lib/checkLocalCart'
 const MenuCard = (props) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [quantity, setQuantity] = useState(0);
     const [inCart, setInCart] = useState(false)
+    const [refresh, setRefresh] = useState(false)
     const cart = useSelector((state)=>state.cart)
     const user = useSelector((state)=>state.users)
 
@@ -20,6 +21,7 @@ const MenuCard = (props) =>{
         dessert,
         side,
     } = props
+
 
     //Quantity Change
     const handleQuantityChange = (change, itemObj) => {
@@ -63,6 +65,9 @@ const MenuCard = (props) =>{
         }
 
     }
+
+
+    // Sets card quantity to cart item quantity
     const checkCartStatusQuantity = () =>{
 
 
@@ -93,11 +98,24 @@ const MenuCard = (props) =>{
             }            
         }
 
-    }    
+    }
+    
+    //Sets local storage cart to contents from cart slice
+    const setLocalCart = () =>{
+        localStorage.setItem('localCart', JSON.stringify(cart))
+    }
+
+    //Gets cart slice items from local storage
+    const getLocalCart = () =>{
+        let localCart = localStorage.getItem('localCart')
+        console.log(JSON.parse(localCart))
+        dispatch(setCart(JSON.parse(localCart)))   
+    } 
+
     useEffect(()=>{
-
         checkCartStatusQuantity()
-
+        {Object.entries(cart.items).length > 0 && setLocalCart()}
+        {Object.entries(cart.items).length === 0 && getLocalCart()}
     },[cart])
 
 
