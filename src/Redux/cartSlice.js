@@ -270,29 +270,12 @@ const cartBeverageItems = {
     cartFantaCan: fantaCan
 }
 
-// export const setLocalCart = ()=> {
-
-
-//     localStorage.setItem('local cart', state)
-
-
-
-// }
-
-// export const getLocalCart = ()=> {
-
-
-//     localStorage.getItem('local cart', state)
-
-
-
-// }
-
 
 const initialState = {
     cartId: uuidv4(),
     pizzas:{},
     items: {},
+    lastItem: false,
     deals:{},
     total: 0
 }
@@ -303,6 +286,14 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers:{
+        addPizzaToCart: (state,action) =>{
+            console.log(action.payload)
+            let value = 2;
+            state.items.pizza1 = action.payload;
+
+
+            
+        },
         addItemToCart: (state, action) => {
 
             ///////////////////////////////////////////////////////////////////////////////////
@@ -388,6 +379,16 @@ export const cartSlice = createSlice({
             if(action.payload.type === 'add' && action.payload.name === 'Fanta Can'){
                 state.items.fantaCanObj = fantaCanObj;
             }
+
+            //Set lastItem Property
+            if(Object.entries(state.items).length === 1){
+                state.lastItem = true;
+            }else{
+                state.lastItem = false;
+            }
+            console.log(Object.entries(state.items).length)
+            console.log(state.lastItem)
+
         },
         updateQuantity:(state, action) =>{
 
@@ -520,7 +521,13 @@ export const cartSlice = createSlice({
                 if(state.items.twoLiterSpriteObj.quantity !== 0){
                     state.items.twoLiterSpriteObj.quantity -=1;
                 }
-                if(state.items.twoLiterSpriteObj.quantity === 0){
+
+                if(state.lastItem === true ){
+                    localStorage.removeItem('localCart')
+                    delete state.items.twoLiterSpriteObj; 
+   
+                }else if(state.items.twoLiterSpriteObj.quantity === 0){
+
                     delete state.items.twoLiterSpriteObj;
                 }
             }
@@ -535,7 +542,11 @@ export const cartSlice = createSlice({
                 if(state.items.spriteCanObj.quantity !== 0){
                     state.items.spriteCanObj.quantity -=1;
                 }
-                if(state.items.spriteCanObj.quantity === 0){
+                if(state.lastItem === true ){
+                    localStorage.removeItem('localCart')
+                    delete state.items.spriteCanObj; 
+   
+                }else if(state.items.spriteCanObj.quantity === 0){
                     delete state.items.spriteCanObj;
                 }
             }
@@ -550,7 +561,11 @@ export const cartSlice = createSlice({
                 if(state.items.twoLiterCokeObj.quantity !== 0){
                     state.items.twoLiterCokeObj.quantity -=1;
                 }
-                if(state.items.twoLiterCokeObj.quantity === 0){
+                if(state.lastItem === true ){
+                    localStorage.removeItem('localCart')
+                    delete state.items.twoLiterCokeObj; 
+   
+                }else if(state.items.twoLiterCokeObj.quantity === 0){
                     delete state.items.twoLiterCokeObj;
                 }
             }
@@ -563,7 +578,11 @@ export const cartSlice = createSlice({
                 if(state.items.cokeCanObj.quantity !== 0){
                     state.items.cokeCanObj.quantity -=1;
                 }
-                if(state.items.cokeCanObj.quantity === 0){
+                if(state.lastItem === true ){
+                    localStorage.removeItem('localCart')
+                    delete state.items.cokeCanObj; 
+   
+                }else if(state.items.cokeCanObj.quantity === 0){
                     delete state.items.cokeCanObj;
                 }
             }
@@ -579,7 +598,11 @@ export const cartSlice = createSlice({
                 if(state.items.twoLiterDietCokeObj.quantity !== 0){
                     state.items.twoLiterDietCokeObj.quantity -=1;
                 }
-                if(state.items.twoLiterDietCokeObj.quantity === 0){
+                if(state.lastItem === true ){
+                    localStorage.removeItem('localCart')
+                    delete state.items.twoLiterDietCokeObj; 
+   
+                }else if(state.items.twoLiterDietCokeObj.quantity === 0){
                     delete state.items.twoLiterDietCokeObj;
                 }
             }
@@ -592,7 +615,11 @@ export const cartSlice = createSlice({
                 if(state.items.dietCokeCanObj.quantity !== 0){
                     state.items.dietCokeCanObj.quantity -=1;
                 }
-                if(state.items.dietCokeCanObj.quantity === 0){
+                if(state.lastItem === true ){
+                    localStorage.removeItem('localCart')
+                    delete state.items.dietCokeCanObj; 
+   
+                }else if(state.items.dietCokeCanObj.quantity === 0){
                     delete state.items.dietCokeCanObj;
                 }
             }
@@ -608,7 +635,11 @@ export const cartSlice = createSlice({
                 if(state.items.twoLiterFantaObj.quantity !== 0){
                     state.items.twoLiterFantaObj.quantity -=1;
                 }
-                if(state.items.twoLiterFantaObj.quantity === 0){
+                if(state.lastItem === true ){
+                    localStorage.removeItem('localCart')
+                    delete state.items.twoLiterFantaObj; 
+   
+                }else if(state.items.twoLiterFantaObj.quantity === 0){
                     delete state.items.twoLiterFantaObj;
                 }
             }
@@ -621,35 +652,173 @@ export const cartSlice = createSlice({
                 if(state.items.fantaCanObj.quantity !== 0){
                     state.items.fantaCanObj.quantity -=1;
                 }
-                if(state.items.fantaCanObj.quantity === 0){
+                if(state.lastItem === true ){
+                    localStorage.removeItem('localCart')
+                    delete state.items.fantaCanObj; 
+   
+                }else if(state.items.fantaCanObj.quantity === 0){
                     delete state.items.fantaCanObj;
                 }
             }
-            
         },
         removeItemFromCart:(state,action)=>{
+
+
+            ///////////////////////////////////////////////////////////////////////////////////
+            // Sides
+            ///////////////////////////////////////////////////////////////////////////////////
+
+
+            // 12 Piece Hot Wings
+
+            if(action.payload.type === 'remove' && action.payload.name === '12 Piece Hot Wings'){
+                delete state.items.hotWingsObj;
+            }
+
+            // Bread Sticks
+
+            if(action.payload.type === 'remove' && action.payload.name === 'Bread Sticks'){
+                delete state.items.breadSticksObj;
+            }
+            // Mozzarella Sticks
+
+            if(action.payload.type === 'remove' && action.payload.name === 'Mozzarella Sticks'){
+                delete state.items.mozzarellaSticksObj; 
+            }
+            // Calamari
+            if(action.payload.type === 'remove' && action.payload.name === 'Calamari'){
+                delete state.items.calamariObj
+            }
+
+
+            ///////////////////////////////////////////////////////////////////////////////////
+            // Desserts
+            ///////////////////////////////////////////////////////////////////////////////////
+
+
+            if(action.payload.type === 'remove' && action.payload.name === 'Chocolate Cake'){
+                delete state.items.chocolateCakeObj;
+            }
+            if(action.payload.type === 'remove' && action.payload.name === 'Chocolate Chip Cookie'){
+                delete state.items.chocolateChipCookieObj;
+            }
+            if(action.payload.type === 'remove' && action.payload.name === 'Vanilla Ice Cream'){
+                delete state.items.vanillaIceCreamObj;
+            }
+
+
+            ///////////////////////////////////////////////////////////////////////////////////
+            // Beverages
+            ///////////////////////////////////////////////////////////////////////////////////
+
+
             if(action.payload.type === 'remove' && action.payload.name === '2 Liter Sprite'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.twoLiterSpriteObj; 
+   
+                }
                 delete state.items.twoLiterSpriteObj; 
             }
+            if(action.payload.type === 'remove' && action.payload.name === 'Sprite Can'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.spriteCanObj; 
+   
+                }
+                delete state.items.spriteCanObj;
+            }
+            if(action.payload.type === 'remove' && action.payload.name === '2 Liter Coke'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.twoLiterCokeObj; 
+   
+                }
+                delete state.items.twoLiterCokeObj; 
+            }
+            if(action.payload.type === 'remove' && action.payload.name === 'Coke Can'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.cokeCanObj; 
+   
+                }
+                delete state.items.cokeCanObj;
+            }
+            if(action.payload.type === 'remove' && action.payload.name === '2 Liter Diet Coke'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.twoLiterDietCokeObj; 
+   
+                }
+                delete state.items.twoLiterDietCokeObj; 
+            }
+            if(action.payload.type === 'remove' && action.payload.name === 'Diet Coke Can'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.dietCokeCanObj; 
+   
+                }
+                delete state.items.dietCokeCanObj;
+            }
+            if(action.payload.type === 'remove' && action.payload.name === '2 Liter Fanta'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.twoLiterFantaObj; 
+   
+                }                
+                delete state.items.twoLiterFantaObj; 
+            }
+            if(action.payload.type === 'remove' && action.payload.name === 'Fanta Can'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.fantaCanObj; 
+   
+                }
+                delete state.items.fantaCanObj;
+            }
+
+            // //Set lastItem Property
+            // if(Object.entries(state.items).length === 1){
+            //     state.lastItem = true;
+            // }else{
+            //     state.lastItem = false;
+            // }
+            // console.log(Object.entries(state.items).length)
+            // console.log(state.lastItem)
+
         },
         setCart:(state,action)=>{
-            console.log(action.payload.items)
+            // console.log(action.payload.items)
             state.items = action.payload.items;
             // console.log(state)
         },      
         addDealToCart:(state,action)=>{
 
         },
+        checkLastItem: (state, action) =>{
+            //Set lastItem Property
+            if(Object.entries(state.items).length === 1){
+                state.lastItem = true;
+            }else{
+                state.lastItem = false;
+            }
+            console.log(Object.entries(state.items).length)
+            console.log(state.lastItem)
+        },
         checkOut:(state, action) =>{
 
         },
         calculateCartTotal: (state, action) => {
             let cartTotal = 0;
+            for(const key in state.items){
+                cartTotal = cartTotal + (state.items[key].quantity * state.items[key].price)
+            }
+            state.total = cartTotal
 
 
         }  
     }
 })
 
-export const { addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkOut, calculateCartTotal} = cartSlice.actions;
+export const { addPizzaToCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkLastItem,checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;

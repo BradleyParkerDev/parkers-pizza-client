@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {v4 as uuidv4} from 'uuid'
+import deepDish from '../MenuImages/deep dish.png'
+import handTossed from '../MenuImages/Hand Tossed.png'
+import thinCrust from '../MenuImages/Thin crust.png'
 
 const toppingSides = {
     left: false,
@@ -25,12 +28,23 @@ const toppingsGridObj = {
 
 
 const initialState ={
-    id: uuidv4(),
+    pizzaId: uuidv4(),
+
+    //Basic Pizza Info
+    name: 'Deep Dish Pizza',
+    image: deepDish,
+    imageHeight:'117.4px',
+    imageWidth:'122px',
+    imageMarginTop: '10.05px',
+
+    //Custom Pizza Info
     crust: 'Deep Dish',
     size: 'Sm',
     toppings:{},
     toppingsGrid: toppingsGridObj,
     specialInstructions: '',
+    buildType: 'create',
+    quantity: 1,
     price: 0
 }
 
@@ -40,16 +54,16 @@ const pizzaBuilderSlice = createSlice({
     initialState,
     reducers: {
         selectCrust:(state, action) =>{
-            console.log(action.payload)
+            // console.log(action.payload)
             state.crust = action.payload
-            console.log(state.size)
-            console.log(state.id)
+            // console.log(state.size)
+            // console.log(state.id)
             return state;
         },
         selectSize:(state, action) =>{
-            console.log(action.payload)
+            // console.log(action.payload)
             state.size = action.payload
-            console.log(state.size)
+            // console.log(state.size)
             return state;
         },
         handleHam:(state, action) => {
@@ -693,7 +707,7 @@ const pizzaBuilderSlice = createSlice({
             let total = 0;
             for (const key in state.toppings) {
 
-                console.log(state.toppings[key].side)
+                // console.log(state.toppings[key].side)
                 if(state.toppings[key].side === 'whole pizza'){
                     total+=1
                 }else{
@@ -726,7 +740,7 @@ const pizzaBuilderSlice = createSlice({
  
             }
 
-            console.log(total)
+            // console.log(total)
             state.price = total
         },
         resetPizza: (state) => {
@@ -736,7 +750,9 @@ const pizzaBuilderSlice = createSlice({
             state.toppings= {}
             state.toppingsGrid= toppingsGridObj
             state.specialInstructions= ''
+            state.quantity =1
             state.price= 0
+
             return state ;
         }
 

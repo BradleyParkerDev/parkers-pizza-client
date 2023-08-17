@@ -2,7 +2,7 @@ import CartOrderCard from "../Components/CartOrderCard/CartOrderCard";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setCart } from "../Redux/cartSlice";
+import { setCart, checkLastItem,calculateCartTotal } from "../Redux/cartSlice";
 const CartPage = () =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -65,7 +65,7 @@ const CartPage = () =>{
                     </div>
 
                     {/* Checkout */}
-                    <div id='checkout' className="w-[100%] flex justify-end border-black border-dashed border-[1px]">
+                    <div id='checkout' className="w-[100%] flex justify-end ">
                         <div >
                             {/* Total */}
                             <div style={{fontSize:'16px', lineHeight:'16px'}} id="total-div-row" className='mt-[16px] md:mt-[66px] flex justify-center md:justify-end border-black border-dashed border-[1px]'>
@@ -80,7 +80,7 @@ const CartPage = () =>{
 
                                             </div>
                                             <div className=' pt-[4px] justify-end font-sergioTrendy h-[24px] '>
-                                                <p>15.00</p>
+                                                <p>{cart.total.toFixed(2)}</p>
 
                                             </div>                            
                                         </div>
@@ -88,7 +88,7 @@ const CartPage = () =>{
                                 </div>                
                             </div>
                             {/* Checkout Button */}
-                            <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px] md:mb-[0px] border-black border-dashed border-[1px]'>
+                            <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px] md:mb-[0px] '>
                                 <div id="button-container" className='flex justify-end'>
                                     <div id="button" className='bg-red-pp w-[141px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
                                         <p className='font-sergioTrendy text-white mt-[15px]'>
@@ -125,8 +125,10 @@ const CartPage = () =>{
 
     useEffect(()=>{
         // checkCartStatusQuantity()
+        dispatch(checkLastItem())
         {Object.entries(cart.items).length > 0 && setLocalCart()}
         {Object.entries(cart.items).length === 0 && getLocalCart()}
+        dispatch(calculateCartTotal)
     },[cart])
 
 
@@ -137,8 +139,8 @@ const CartPage = () =>{
             <div >
 
                 {/* Total */}
-                {/* <div style={{fontSize:'16px', lineHeight:'16px'}} id="total-div-row" className='mt-[16px] md:mt-[66px] flex justify-center md:justify-end border-black border-dashed border-[1px]'>
-                    <div id="total-outer-container" className=' flex justify-end '>
+                <div style={{fontSize:'16px', lineHeight:'16px'}} id="total-div-row" className='mt-[16px] md:mt-[66px] flex justify-end md:justify-end'>
+                    <div id="total-outer-container" className=' flex justify-end'>
                         <div  id="total-inner-container">
                             <div id="total-text" className='w-[92px] font-sergioTrendy '>
                                 <p>Total</p>
@@ -149,16 +151,16 @@ const CartPage = () =>{
 
                                 </div>
                                 <div className=' pt-[4px] justify-end font-sergioTrendy h-[24px] '>
-                                    <p>15.00</p>
+                                    <p>{cart.total.toFixed(2)}</p>
 
                                 </div>                            
                             </div>
                         </div>
                     </div>                
-                </div> */}
+                </div>
 
                 {/* Login To Checkout Button */}
-                <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px] md:mb-[0px] border-black border-dashed border-[1px]'>
+                <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px]  '>
                     <div id="button-container" className='flex justify-end'>
                         <div onClick={()=>{navigate('/login')}} id="button" className='bg-red-pp w-[370px] md:w-[680px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
                             <p className='font-sergioTrendy text-white mt-[15px]'>

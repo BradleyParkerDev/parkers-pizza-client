@@ -2,10 +2,43 @@ import MenuCard from "../Components/MenuCard/MenuCard"
 import DealCard from "../Components/DealCard/DealCard"
 import { useNavigate } from 'react-router-dom'
 import { pizzas, sides, desserts,beverages } from "../Redux/cartSlice"
-
+import { setCart, calculateCartTotal } from "../Redux/cartSlice";
+import { useDispatch, useSelector } from 'react-redux'; 
+import { useEffect } from "react";
 const HomePage = (props) =>{
+
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     const favorites = [pizzas[0],sides[0],desserts[0]]
+    const cart = useSelector((state)=>state.cart)
+
+    // //Sets local storage cart to contents from cart slice
+    // const setLocalCart = () =>{
+    //     localStorage.setItem('localCart', JSON.stringify(cart))
+    // }
+
+    // //Gets cart slice items from local storage
+    // const getLocalCart = () =>{
+    //     let localCart = localStorage.getItem('localCart')
+    //     if(localCart){
+    //         dispatch(setCart(JSON.parse(localCart))) 
+    //         console.log(JSON.parse(localCart))
+  
+    //     }
+    // } 
+    // useEffect(()=>{
+    //     // checkCartStatusQuantity()
+    //     {Object.entries(cart.items).length > 0 && setLocalCart()}
+    //     {Object.entries(cart.items).length === 0 && getLocalCart()}
+    //     dispatch(calculateCartTotal())
+    // },[cart])
+
+
+
+
+
+
+
     return(
 
         <div id="home-container" className="w-full min-h-screen">
@@ -19,12 +52,12 @@ const HomePage = (props) =>{
                 </div>
             </div>
 
-            <div id='favorites-row-container' className="ml-[34px] h-[300px] w-[auto] border-black border-dashed border-[1px] ">
-                <div id='favorites-title' className=" flex font-sergioTrendy  border-black border-dashed border-[1px]">
+            <div id='favorites-row-container' className="ml-[34px] h-[300px] w-[auto]  ">
+                <div id='favorites-title' className=" flex font-sergioTrendy  ">
                     <p style={{fontSize:'32px', lineHeight:'32px'}}>Favorites</p>
                     <p onClick={()=>{navigate('/menu')}} className='ml-[14px] mt-[10px]' style={{fontSize:'16px', lineHeight:'16px'}}>View full menu</p>
                 </div>
-                <div id='favorites-row'  className="flex overflow-x-scroll mt-[21px] h-[220px]  border-black border-dashed border-[1px]">
+                <div id='favorites-row'  className="flex overflow-x-scroll mt-[21px] h-[220px]  ">
                     <MenuCard pizza={pizzas[0]} />
                     <MenuCard side={sides[0]} />
                     <MenuCard dessert={desserts[0]} />

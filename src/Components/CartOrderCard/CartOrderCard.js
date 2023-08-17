@@ -3,7 +3,7 @@ import plus from './plus.png'
 import trash from './trash.png'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart, updateQuantity ,removeItemFromCart } from '../../Redux/cartSlice'
+import { setCart,updateQuantity, checkLastItem ,removeItemFromCart, calculateCartTotal } from '../../Redux/cartSlice'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -14,6 +14,7 @@ const CartOrderCard = (props) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const cart = useSelector((state)=>state.cart)
+    console.log(cart)
 
     const {
         cartItem
@@ -27,8 +28,23 @@ const CartOrderCard = (props) =>{
         }
         if(change === 'increase'  && quantity < 10){
             setQuantity(quantity+1)
+
         }
-        if(change === 'remove' && cartItemObj.name === '2 Liter Sprite'){
+        if(change === 'increase'){
+            let payload = {
+                type: change,
+                name: cartItemObj.name
+            }
+            dispatch(updateQuantity(payload))
+        }
+        if(change === 'decrease'){
+            let payload = {
+                type: change,
+                name: cartItemObj.name
+            }
+            dispatch(updateQuantity(payload))
+        }
+        if(change === 'remove'){
             let payload = {
                 type: change,
                 name: cartItemObj.name
@@ -37,13 +53,33 @@ const CartOrderCard = (props) =>{
             setQuantity(0)
         }
     }
-
     
+    //Sets local storage cart to contents from cart slice
+    const setLocalCart = () =>{
+        localStorage.setItem('localCart', JSON.stringify(cart))
+    }
+
+    //Gets cart slice items from local storage
+    const getLocalCart = () =>{
+        let localCart = localStorage.getItem('localCart')
+        if(localCart){
+            dispatch(setCart(JSON.parse(localCart))) 
+            console.log(JSON.parse(localCart))
+  
+        }
+    } 
+    useEffect(()=>{
+        // checkCartStatusQuantity()
+        dispatch(checkLastItem())
+        {Object.entries(cart.items).length > 0 && setLocalCart()}
+        {Object.entries(cart.items).length === 0 && getLocalCart()}
+        dispatch(calculateCartTotal())
+    },[cart])
 
     return(
         <div id='cart-order-card-container' className=" md:flex font-sergioTrendy border-solid border-black border-[1px] rounded-[5px] w-[342px] md:w-[100%] h-[250px] md:h-[160px] mb-[9px] p-[10px] md:p-[0px]">
             <div id="coc-div-1" className="flex h-[160px] md:h-[100%] w-[100%] ">
-                <div id='coc-image-div' className="flex justify-center h-[auto] w-[170px] border-black border-dashed border-[1px] ">
+                <div id='coc-image-div' className="flex justify-center h-[auto] w-[170px]">
                     <img style={{marginTop:'21px', height:`${cartItem.height}`, width:`${cartItem.width}`}} className='' src={cartItem.image}/>
                 </div>
 
@@ -85,14 +121,14 @@ const CartOrderCard = (props) =>{
                     <div id='coc-quantity-update-container' className="flex  justify-center md:h-[auto] h-[40px] ">
                         <div id="coc-quantity-update" className="flex w-[75px] md:w-[auto] md:h-[auto] h-[40px] ">
                             <div id='decrease-div' className="w-[15px] h-[100%] md:h-[auto] md:w-[auto]">
-                                <img onClick={()=>{handleQuantityChange('decrease')}} className='mt-[11px] h-[15px] w-[15px] md:h-[20px] md:w-[20px]' src={minus}/>
+                                <img onClick={()=>{handleQuantityChange('decrease',cartItem)}} className='mt-[11px] h-[15px] w-[15px] md:h-[20px] md:w-[20px]' src={minus}/>
 
                             </div>
                             <div id='quantity-amount' className="flex md:h-[50px] md:w-[35px] pt-[5px] md:pt-[10px] justify-center ml-[9px] mr-[9px] w-[25px] h-[40px] border-solid border-black border-[1px]">
-                                <p>{quantity}</p>
+                                <p>{cartItem.quantity}</p>
                             </div>
                             <div id='increase-div'className="w-[15px] h-[100%] md:h-[auto] md:w-[auto]">
-                                <img onClick={()=>{handleQuantityChange('increase')}} className='mt-[11px] h-[15px] w-[15px] md:h-[20px] md:w-[20px]' src={plus}/>
+                                <img onClick={()=>{handleQuantityChange('increase', cartItem)}} className='mt-[11px] h-[15px] w-[15px] md:h-[20px] md:w-[20px]' src={plus}/>
                                     
                             </div>
                         </div>

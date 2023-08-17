@@ -3,7 +3,7 @@ import plus from './plus.png'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart, updateQuantity,setCart } from '../../Redux/cartSlice'
+import { addItemToCart, updateQuantity,setCart,checkLastItem, calculateCartTotal } from '../../Redux/cartSlice'
 // import { checkLocalCart } from '../../Lib/checkLocalCart'
 const MenuCard = (props) =>{
     const dispatch = useDispatch();
@@ -108,16 +108,19 @@ const MenuCard = (props) =>{
     //Gets cart slice items from local storage
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
-        console.log(JSON.parse(localCart))
         if(localCart){
-            dispatch(setCart(JSON.parse(localCart)))   
+            dispatch(setCart(JSON.parse(localCart)))  
+            console.log(JSON.parse(localCart))
         }
+
     } 
 
     useEffect(()=>{
         checkCartStatusQuantity()
+        dispatch(checkLastItem())
         {Object.entries(cart.items).length > 0 && setLocalCart()}
         {Object.entries(cart.items).length === 0 && getLocalCart()}
+        dispatch(calculateCartTotal())
     },[cart])
 
 
