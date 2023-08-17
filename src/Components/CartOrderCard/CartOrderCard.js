@@ -14,6 +14,8 @@ const CartOrderCard = (props) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const cart = useSelector((state)=>state.cart)
+    const auth = useSelector((state)=>state.auth.isAuth)
+
     console.log(cart)
 
     const {
@@ -53,7 +55,7 @@ const CartOrderCard = (props) =>{
             setQuantity(0)
         }
     }
-    
+
     //Sets local storage cart to contents from cart slice
     const setLocalCart = () =>{
         localStorage.setItem('localCart', JSON.stringify(cart))
@@ -71,8 +73,8 @@ const CartOrderCard = (props) =>{
     useEffect(()=>{
         // checkCartStatusQuantity()
         dispatch(checkLastItem())
-        {Object.entries(cart.items).length > 0 && setLocalCart()}
-        {Object.entries(cart.items).length === 0 && getLocalCart()}
+        {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
+        {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
         dispatch(calculateCartTotal())
     },[cart])
 

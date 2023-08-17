@@ -10,14 +10,35 @@ const CartPage = () =>{
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
 
+    //Sets local storage cart to contents from cart slice
+    const setLocalCart = () =>{
+        localStorage.setItem('localCart', JSON.stringify(cart))
+    }
+
+    //Gets cart slice items from local storage
+    const getLocalCart = () =>{
+        let localCart = localStorage.getItem('localCart')
+        console.log(JSON.parse(localCart))
+        if(localCart){
+            dispatch(setCart(JSON.parse(localCart)))   
+        }
+    } 
+
+    useEffect(()=>{
+        // checkCartStatusQuantity()
+        dispatch(checkLastItem())
+        {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
+        {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
+        dispatch(calculateCartTotal)
+    },[cart,auth])
 
     // Allows user to choose delivery or pickup
     const showDeliveryPickup = () =>{
         return(
             <div>
-                <div id='orderType-checkout' className="md:flex w-[370px] md:w-[680px]  border-black border-dashed border-[1px]">
+                <div id='orderType-checkout' className="md:flex w-[370px] md:w-[680px] ">
                     {/* Delivery */}
-                    <div id='delivery' className="font-sergioTrendy  w-[100%] h-[195px] border-black border-dashed border-[1px]">
+                    <div id='delivery' className="font-sergioTrendy  w-[100%] h-[195px]">
                         <div className='flex mb-[21px]' id='delivery-radio-line'>
                             <div id='delivery-radio' className="mr-[6px]">
                                 <input name ='delivery-pickup' type='radio'/>
@@ -47,7 +68,7 @@ const CartPage = () =>{
                     </div>
 
                     {/* Pickup */}
-                    <div id='pickup' className="font-sergioTrendy w-[100%] h-[195px] border-black border-dashed border-[1px]">
+                    <div id='pickup' className="font-sergioTrendy w-[100%] h-[195px]">
                         <div className='flex mb-[21px]' id='pickup-radio-line'>
                             <div id='pickup-radio' className="mr-[6px]">
                                 <input name ='delivery-pickup' type='radio'/>
@@ -68,7 +89,7 @@ const CartPage = () =>{
                     <div id='checkout' className="w-[100%] flex justify-end ">
                         <div >
                             {/* Total */}
-                            <div style={{fontSize:'16px', lineHeight:'16px'}} id="total-div-row" className='mt-[16px] md:mt-[66px] flex justify-center md:justify-end border-black border-dashed border-[1px]'>
+                            <div style={{fontSize:'16px', lineHeight:'16px'}} id="total-div-row" className='mt-[16px] md:mt-[66px] flex justify-center md:justify-end '>
                                 <div id="total-outer-container" className=' flex justify-end '>
                                     <div  id="total-inner-container">
                                         <div id="total-text" className='w-[92px] font-sergioTrendy '>
@@ -109,27 +130,6 @@ const CartPage = () =>{
 
     }
 
-    //Sets local storage cart to contents from cart slice
-    const setLocalCart = () =>{
-        localStorage.setItem('localCart', JSON.stringify(cart))
-    }
-
-    //Gets cart slice items from local storage
-    const getLocalCart = () =>{
-        let localCart = localStorage.getItem('localCart')
-        console.log(JSON.parse(localCart))
-        if(localCart){
-            dispatch(setCart(JSON.parse(localCart)))   
-        }
-    } 
-
-    useEffect(()=>{
-        // checkCartStatusQuantity()
-        dispatch(checkLastItem())
-        {Object.entries(cart.items).length > 0 && setLocalCart()}
-        {Object.entries(cart.items).length === 0 && getLocalCart()}
-        dispatch(calculateCartTotal)
-    },[cart])
 
 
 
@@ -176,32 +176,13 @@ const CartPage = () =>{
     }
     let cartItemsArr =[]
     const displayCartCards = (cartItems) =>{
-        // const cartItemsArr = Object.values(cartItems.items)
-        // console.log(cartItemsArr)
-
-        for (const key in cart.items) {
-
-            // console.log(cart.items[key].name)
-            
-                
+        for (const key in cart.items) { 
             cartItemsArr.push(cart.items[key])
-
-                
-        
-            // {<CartOrderCard item={cart.items[key]}/>}
         }
-
         return (
-
             cartItemsArr.map(cartItem=>(<CartOrderCard cartItem = {cartItem}/>))
         )
-        
-        
     }   
-
-
-
-
 
 
     return(
@@ -225,7 +206,7 @@ const CartPage = () =>{
             </div>
             <div id="cp-container-3" className="flex justify-center">
                     {/* Special Instructions */}
-                    <div id="special-instructions-container" className='w-[370px] md:w-[680px]   border-black border-dashed border-[1px]'>
+                    <div id="special-instructions-container" className='w-[370px] md:w-[680px]  '>
                         <div id="si-title" style={{fontSize:'16px', lineHeight:'16px'}} className='mb-[16px] mt-[31px] md:mt-[15px] font-sergioTrendy'>
                             <p>
                                 Special Instructions

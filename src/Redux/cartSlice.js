@@ -777,15 +777,6 @@ export const cartSlice = createSlice({
                 delete state.items.fantaCanObj;
             }
 
-            // //Set lastItem Property
-            // if(Object.entries(state.items).length === 1){
-            //     state.lastItem = true;
-            // }else{
-            //     state.lastItem = false;
-            // }
-            // console.log(Object.entries(state.items).length)
-            // console.log(state.lastItem)
-
         },
         setCart:(state,action)=>{
             // console.log(action.payload.items)

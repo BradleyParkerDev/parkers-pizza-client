@@ -77,6 +77,10 @@ export const usersSlice = createSlice({
                 password: ''
             }
         },
+        setUserCart: (state, action) => {
+            state.cart = action.payload;
+
+        },
         resetUser: (state) => {
             return {
                 id: '',
@@ -99,6 +103,6 @@ export const usersSlice = createSlice({
     
 })
 
- export const { setUser, resetStatus, resetUser } = usersSlice.actions
+ export const { setUser, setUserCart ,resetStatus, resetUser } = usersSlice.actions
 
 export default usersSlice.reducer

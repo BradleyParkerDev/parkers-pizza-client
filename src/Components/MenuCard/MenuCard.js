@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, updateQuantity,setCart,checkLastItem, calculateCartTotal } from '../../Redux/cartSlice'
+import { setUserCart } from '../../Redux/usersSlice'
 // import { checkLocalCart } from '../../Lib/checkLocalCart'
 const MenuCard = (props) =>{
     const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const MenuCard = (props) =>{
     const [refresh, setRefresh] = useState(false)
     const cart = useSelector((state)=>state.cart)
     const user = useSelector((state)=>state.users)
+    const auth = useSelector((state)=>state.auth.isAuth)
 
     // console.log(cart)
     const {
@@ -118,10 +120,11 @@ const MenuCard = (props) =>{
     useEffect(()=>{
         checkCartStatusQuantity()
         dispatch(checkLastItem())
-        {Object.entries(cart.items).length > 0 && setLocalCart()}
-        {Object.entries(cart.items).length === 0 && getLocalCart()}
+        {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
+        {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
         dispatch(calculateCartTotal())
-    },[cart])
+        {auth && dispatch(setUserCart(cart))}
+    },[cart,auth])
 
 
 
