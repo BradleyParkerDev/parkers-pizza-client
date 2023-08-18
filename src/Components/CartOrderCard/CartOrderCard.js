@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { 
     setCart,
     updatePizzaQuantity,
-    removePizza,
+    removePizzaFromCart,
     updateQuantity, 
     checkLastItem ,
     removeItemFromCart, 
@@ -55,7 +55,7 @@ const CartOrderCard = (props) =>{
                 type: change,
                 pizzaId: pizzaObj.pizzaId
             }
-            dispatch(updatePizzaQuantity(payload))
+            dispatch(removePizzaFromCart(payload))
 
         }
     }

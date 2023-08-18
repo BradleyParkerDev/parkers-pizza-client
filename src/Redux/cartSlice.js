@@ -329,7 +329,7 @@ export const cartSlice = createSlice({
                 for(let i = 0; i < state.pizzas.pizzasArr.length; i++){
                     // console.log(action.payload)
 
-                    if( state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId){
+                    if( state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId && state.pizzas.pizzasArr[i].quantity < 10){
                         state.pizzas.pizzasArr[i].quantity++
                         console.log(`Pizza Quantity: ${state.pizzas.pizzasArr[i].quantity}`)
                         console.log(`pizzaId: ${state.pizzas.pizzasArr[i].pizzaId}`)
@@ -342,23 +342,32 @@ export const cartSlice = createSlice({
 
                     console.log(action.payload)
 
-                    if(state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId){
+                    if(state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId && state.pizzas.pizzasArr[i].quantity !== 0){
                         state.pizzas.pizzasArr[i].quantity--
 
                         console.log(`Pizza Quantity: ${state.pizzas.pizzasArr[i].quantity}`)
                         console.log(`pizzaId: ${state.pizzas.pizzasArr[i].pizzaId}`)
 
                     }
+                    if(state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId && state.pizzas.pizzasArr[i].quantity === 0){
+                        state.pizzas.pizzasArr.splice(i,1)
+
+                        // console.log(`Pizza Quantity: ${state.pizzas.pizzasArr[i].quantity}`)
+                        // console.log(`pizzaId: ${state.pizzas.pizzasArr[i].pizzaId}`)
+
+                    }
                 }                
             }
-
             
         },
-        removePizza: (state,action) =>{
-
-
-
-            
+        removePizzaFromCart: (state,action) =>{
+            if(action.payload.type === 'remove'){
+                for(let i = 0; i < state.pizzas.pizzasArr.length; i++){
+                    if( state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId){
+                        state.pizzas.pizzasArr.splice(i,1)
+                    }
+                }
+            }  
         },
         addItemToCart: (state, action) => {
 
@@ -890,5 +899,5 @@ export const cartSlice = createSlice({
     }
 })
 
-export const { addPizzaToCart,updatePizzaQuantity, removePizza, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkLastItem,checkOut, calculateCartTotal} = cartSlice.actions;
+export const { addPizzaToCart,updatePizzaQuantity, removePizzaFromCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkLastItem,checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;
