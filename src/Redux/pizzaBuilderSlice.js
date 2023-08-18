@@ -57,6 +57,7 @@ const thinCrustObj = {
 
 const initialState ={
     pizzaId: uuidv4(),
+    isPizza: true,
 
     //Basic Pizza Info
     name: 'Deep Dish Pizza',
@@ -89,21 +90,18 @@ const pizzaBuilderSlice = createSlice({
                 state.image = deepDishObj.image
                 state.imageHeight = deepDishObj.imageHeight
                 state.imageWidth = deepDishObj.imageWidth
-                state.imageMarginTop = deepDish.imageMarginTop
             }
             if(state.crust === 'Hand Tossed'){
                 state.name = handTossedObj.name
                 state.image = handTossedObj.image
                 state.imageHeight = handTossedObj.imageHeight
                 state.imageWidth = handTossedObj.imageWidth
-                state.imageMarginTop = handTossedObj.imageMarginTop
             }
             if(state.crust === 'Thin Crust'){
                 state.name = thinCrustObj.name
                 state.image = thinCrustObj.image
                 state.imageHeight = thinCrustObj.imageHeight
                 state.imageWidth = thinCrustObj.imageWidth
-                state.imageMarginTop = thinCrustObj.imageMarginTop
             }
 
 
@@ -168,8 +166,6 @@ const pizzaBuilderSlice = createSlice({
 
         },
         handleBeef:(state, action) => {
-            // console.log(action.payload)
-        
         
             if(action.payload.side === 'left side' && state.toppingsGrid.beef.left === true){
                 state.toppingsGrid.beef.left = false

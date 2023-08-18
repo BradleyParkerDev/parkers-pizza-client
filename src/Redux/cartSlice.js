@@ -63,6 +63,7 @@ export const pizzas = [
 // Sides
 /////////////////////////////////////////////////////////////////////////
 const hotWingsObj = {
+    isPizza: false,
     quantity: 1,
     name: '12 Piece Hot Wings',
     image: hotWings,
@@ -73,6 +74,7 @@ const hotWingsObj = {
 
 }
 const breadSticksObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Bread Sticks',
     image: breadSticks,
@@ -83,6 +85,7 @@ const breadSticksObj = {
 
 }
 const mozzarellaSticksObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Mozzarella Sticks',
     image: mozzarellaSticks,
@@ -93,6 +96,7 @@ const mozzarellaSticksObj = {
 
 }
 const calamariObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Calamari',
     image: calamari,
@@ -114,6 +118,7 @@ export const sides = [
 // Desserts
 /////////////////////////////////////////////////////////////////////////
 const chocolateCakeObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Chocolate Cake',
     image: chocolateCake,
@@ -124,6 +129,7 @@ const chocolateCakeObj = {
 
 }
 const chocolateChipCookieObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Chocolate Chip Cookie',
     image: chocolateChipCookie,
@@ -134,6 +140,7 @@ const chocolateChipCookieObj = {
 
 }
 const vanillaIceCreamObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Vanilla Ice Cream',
     image: vanillaIceCream,
@@ -154,6 +161,7 @@ export const desserts = [
 // Beverages
 /////////////////////////////////////////////////////////////////////////
 const twoLiterSpriteObj = {
+    isPizza: false,
     quantity: 1,
     name: '2 Liter Sprite',
     image: spriteTwoLiter,
@@ -164,6 +172,7 @@ const twoLiterSpriteObj = {
 
 }
 const spriteCanObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Sprite Can',
     image: spriteCan,
@@ -174,6 +183,7 @@ const spriteCanObj = {
 
 }
 const twoLiterCokeObj = {
+    isPizza: false,
     quantity: 1,
     name: '2 Liter Coke',
     image: cokeTwoLiter,
@@ -184,6 +194,7 @@ const twoLiterCokeObj = {
 
 }
 const cokeCanObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Coke Can',
     image: cokeCan,
@@ -194,6 +205,7 @@ const cokeCanObj = {
 
 }
 const twoLiterDietCokeObj = {
+    isPizza: false,
     quantity: 1,
     name: '2 Liter Diet Coke',
     image: dietCokeTwoLiter,
@@ -204,6 +216,7 @@ const twoLiterDietCokeObj = {
 
 }
 const dietCokeCanObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Diet Coke Can',
     image: dietCokeCan,
@@ -214,6 +227,7 @@ const dietCokeCanObj = {
 
 }
 const twoLiterFantaObj = {
+    isPizza: false,
     quantity: 1,
     name: '2 Liter Fanta',
     image: fantaTwoLiter,
@@ -224,6 +238,7 @@ const twoLiterFantaObj = {
 
 }
 const fantaCanObj = {
+    isPizza: false,
     quantity: 1,
     name: 'Fanta Can',
     image: fantaCan,
@@ -280,6 +295,7 @@ const initialState = {
     items: {},
     lastItem: false,
     pizzasInCart: false,
+    buildType: '',
     deals:{},
     total: 0
 }
@@ -293,8 +309,53 @@ export const cartSlice = createSlice({
         addPizzaToCart: (state,action) =>{
             console.log(action.payload)
             let tempPizza = action.payload
+            console.log(tempPizza)
             // tempPizza.buildType = 'update'
             state.pizzas.pizzasArr.push(tempPizza)
+
+
+            
+        },
+        updatePizza: (state,action) =>{
+
+
+            
+        },       
+        updatePizzaQuantity: (state,action) =>{
+            console.log(action.payload.type)
+            console.log(action.payload.pizzaId)
+
+            if(action.payload.type === 'increase'){
+                for(let i = 0; i < state.pizzas.pizzasArr.length; i++){
+                    // console.log(action.payload)
+
+                    if( state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId){
+                        state.pizzas.pizzasArr[i].quantity++
+                        console.log(`Pizza Quantity: ${state.pizzas.pizzasArr[i].quantity}`)
+                        console.log(`pizzaId: ${state.pizzas.pizzasArr[i].pizzaId}`)
+
+                    }
+                }
+            }
+            if(action.payload.type === 'decrease'){
+                for(let i = 0; i < state.pizzas.pizzasArr.length; i++){
+
+                    console.log(action.payload)
+
+                    if(state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId){
+                        state.pizzas.pizzasArr[i].quantity--
+
+                        console.log(`Pizza Quantity: ${state.pizzas.pizzasArr[i].quantity}`)
+                        console.log(`pizzaId: ${state.pizzas.pizzasArr[i].pizzaId}`)
+
+                    }
+                }                
+            }
+
+            
+        },
+        removePizza: (state,action) =>{
+
 
 
             
@@ -819,15 +880,15 @@ export const cartSlice = createSlice({
             for(const key in state.items){
                 cartTotal = cartTotal + (state.items[key].quantity * state.items[key].price)
             }
-            // for(const pizza in state.pizzas.pizzasArr){
-            //     pizzasTotal = pizzasTotal + (pizza.quantity * pizza.price)
-            // }
+            if(state.pizzas.pizzasArr.length >= 1){
+                for(let i = 0; i < state.pizzas.pizzasArr.length; i++){
+                    pizzasTotal = pizzasTotal + (state.pizzas.pizzasArr[i].quantity * state.pizzas.pizzasArr[i].price)
+                }
+            }
             state.total = cartTotal + pizzasTotal
-
-
         }  
     }
 })
 
-export const { addPizzaToCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkLastItem,checkOut, calculateCartTotal} = cartSlice.actions;
+export const { addPizzaToCart,updatePizzaQuantity, removePizza, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkLastItem,checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;
