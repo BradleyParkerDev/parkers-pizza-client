@@ -7,34 +7,6 @@ const MenuPage = (props) =>{
     const dispatch = useDispatch();
     const cart = useSelector((state)=>state.cart)
 
-
-
-    // //Sets local storage cart to contents from cart slice
-    // const setLocalCart = () =>{
-    //     localStorage.setItem('localCart', JSON.stringify(cart))
-    // }
-
-    // //Gets cart slice items from local storage
-    // const getLocalCart = () =>{
-    //     let localCart = localStorage.getItem('localCart')
-    //     console.log(JSON.parse(localCart))
-    //     if(localCart){
-    //         dispatch(setCart(JSON.parse(localCart)))   
-    //     }
-    // } 
-
-    // useEffect(()=>{
-    //     // checkCartStatusQuantity()
-    //     {Object.entries(cart.items).length > 0 && setLocalCart()}
-    //     // {Object.entries(cart.items).length === 0 && getLocalCart()}
-    //     dispatch(calculateCartTotal)
-    // },[cart])
-
-
-
-
-
-
     return(
 
         <div id="menu-container" className="w-full min-h-screen">

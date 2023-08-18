@@ -273,9 +273,13 @@ const cartBeverageItems = {
 
 const initialState = {
     cartId: uuidv4(),
-    pizzas:{},
+    pizzas:{
+        pizzasArr: [],
+        pizzasTotal:0
+    },
     items: {},
     lastItem: false,
+    pizzasInCart: false,
     deals:{},
     total: 0
 }
@@ -288,8 +292,9 @@ export const cartSlice = createSlice({
     reducers:{
         addPizzaToCart: (state,action) =>{
             console.log(action.payload)
-            let value = 2;
-            state.items.pizza1 = action.payload;
+            let tempPizza = action.payload
+            // tempPizza.buildType = 'update'
+            state.pizzas.pizzasArr.push(tempPizza)
 
 
             
@@ -793,18 +798,31 @@ export const cartSlice = createSlice({
             }else{
                 state.lastItem = false;
             }
-            console.log(Object.entries(state.items).length)
-            console.log(state.lastItem)
+            console.log(`Items Length: ${Object.entries(state.items).length}`)
+            console.log(`Last Item: ${state.lastItem}`)
+            
+            // //Set lastItem Property
+            // if(state.pizzas.pizzasArr.length()>= 1){
+            //     state.pizzasInCart = true;
+            // }else{
+            //     state.pizzasInCart = false;
+            // }
+            // console.log(`Cart Pizzas Length: ${state.pizzas.pizzasArr.length()}`)
+            // console.log(`Last Item: ${state.pizzasInCart}`)
         },
         checkOut:(state, action) =>{
 
         },
         calculateCartTotal: (state, action) => {
             let cartTotal = 0;
+            let pizzasTotal = 0;
             for(const key in state.items){
                 cartTotal = cartTotal + (state.items[key].quantity * state.items[key].price)
             }
-            state.total = cartTotal
+            // for(const pizza in state.pizzas.pizzasArr){
+            //     pizzasTotal = pizzasTotal + (pizza.quantity * pizza.price)
+            // }
+            state.total = cartTotal + pizzasTotal
 
 
         }  

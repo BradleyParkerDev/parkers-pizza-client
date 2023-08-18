@@ -19,6 +19,7 @@ const CartOrderCard = (props) =>{
     console.log(cart)
 
     const {
+        pizza,
         cartItem
     } = props;
 
@@ -72,9 +73,9 @@ const CartOrderCard = (props) =>{
     } 
     useEffect(()=>{
         // checkCartStatusQuantity()
-        dispatch(checkLastItem())
-        {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
-        {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
+        // dispatch(checkLastItem())
+        // {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
+        // {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
         dispatch(calculateCartTotal())
     },[cart])
 
@@ -82,7 +83,9 @@ const CartOrderCard = (props) =>{
         <div id='cart-order-card-container' className=" md:flex font-sergioTrendy border-solid border-black border-[1px] rounded-[5px] w-[342px] md:w-[100%] h-[250px] md:h-[160px] mb-[9px] p-[10px] md:p-[0px]">
             <div id="coc-div-1" className="flex h-[160px] md:h-[100%] w-[100%] ">
                 <div id='coc-image-div' className="flex justify-center h-[auto] w-[170px]">
-                    <img style={{marginTop:'21px', height:`${cartItem.height}`, width:`${cartItem.width}`}} className='' src={cartItem.image}/>
+                    {pizza && <img style={{marginTop:'21px', height:`${pizza.height}`, width:`${pizza.width}`}} className='' src={pizza.image}/>}
+
+                    {!pizza && <img style={{marginTop:'21px', height:`${cartItem.height}`, width:`${cartItem.width}`}} className='' src={cartItem.image}/>}
                 </div>
 
                 <div id='coc-title-details-price-div' className='md:flex ml-[10px] md:ml-[15px]' >
@@ -92,7 +95,7 @@ const CartOrderCard = (props) =>{
                                 {cartItem.name}
                             </p>
                         </div>
-                        {isPizza && <div id='coc-item-details' className='mt-[5px]'><p>Details</p></div>}
+                        {pizza && <div id='coc-item-details' className='mt-[5px]'><p>Details</p></div>}
                     </div>
 
                     <div id="coc-price" className='md:mt-[20px]  md:w-[80px]'>
@@ -106,7 +109,8 @@ const CartOrderCard = (props) =>{
 
                                 </div>
                                 <div className=' pt-[4px] md:pt-[0px] font-sergioTrendy h-[24px] '>
-                                    <p>{cartItem.price.toFixed(2)}</p>
+                                    {pizza && <p>{cartItem.price.toFixed(2)}</p>}
+                                    {!pizza && <p>{cartItem.price.toFixed(2)}</p>}
 
                                 </div>                            
                             </div>
@@ -123,21 +127,21 @@ const CartOrderCard = (props) =>{
                     <div id='coc-quantity-update-container' className="flex  justify-center md:h-[auto] h-[40px] ">
                         <div id="coc-quantity-update" className="flex w-[75px] md:w-[auto] md:h-[auto] h-[40px] ">
                             <div id='decrease-div' className="w-[15px] h-[100%] md:h-[auto] md:w-[auto]">
-                                <img onClick={()=>{handleQuantityChange('decrease',cartItem)}} className='mt-[11px] h-[15px] w-[15px] md:h-[20px] md:w-[20px]' src={minus}/>
+                                {!pizza && <img onClick={()=>{handleQuantityChange('decrease',cartItem)}} className='mt-[11px] h-[15px] w-[15px] md:h-[20px] md:w-[20px]' src={minus}/>}
 
                             </div>
                             <div id='quantity-amount' className="flex md:h-[50px] md:w-[35px] pt-[5px] md:pt-[10px] justify-center ml-[9px] mr-[9px] w-[25px] h-[40px] border-solid border-black border-[1px]">
-                                <p>{cartItem.quantity}</p>
+                                {!pizza && <p>{cartItem.quantity}</p>}
                             </div>
                             <div id='increase-div'className="w-[15px] h-[100%] md:h-[auto] md:w-[auto]">
-                                <img onClick={()=>{handleQuantityChange('increase', cartItem)}} className='mt-[11px] h-[15px] w-[15px] md:h-[20px] md:w-[20px]' src={plus}/>
+                                {!pizza && <img onClick={()=>{handleQuantityChange('increase', cartItem)}} className='mt-[11px] h-[15px] w-[15px] md:h-[20px] md:w-[20px]' src={plus}/>}
                                     
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id='coc-remove-div' className='flex md:ml-[35px] justify-end h-[100%] w-[162px] md:w-[auto] '>
-                    <img onClick={()=>{handleQuantityChange('remove', cartItem)}} className='mt-[30px] md:mt-[50px] h-[30px] w-[30px] md:h-[40px] md:w-[40px]' src={trash}/>
+                    {!pizza && <img onClick={()=>{handleQuantityChange('remove', cartItem)}} className='mt-[30px] md:mt-[50px] h-[30px] w-[30px] md:h-[40px] md:w-[40px]' src={trash}/>}
                 </div>
             </div>
         </div>

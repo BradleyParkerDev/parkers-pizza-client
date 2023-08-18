@@ -13,14 +13,18 @@ import {
     handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, 
     handlePineapple,handleSpecialInstructions, calculateTotal, resetPizza   
 } from '../../Redux/pizzaBuilderSlice'
-import { addPizzaToCart } from '../../Redux/cartSlice'
+import { addPizzaToCart, calculateCartTotal, setCart, checkLastItem } from '../../Redux/cartSlice'
 import { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'; 
 
 const PizzaBuilder = () => {
     const dispatch = useDispatch();
+    const auth = useSelector((state)=>state.auth.isAuth)
+
     const pizza = useSelector((state)=>state.pizza)
     const cart = useSelector((state)=>state.cart)
+    const pizzas = useSelector((state)=>state.cart.pizzas.pizzasArr)
+
     //Crust
     const [crust, setCrust] = useState('Deep Dish')
     const [crustOneBg, setCrustOneBg] = useState('#D9D9D9')
@@ -149,17 +153,27 @@ const PizzaBuilder = () => {
     }
 
 
+    //Sets local storage cart to contents from cart slice
+    const setLocalCart = () =>{
+        localStorage.setItem('localCart', JSON.stringify(cart))
+    }
+
+    //Gets cart slice items from local storage
+    const getLocalCart = () =>{
+        let localCart = localStorage.getItem('localCart')
+        console.log(JSON.parse(localCart))
+        if(localCart){
+            dispatch(setCart(JSON.parse(localCart)))   
+        }
+    } 
 
     useEffect(()=>{
 
-
+        console.log(pizzas)
         dispatch(calculateTotal())
-        // console.log(pizza)
-        // console.log(cart)
+    },[pizza])
 
 
-
-    },[pizza, cart])
 
 
 

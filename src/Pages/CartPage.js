@@ -7,9 +7,10 @@ const CartPage = () =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cart = useSelector((state)=>state.cart)
+    const pizzas = useSelector((state)=>state.cart.pizzas.pizzasArr)
+    
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
-
     //Sets local storage cart to contents from cart slice
     const setLocalCart = () =>{
         localStorage.setItem('localCart', JSON.stringify(cart))
@@ -27,9 +28,13 @@ const CartPage = () =>{
     useEffect(()=>{
         // checkCartStatusQuantity()
         dispatch(checkLastItem())
-        {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
-        {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
-        dispatch(calculateCartTotal)
+        console.log(pizzas)
+        // {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
+        // {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
+        // {(pizzas.length > 0 && auth === false)&& setLocalCart()}
+        // {(pizzas.length === 0 && auth === false)&& getLocalCart()}
+        dispatch(calculateCartTotal())
+        
     },[cart,auth])
 
     // Allows user to choose delivery or pickup
@@ -184,7 +189,7 @@ const CartPage = () =>{
         )
     }   
 
-
+    console.log(pizzas)
     return(
         // Page Container
         <div id="cartPage-container" className="w-full min-h-screen">
@@ -199,6 +204,7 @@ const CartPage = () =>{
                 {/* Container for CartOrderCards */}
                 <div id="cart-items-outer-container" className="w-[370px] md:w-[680px]  bg-grey-pp rounded-[5px] p-[6px] min-h-[300px] md:min-h-[170px] h-[auto]">
                     <div id="cart-items-inner-container" className="w-[full] bg-white rounded-[5px] p-[9px]  h-[100%]">
+                        {pizzas.map(pizza=><CartOrderCard cartItem = {pizza}/>)}
                         {displayCartCards(cart)}
  
                     </div>

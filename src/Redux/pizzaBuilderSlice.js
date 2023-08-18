@@ -25,7 +25,35 @@ const toppingsGridObj = {
     pineapple: toppingSides
 }
 
+const deepDishObj = {
+    quantity: 1,
+    name: 'Deep Dish Pizza',
+    image: deepDish,
+    imageHeight:'117.4px',
+    imageWidth:'122px',
+    price: 12.50,
+    imageMarginTop: '10.05px'
 
+}
+const handTossedObj = {
+    quantity: 1,
+    name: 'Hand Tossed Pizza',
+    image: handTossed,
+    imageHeight:'125px',
+    imageWidth:'125px',
+    price: 10,
+    imageMarginTop: '10.05px'
+
+}
+const thinCrustObj = {
+    quantity: 1,
+    name: 'Thin Crust Pizza',
+    image: thinCrust,
+    imageHeight:'122.64px',
+    imageWidth:'122px',
+    price: 7.50,
+    imageMarginTop: '10.05px'
+}
 
 const initialState ={
     pizzaId: uuidv4(),
@@ -54,22 +82,40 @@ const pizzaBuilderSlice = createSlice({
     initialState,
     reducers: {
         selectCrust:(state, action) =>{
-            // console.log(action.payload)
             state.crust = action.payload
-            // console.log(state.size)
-            // console.log(state.id)
+            
+            if(state.crust === 'Deep Dish'){
+                state.name = deepDishObj.name
+                state.image = deepDishObj.image
+                state.imageHeight = deepDishObj.imageHeight
+                state.imageWidth = deepDishObj.imageWidth
+                state.imageMarginTop = deepDish.imageMarginTop
+            }
+            if(state.crust === 'Hand Tossed'){
+                state.name = handTossedObj.name
+                state.image = handTossedObj.image
+                state.imageHeight = handTossedObj.imageHeight
+                state.imageWidth = handTossedObj.imageWidth
+                state.imageMarginTop = handTossedObj.imageMarginTop
+            }
+            if(state.crust === 'Thin Crust'){
+                state.name = thinCrustObj.name
+                state.image = thinCrustObj.image
+                state.imageHeight = thinCrustObj.imageHeight
+                state.imageWidth = thinCrustObj.imageWidth
+                state.imageMarginTop = thinCrustObj.imageMarginTop
+            }
+
+
+
             return state;
         },
         selectSize:(state, action) =>{
-            // console.log(action.payload)
             state.size = action.payload
-            // console.log(state.size)
             return state;
         },
         handleHam:(state, action) => {
-            // console.log(action.payload)
-
-
+            
             if(action.payload.side === 'left side' && state.toppingsGrid.ham.left === true){
                 state.toppingsGrid.ham.left = false
                 state.toppingsGrid.ham.whole = false
@@ -744,7 +790,7 @@ const pizzaBuilderSlice = createSlice({
             state.price = total
         },
         resetPizza: (state) => {
-            state.id = uuidv4()
+            state.pizzaId = uuidv4()
             state.crust= 'Deep Dish'
             state.size= 'Sm'
             state.toppings= {}

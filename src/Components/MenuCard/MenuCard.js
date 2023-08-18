@@ -119,9 +119,9 @@ const MenuCard = (props) =>{
 
     useEffect(()=>{
         checkCartStatusQuantity()
-        dispatch(checkLastItem())
-        {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
-        {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
+        // dispatch(checkLastItem())
+        // {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
+        // {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
         dispatch(calculateCartTotal())
         {auth && dispatch(setUserCart(cart))}
     },[cart,auth])
