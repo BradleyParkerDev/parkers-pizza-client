@@ -13,7 +13,7 @@ import {
     handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, 
     handlePineapple,handleSpecialInstructions, calculateTotal, resetPizza   
 } from '../../Redux/pizzaBuilderSlice'
-import { addPizzaToCart, calculateCartTotal, setCart, checkLastItem } from '../../Redux/cartSlice'
+import { addPizzaToCart, updatePizzaInCart ,calculateCartTotal, setCart, checkLastItem } from '../../Redux/cartSlice'
 import { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'; 
 

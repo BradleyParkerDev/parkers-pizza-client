@@ -316,7 +316,7 @@ export const cartSlice = createSlice({
 
             
         },
-        updatePizza: (state,action) =>{
+        updatePizzaInCart: (state,action) =>{
 
 
             
@@ -899,5 +899,5 @@ export const cartSlice = createSlice({
     }
 })
 
-export const { addPizzaToCart,updatePizzaQuantity, removePizzaFromCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkLastItem,checkOut, calculateCartTotal} = cartSlice.actions;
+export const { addPizzaToCart,updatePizzaInCart,updatePizzaQuantity, removePizzaFromCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkLastItem,checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;

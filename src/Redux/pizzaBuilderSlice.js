@@ -785,6 +785,17 @@ const pizzaBuilderSlice = createSlice({
             // console.log(total)
             state.price = total
         },
+        viewPizzaDetails: (state, action) => {
+            console.log(action.payload)
+            state.pizzaId = action.payload.pizzaId
+            state.crust= action.payload.crust
+            state.size= action.payload.size
+            state.toppings= action.payload.toppings
+            state.toppingsGrid= action.payload.toppingsGrid
+            state.specialInstructions= action.payload.specialInstructions
+            state.quantity =action.payload.quantity
+            state.price=action.payload.price  
+        },
         resetPizza: (state) => {
             state.pizzaId = uuidv4()
             state.crust= 'Deep Dish'
@@ -802,6 +813,6 @@ const pizzaBuilderSlice = createSlice({
 });
 
 
-export const { selectCrust, selectSize, handleHam, handleBeef, handleSalami, handlePepperoni,handleItalianSausage,handleBacon, handleOnions, handleMushrooms, handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, handlePineapple, handleSpecialInstructions, calculateTotal, resetPizza } = pizzaBuilderSlice.actions;
+export const { selectCrust, selectSize,handleHam, handleBeef, handleSalami, handlePepperoni,handleItalianSausage,handleBacon, handleOnions, handleMushrooms, handleBlackOlives, handleGreenPeppers, handleJalapenoPeppers, handlePineapple, handleSpecialInstructions, calculateTotal, viewPizzaDetails,resetPizza } = pizzaBuilderSlice.actions;
 export default pizzaBuilderSlice.reducer;
 

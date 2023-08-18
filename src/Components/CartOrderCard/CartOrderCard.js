@@ -12,6 +12,7 @@ import {
     removeItemFromCart, 
     calculateCartTotal 
 } from '../../Redux/cartSlice'
+import { viewPizzaDetails } from '../../Redux/pizzaBuilderSlice'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -58,6 +59,23 @@ const CartOrderCard = (props) =>{
             dispatch(removePizzaFromCart(payload))
 
         }
+    }
+
+    const viewCurrentPizzaDetails = (pizzaObj) =>{
+        let payload = {
+            
+            pizzaId: pizzaObj.pizzaId,
+            crust: pizzaObj.crust,
+            size: pizzaObj.size,
+            toppings: pizzaObj.toppings,
+            toppingsGrid: pizzaObj.toppingsGrid,
+            specialInstructions: pizzaObj.specialInstructions,
+            quantity: pizzaObj.quantity, 
+            price: pizzaObj.price
+        }
+        dispatch(viewPizzaDetails(payload))
+        navigate('/pizza-builder')
+
     }
 
 
@@ -131,7 +149,7 @@ const CartOrderCard = (props) =>{
                                 {cartItem.name}
                             </p>
                         </div>
-                        {cartItem.isPizza && <div id='coc-item-details' className='mt-[5px]'><p>Details</p></div>}
+                        {cartItem.isPizza && <div onClick={()=>{viewCurrentPizzaDetails(cartItem)}} id='coc-item-details' className='mt-[5px]'><p>Details</p></div>}
                     </div>
 
                     <div id="coc-price" className='md:mt-[20px]  md:w-[80px]'>
