@@ -29,8 +29,8 @@ const CartPage = () =>{
         // checkCartStatusQuantity()
         dispatch(checkLastItem())
         console.log(pizzas)
-        // {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
-        // {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
+        // {((pizzas.length > 0 ||Object.entries(cart.items).length > 0) && auth === false)&& setLocalCart()}
+        // {(( pizzas.length === 0 || Object.entries(cart.items).length === 0) && auth === false)&& getLocalCart()}
         // {(pizzas.length > 0 && auth === false)&& setLocalCart()}
         // {(pizzas.length === 0 && auth === false)&& getLocalCart()}
         dispatch(calculateCartTotal())
@@ -206,6 +206,9 @@ const CartPage = () =>{
                     <div id="cart-items-inner-container" className="w-[full] bg-white rounded-[5px] p-[9px]  h-[100%]">
                         {pizzas.map(pizza=><CartOrderCard cartItem = {pizza}/>)}
                         {displayCartCards(cart)}
+
+                        {cart.total === 0 && <div className="h-[100%] w-[100%] flex justify-center"><p className="mt-[35%] md:mt-[50px] font-sergioTrendy">Cart Empty</p></div>}
+        
  
                     </div>
                 </div>

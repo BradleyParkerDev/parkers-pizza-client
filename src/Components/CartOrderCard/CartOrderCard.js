@@ -71,7 +71,8 @@ const CartOrderCard = (props) =>{
             toppingsGrid: pizzaObj.toppingsGrid,
             specialInstructions: pizzaObj.specialInstructions,
             quantity: pizzaObj.quantity, 
-            price: pizzaObj.price
+            price: pizzaObj.price,
+            buildType: 'update'
         }
         dispatch(viewPizzaDetails(payload))
         navigate('/pizza-builder')

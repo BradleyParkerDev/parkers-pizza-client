@@ -16,10 +16,12 @@ import {
 import { addPizzaToCart, updatePizzaInCart ,calculateCartTotal, setCart, checkLastItem } from '../../Redux/cartSlice'
 import { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'; 
+import { useNavigate } from 'react-router-dom'
 
 const PizzaBuilder = () => {
     const dispatch = useDispatch();
     const auth = useSelector((state)=>state.auth.isAuth)
+    const navigate = useNavigate()
 
     const pizza = useSelector((state)=>state.pizza)
     const cart = useSelector((state)=>state.cart)
@@ -170,6 +172,8 @@ const PizzaBuilder = () => {
     useEffect(()=>{
 
         console.log(pizzas)
+        handleCrustChange(pizza.crust)
+        handleSizeChange(pizza.size)
         dispatch(calculateTotal())
     },[pizza])
 
@@ -185,10 +189,67 @@ const PizzaBuilder = () => {
         handleSizeChange('Sm')
 
     }
+    
+    const cancelUpdate = () =>{
+
+        dispatch(resetPizza())
+        handleCrustChange('Deep Dish')
+        handleSizeChange('Sm')
+        navigate('/cart')
+
+    }
+
+    const updatePizza = () =>{
+
+        dispatch(updatePizzaInCart(pizza))
+        dispatch(resetPizza())
+        handleCrustChange('Deep Dish')
+        handleSizeChange('Sm')
+        navigate('/cart')
+    }
 
 
+    const showButtons = (pizzaBuildType) =>{
 
-
+        if(pizzaBuildType === 'create'){
+            return(
+                // Add to Cart Button 
+                <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px]'>
+                    <div id="button-container" className='flex justify-end'>
+                        <div id="button" className='bg-red-pp w-[202px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
+                            <p onClick={()=>{addPizza()}} className='font-sergioTrendy text-white mt-[15px]'>
+                                Add to Cart
+                            </p>
+                        </div>
+                    </div>
+                </div> 
+            ) 
+        }
+        if(pizzaBuildType === 'update'){
+            return(
+                // Update Buttons 
+                <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px] flex md:justify-end'>
+                    {/*  */}
+                    <div id="button-container" className='flex justify-end'>
+                        <div id="button" className='bg-green-pp w-[168px] md:w-[202px] mr-[18px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
+                            <p onClick={()=>{cancelUpdate()}} className='font-sergioTrendy text-white mt-[15px]'>
+                                Return To Cart
+                            </p>
+                        </div>
+                    </div>
+                    {/* Update Button */}
+                    <div id="button-container" className='flex justify-end'>
+                        <div id="button" className='bg-red-pp w-[168px] md:w-[202px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
+                            <p onClick={()=>{updatePizza()}} className='font-sergioTrendy text-white mt-[15px]'>
+                                Update Pizza
+                            </p>
+                        </div>
+                    </div>
+                </div> 
+            ) 
+        }
+    }
+    console.log(pizza.buildType)
     return(
         //
         <div id ="form-total-button">
@@ -450,7 +511,7 @@ const PizzaBuilder = () => {
                                 Special Instructions
                             </p>
                         </div>
-                        <textarea onChange={(e)=>dispatch(handleSpecialInstructions(e.target.value))} id="special-instructions" className='p-[5px] w-full h-[106px] border-solid border-black border-[1px]'/>
+                        <textarea onChange={(e)=>dispatch(handleSpecialInstructions(e.target.value))} id="special-instructions" value={pizza.specialInstructions} className='p-[5px] w-full h-[106px] border-solid border-black border-[1px]'/>
                     </div>
                 </div>
             </div>
@@ -477,17 +538,8 @@ const PizzaBuilder = () => {
             </div>
 
 
-            {/* Add to Cart Button */}
-            <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px]'>
-                <div id="button-container" className='flex justify-end'>
-                    <div id="button" className='bg-red-pp w-[202px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
-                        <p onClick={()=>{addPizza()}} className='font-sergioTrendy text-white mt-[15px]'>
-                            Add to Cart
-                        </p>
-                    </div>
-
-                </div>
-            </div>
+            {/* Pizza Builder Buttonsx */}
+            {showButtons(pizza.buildType)}
 
         </div>
 

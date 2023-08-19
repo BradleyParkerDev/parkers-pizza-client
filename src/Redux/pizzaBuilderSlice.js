@@ -794,6 +794,7 @@ const pizzaBuilderSlice = createSlice({
             state.toppingsGrid= action.payload.toppingsGrid
             state.specialInstructions= action.payload.specialInstructions
             state.quantity =action.payload.quantity
+            state.buildType = action.payload.buildType
             state.price=action.payload.price  
         },
         resetPizza: (state) => {
@@ -805,6 +806,7 @@ const pizzaBuilderSlice = createSlice({
             state.specialInstructions= ''
             state.quantity =1
             state.price= 0
+            state.buildType ='create'
 
             return state ;
         }

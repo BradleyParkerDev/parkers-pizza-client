@@ -8,7 +8,8 @@ module.exports = {
       colors:{
         'red-pp':'#C72026',
         'yellow-pp':'#F6F980',
-        'grey-pp':'#D9D9D9'
+        'grey-pp':'#D9D9D9',
+        'green-pp': '#1A9900'
       },
       fontFamily:{
         sergioTrendy: ['Sergio Trendy', 'normal'],

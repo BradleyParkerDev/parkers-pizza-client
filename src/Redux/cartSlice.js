@@ -310,13 +310,22 @@ export const cartSlice = createSlice({
             console.log(action.payload)
             let tempPizza = action.payload
             console.log(tempPizza)
-            // tempPizza.buildType = 'update'
             state.pizzas.pizzasArr.push(tempPizza)
 
 
             
         },
         updatePizzaInCart: (state,action) =>{
+            console.log(action.payload)
+            console.log(state.pizzas.pizzasArr.indexOf(action.payload.pizzaId))
+            let index = '';
+            for(let i = 0; i < state.pizzas.pizzasArr.length; i++){
+
+                if(state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId){
+
+                    state.pizzas.pizzasArr.splice(i,1,action.payload)
+                }
+            }
 
 
             
