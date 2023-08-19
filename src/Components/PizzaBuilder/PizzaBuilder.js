@@ -171,7 +171,7 @@ const PizzaBuilder = () => {
 
     useEffect(()=>{
 
-        console.log(pizzas)
+        // console.log(pizzas)
         handleCrustChange(pizza.crust)
         handleSizeChange(pizza.size)
         dispatch(calculateTotal())
@@ -249,7 +249,7 @@ const PizzaBuilder = () => {
             ) 
         }
     }
-    console.log(pizza.buildType)
+    // console.log(pizza.buildType)
     return(
         //
         <div id ="form-total-button">

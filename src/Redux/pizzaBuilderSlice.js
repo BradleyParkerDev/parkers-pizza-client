@@ -83,6 +83,7 @@ const pizzaBuilderSlice = createSlice({
     initialState,
     reducers: {
         selectCrust:(state, action) =>{
+            console.log(action.payload)
             state.crust = action.payload
             
             if(state.crust === 'Deep Dish'){
@@ -109,6 +110,7 @@ const pizzaBuilderSlice = createSlice({
             return state;
         },
         selectSize:(state, action) =>{
+            console.log(action.payload)
             state.size = action.payload
             return state;
         },

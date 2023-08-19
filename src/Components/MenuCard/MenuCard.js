@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, updateQuantity,setCart,checkLastItem, calculateCartTotal } from '../../Redux/cartSlice'
 import { setUserCart } from '../../Redux/usersSlice'
-// import { checkLocalCart } from '../../Lib/checkLocalCart'
+import { selectSize, selectCrust } from '../../Redux/pizzaBuilderSlice'
 const MenuCard = (props) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -13,6 +13,7 @@ const MenuCard = (props) =>{
     const [inCart, setInCart] = useState(false)
     const [refresh, setRefresh] = useState(false)
     const cart = useSelector((state)=>state.cart)
+    const pizzaBuilder = useSelector((state)=>state.pizza)
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
 
@@ -126,13 +127,21 @@ const MenuCard = (props) =>{
         {auth && dispatch(setUserCart(cart))}
     },[cart,auth])
 
+    
+    const setPizzaBuilderImages = (pizzaCrust, pizzaSize) =>{
 
+        dispatch(selectCrust(pizzaCrust)) 
+        dispatch(selectSize(pizzaSize)) 
+        navigate('/pizza-builder')       
+    }
 
+    const showViewButton = () =>{ 
+        
+ 
 
-    const showViewButton = () =>{   
         return(
             <div id='view-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp">
-                <p onClick={()=>{navigate('/pizza-builder')}} style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">View</p>
+                <p onClick={()=>{setPizzaBuilderImages(pizza.crust,pizza.size)}} style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">View</p>
             </div>                
         )  
     }

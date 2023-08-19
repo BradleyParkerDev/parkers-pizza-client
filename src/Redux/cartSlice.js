@@ -24,6 +24,8 @@ import vanillaIceCream from '../MenuImages/Vanilla Ice Cream.png'
 // Pizzas
 /////////////////////////////////////////////////////////////////////////
 const deepDishObj = {
+    crust: 'Deep Dish',
+    size: 'Sm',
     quantity: 1,
     name: 'Deep Dish Pizza',
     image: deepDish,
@@ -34,6 +36,8 @@ const deepDishObj = {
 
 }
 const handTossedObj = {
+    crust: 'Hand Tossed',
+    size: 'Sm',
     quantity: 1,
     name: 'Hand Tossed Pizza',
     image: handTossed,
@@ -44,6 +48,8 @@ const handTossedObj = {
 
 }
 const thinCrustObj = {
+    crust: 'Thin Crust',
+    size: 'Sm',
     quantity: 1,
     name: 'Thin Crust Pizza',
     image: thinCrust,
