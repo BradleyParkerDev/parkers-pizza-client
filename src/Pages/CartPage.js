@@ -14,11 +14,6 @@ const CartPage = () =>{
     const [empty,setEmpty] = useState(true)
 
 
-    //Sets local storage cart to contents from cart slice
-    const setLocalCart = () =>{
-        localStorage.setItem('localCart', JSON.stringify(cart))
-    }
-
     //Gets cart slice items from local storage
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
@@ -29,18 +24,13 @@ const CartPage = () =>{
     } 
 
     useEffect((props)=>{
-    //     dispatch(checkCartStatus())
-    //     {(cart.itemsInCart === true && cart.userLoggedIn === false) && setLocalCart()}
-    //     {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
-    //     dispatch(calculateCartTotal())
-    //     // {cart.userLoggedIn && dispatch(setUserCart(cart))}
-    
-    console.log('Cart Changed')
-    if(cart.total === 0){
-        setEmpty(true)
-    }else{
-        setEmpty(false)
-    }
+        {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
+        console.log('Cart Changed')
+        if(cart.total === 0){
+            setEmpty(true)
+        }else{
+            setEmpty(false)
+        }
     },[cart])
 
     // Allows user to choose delivery or pickup
