@@ -301,6 +301,8 @@ const initialState = {
     items: {},
     lastItem: false,
     pizzasInCart: false,
+    itemsInCart: false,
+    userLoggedIn: false,
     buildType: '',
     deals:{},
     total: 0
@@ -498,9 +500,16 @@ export const cartSlice = createSlice({
                 if(state.items.hotWingsObj.quantity !== 0){
                     state.items.hotWingsObj.quantity -= 1;
                 }
-                if(state.items.hotWingsObj.quantity === 0){
+                if(state.lastItem === true && state.items.hotWingsObj.quantity === 0){
+                    localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
+                    delete state.items.hotWingsObj; 
+   
+                }else if(state.items.hotWingsObj.quantity === 0){
                     delete state.items.hotWingsObj;
                 }
+
+                
             }
 
             // Bread Sticks
@@ -513,7 +522,12 @@ export const cartSlice = createSlice({
                 if(state.items.breadSticksObj.quantity !== 0){
                     state.items.breadSticksObj.quantity -= 1;
                 }
-                if(state.items.breadSticksObj.quantity === 0){
+                if(state.lastItem === true && state.items.breadSticksObj.quantity === 0){
+                    localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
+                    delete state.items.breadSticksObj; 
+   
+                }else if(state.items.breadSticksObj.quantity === 0){
                     delete state.items.breadSticksObj;
                 }
             }
@@ -527,7 +541,12 @@ export const cartSlice = createSlice({
                 if(state.items.mozzarellaSticksObj.quantity !== 0){
                     state.items.mozzarellaSticksObj.quantity -= 1;
                 }
-                if(state.items.mozzarellaSticksObj.quantity === 0){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
+                    delete state.items.mozzarellaSticksObj; 
+   
+                }else if(state.items.mozzarellaSticksObj.quantity === 0){
                     delete state.items.mozzarellaSticksObj;
                 }
             }
@@ -541,7 +560,12 @@ export const cartSlice = createSlice({
                 if(state.items.calamariObj.quantity !== 0){
                     state.items.calamariObj.quantity -= 1;
                 }
-                if(state.items.calamariObj.quantity === 0){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
+                    delete state.items.calamariObj; 
+   
+                }else if(state.items.calamariObj.quantity === 0){
                     delete state.items.calamariObj
                 }
             }
@@ -560,7 +584,12 @@ export const cartSlice = createSlice({
                 if(state.items.chocolateCakeObj.quantity !== 0){
                     state.items.chocolateCakeObj.quantity -= 1;
                 }
-                if(state.items.chocolateCakeObj.quantity === 0){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
+                    delete state.items.chocolateCakeObj; 
+   
+                }else if(state.items.chocolateCakeObj.quantity === 0){
                     delete state.items.chocolateCakeObj;
                 }
             }
@@ -575,7 +604,12 @@ export const cartSlice = createSlice({
                 if(state.items.chocolateChipCookieObj.quantity !== 0){
                     state.items.chocolateChipCookieObj.quantity -= 1;
                 }
-                if(state.items.chocolateChipCookieObj.quantity === 0){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
+                    delete state.items.chocolateChipCookieObj; 
+   
+                }else if(state.items.chocolateChipCookieObj.quantity === 0){
                     delete state.items.chocolateChipCookieObj;
                 }
             }
@@ -590,7 +624,12 @@ export const cartSlice = createSlice({
                 if(state.items.vanillaIceCreamObj.quantity !== 0){
                     state.items.vanillaIceCreamObj.quantity -= 1;
                 }
-                if(state.items.vanillaIceCreamObj.quantity === 0){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
+                    delete state.items.vanillaIceCreamObj; 
+   
+                }else if(state.items.vanillaIceCreamObj.quantity === 0){
                     delete state.items.vanillaIceCreamObj;
                 }
             }
@@ -611,9 +650,9 @@ export const cartSlice = createSlice({
                 if(state.items.twoLiterSpriteObj.quantity !== 0){
                     state.items.twoLiterSpriteObj.quantity -=1;
                 }
-
                 if(state.lastItem === true ){
                     localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
                     delete state.items.twoLiterSpriteObj; 
    
                 }else if(state.items.twoLiterSpriteObj.quantity === 0){
@@ -634,6 +673,7 @@ export const cartSlice = createSlice({
                 }
                 if(state.lastItem === true ){
                     localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
                     delete state.items.spriteCanObj; 
    
                 }else if(state.items.spriteCanObj.quantity === 0){
@@ -653,6 +693,7 @@ export const cartSlice = createSlice({
                 }
                 if(state.lastItem === true ){
                     localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
                     delete state.items.twoLiterCokeObj; 
    
                 }else if(state.items.twoLiterCokeObj.quantity === 0){
@@ -670,6 +711,7 @@ export const cartSlice = createSlice({
                 }
                 if(state.lastItem === true ){
                     localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
                     delete state.items.cokeCanObj; 
    
                 }else if(state.items.cokeCanObj.quantity === 0){
@@ -690,6 +732,7 @@ export const cartSlice = createSlice({
                 }
                 if(state.lastItem === true ){
                     localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
                     delete state.items.twoLiterDietCokeObj; 
    
                 }else if(state.items.twoLiterDietCokeObj.quantity === 0){
@@ -707,6 +750,7 @@ export const cartSlice = createSlice({
                 }
                 if(state.lastItem === true ){
                     localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
                     delete state.items.dietCokeCanObj; 
    
                 }else if(state.items.dietCokeCanObj.quantity === 0){
@@ -727,6 +771,7 @@ export const cartSlice = createSlice({
                 }
                 if(state.lastItem === true ){
                     localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
                     delete state.items.twoLiterFantaObj; 
    
                 }else if(state.items.twoLiterFantaObj.quantity === 0){
@@ -744,6 +789,7 @@ export const cartSlice = createSlice({
                 }
                 if(state.lastItem === true ){
                     localStorage.removeItem('localCart')
+                    state.itemsInCart = false;
                     delete state.items.fantaCanObj; 
    
                 }else if(state.items.fantaCanObj.quantity === 0){
@@ -762,21 +808,41 @@ export const cartSlice = createSlice({
             // 12 Piece Hot Wings
 
             if(action.payload.type === 'remove' && action.payload.name === '12 Piece Hot Wings'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.hotWingsObj; 
+   
+                }                
                 delete state.items.hotWingsObj;
             }
 
             // Bread Sticks
 
             if(action.payload.type === 'remove' && action.payload.name === 'Bread Sticks'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.breadSticksObj; 
+   
+                }                
                 delete state.items.breadSticksObj;
             }
             // Mozzarella Sticks
 
             if(action.payload.type === 'remove' && action.payload.name === 'Mozzarella Sticks'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.mozzarellaSticksObj; 
+   
+                }                
                 delete state.items.mozzarellaSticksObj; 
             }
             // Calamari
             if(action.payload.type === 'remove' && action.payload.name === 'Calamari'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.calamariObj; 
+   
+                }                
                 delete state.items.calamariObj
             }
 
@@ -787,12 +853,26 @@ export const cartSlice = createSlice({
 
 
             if(action.payload.type === 'remove' && action.payload.name === 'Chocolate Cake'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.chocolateCakeObj; 
+   
+                }
                 delete state.items.chocolateCakeObj;
             }
             if(action.payload.type === 'remove' && action.payload.name === 'Chocolate Chip Cookie'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.chocolateChipCookieObj; 
+   
+                }
                 delete state.items.chocolateChipCookieObj;
             }
             if(action.payload.type === 'remove' && action.payload.name === 'Vanilla Ice Cream'){
+                if(state.lastItem === true){
+                    localStorage.removeItem('localCart')
+                    delete state.items.vanillaIceCreamObj; 
+                }
                 delete state.items.vanillaIceCreamObj;
             }
 
@@ -869,31 +949,33 @@ export const cartSlice = createSlice({
 
         },
         setCart:(state,action)=>{
-            // console.log(action.payload.items)
+            console.log(action.payload)
             state.items = action.payload.items;
-            // console.log(state)
+            state.pizzas = action.payload.pizzas;
         },      
         addDealToCart:(state,action)=>{
 
         },
-        checkLastItem: (state, action) =>{
+        checkCartStatus: (state, action) =>{
+
             //Set lastItem Property
             if(Object.entries(state.items).length === 1){
                 state.lastItem = true;
             }else{
                 state.lastItem = false;
             }
+
+            //Checks if menu items or pizzas are in cartSlice
+            if(Object.entries(state.items).length >= 1 || state.pizzas.pizzasArr.length > 0){
+                state.itemsInCart = true;
+            }else{
+                state.lastItem = false;
+            }
+
             console.log(`Items Length: ${Object.entries(state.items).length}`)
+            console.log(`pizzasArr Length: ${state.pizzas.pizzasArr.length}`)
             console.log(`Last Item: ${state.lastItem}`)
             
-            // //Set lastItem Property
-            // if(state.pizzas.pizzasArr.length()>= 1){
-            //     state.pizzasInCart = true;
-            // }else{
-            //     state.pizzasInCart = false;
-            // }
-            // console.log(`Cart Pizzas Length: ${state.pizzas.pizzasArr.length()}`)
-            // console.log(`Last Item: ${state.pizzasInCart}`)
         },
         checkOut:(state, action) =>{
 
@@ -909,10 +991,12 @@ export const cartSlice = createSlice({
                     pizzasTotal = pizzasTotal + (state.pizzas.pizzasArr[i].quantity * state.pizzas.pizzasArr[i].price)
                 }
             }
+            state.pizzas.pizzasTotal = pizzasTotal
+
             state.total = cartTotal + pizzasTotal
         }  
     }
 })
 
-export const { addPizzaToCart,updatePizzaInCart,updatePizzaQuantity, removePizzaFromCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkLastItem,checkOut, calculateCartTotal} = cartSlice.actions;
+export const { addPizzaToCart,updatePizzaInCart,updatePizzaQuantity, removePizzaFromCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkCartStatus,checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;

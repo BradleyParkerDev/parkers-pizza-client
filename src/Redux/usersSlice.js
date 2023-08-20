@@ -94,7 +94,7 @@ export const usersSlice = createSlice({
                 city:'',
                 state:'',
                 zipcode:'',
-                cart:[],
+                cart:{},
                 orders:[]
             }
         }

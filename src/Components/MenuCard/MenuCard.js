@@ -3,7 +3,7 @@ import plus from './plus.png'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart, updateQuantity,setCart,checkLastItem, calculateCartTotal } from '../../Redux/cartSlice'
+import { addItemToCart, updateQuantity,setCart,checkCartStatus, calculateCartTotal } from '../../Redux/cartSlice'
 import { setUserCart } from '../../Redux/usersSlice'
 import { selectSize, selectCrust } from '../../Redux/pizzaBuilderSlice'
 const MenuCard = (props) =>{
@@ -11,9 +11,7 @@ const MenuCard = (props) =>{
     const navigate = useNavigate()
     const [quantity, setQuantity] = useState(0);
     const [inCart, setInCart] = useState(false)
-    const [refresh, setRefresh] = useState(false)
     const cart = useSelector((state)=>state.cart)
-    const pizzaBuilder = useSelector((state)=>state.pizza)
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
 
@@ -51,6 +49,7 @@ const MenuCard = (props) =>{
                 name: itemObj.name
             }
             dispatch(addItemToCart(payload))
+
         }
         if(change === 'increase'){
             let payload = {
@@ -79,6 +78,7 @@ const MenuCard = (props) =>{
                 if(cart.items[key].name === side.name){
                     setInCart(true)
                     setQuantity(cart.items[key].quantity)
+
                 }
       
             }            
@@ -88,6 +88,7 @@ const MenuCard = (props) =>{
                 if(cart.items[key].name === dessert.name){
                     setInCart(true)
                     setQuantity(cart.items[key].quantity)
+
                 }
      
             }            
@@ -97,6 +98,7 @@ const MenuCard = (props) =>{
                 if(cart.items[key].name === beverage.name){
                     setInCart(true)
                     setQuantity(cart.items[key].quantity)
+
                 }    
             }            
         }
@@ -115,19 +117,18 @@ const MenuCard = (props) =>{
             dispatch(setCart(JSON.parse(localCart)))  
             console.log(JSON.parse(localCart))
         }
-
     } 
 
-    useEffect(()=>{
+    useEffect((props)=>{
         checkCartStatusQuantity()
-        // dispatch(checkLastItem())
-        // {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
-        // {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
+        dispatch(checkCartStatus())
+        {(cart.itemsInCart === true && cart.userLoggedIn === false) && setLocalCart()}
+        {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
         dispatch(calculateCartTotal())
-        {auth && dispatch(setUserCart(cart))}
-    },[cart,auth])
+        // {cart.userLoggedIn && dispatch(setUserCart(cart))}
+    },[cart, inCart, quantity])
 
-    
+    //Sets the images and sizes in PizzaBuilder for pizza MenuCards
     const setPizzaBuilderImages = (pizzaCrust, pizzaSize) =>{
 
         dispatch(selectCrust(pizzaCrust)) 
@@ -136,9 +137,6 @@ const MenuCard = (props) =>{
     }
 
     const showViewButton = () =>{ 
-        
- 
-
         return(
             <div id='view-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp">
                 <p onClick={()=>{setPizzaBuilderImages(pizza.crust,pizza.size)}} style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">View</p>
@@ -150,17 +148,11 @@ const MenuCard = (props) =>{
         
         if(!inCart){
             return(
-
             <div>
-            {side && <div onClick={()=>{handleQuantityChange('add',side)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}
-            {dessert && <div onClick={()=>{handleQuantityChange('add', dessert)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}   
-            {beverage && <div onClick={()=>{handleQuantityChange('add', beverage)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}   
-
-            
-            
-            
-            </div>
-               
+                {side && <div onClick={()=>{handleQuantityChange('add',side)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}
+                {dessert && <div onClick={()=>{handleQuantityChange('add', dessert)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}   
+                {beverage && <div onClick={()=>{handleQuantityChange('add', beverage)}} id='add-button' className="mt-[8px] ml-[10px] flex justify-center w-[50px] h-[30px] rounded-[5px] bg-red-pp"><p style={{fontSize:'14px', lineHeight:'14px'}} className="mt-[7px]  font-sergioTrendy text-white">Add</p></div>}   
+            </div>    
             )
         }else{
             return(
@@ -171,10 +163,6 @@ const MenuCard = (props) =>{
                         {beverage && <div onClick={()=>{handleQuantityChange('decrease', beverage)}} id='minus-button' className='mt-[11px]'><img src={minus} className='h-[15px] w-[15px]'/></div>}
                         
                         {/* Quantity Number */}
-                        {/* {side && <div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'><p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{side.quantity} </p></div>}
-                        {dessert && <div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'><p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{dessert.quantity} </p></div>}
-                        {beverage && <div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'><p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{beverage.quantity} </p></div>}
-                         */}
                         {<div id ='quantity-number' className='ml-[7px] mr-[7px] flex justify-center border-black border-solid border-[1px] rounded-[3px] w-[25px] h-[35px]'><p style={{fontSize:'16px', lineHeight:'16px'}} className='mt-[9px] font-sergioTrendy'>{quantity} </p></div>}
 
                         {/* Increase Buttons */}

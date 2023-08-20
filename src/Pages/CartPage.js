@@ -2,7 +2,7 @@ import CartOrderCard from "../Components/CartOrderCard/CartOrderCard";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setCart, checkLastItem,calculateCartTotal } from "../Redux/cartSlice";
+import { setCart, checkCartStatus,calculateCartTotal } from "../Redux/cartSlice";
 const CartPage = () =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ const CartPage = () =>{
 
     useEffect(()=>{
         // checkCartStatusQuantity()
-        dispatch(checkLastItem())
+        dispatch(checkCartStatus())
         console.log(pizzas)
         // {((pizzas.length > 0 ||Object.entries(cart.items).length > 0) && auth === false)&& setLocalCart()}
         // {(( pizzas.length === 0 || Object.entries(cart.items).length === 0) && auth === false)&& getLocalCart()}

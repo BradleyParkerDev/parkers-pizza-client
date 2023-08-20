@@ -8,15 +8,12 @@ import {
     updatePizzaQuantity,
     removePizzaFromCart,
     updateQuantity, 
-    checkLastItem ,
+    checkCartStatus ,
     removeItemFromCart, 
     calculateCartTotal 
 } from '../../Redux/cartSlice'
 import { viewPizzaDetails } from '../../Redux/pizzaBuilderSlice'
 import { useNavigate } from 'react-router-dom'
-
-
-
 
 
 const CartOrderCard = (props) =>{
@@ -127,13 +124,13 @@ const CartOrderCard = (props) =>{
   
         }
     } 
-    useEffect(()=>{
-        // checkCartStatusQuantity()
-        // dispatch(checkLastItem())
-        // {(Object.entries(cart.items).length > 0 && auth === false)&& setLocalCart()}
-        // {(Object.entries(cart.items).length === 0 && auth === false)&& getLocalCart()}
+    useEffect((props)=>{
+        dispatch(checkCartStatus())
+        {(cart.itemsInCart === true && cart.userLoggedIn === false) && setLocalCart()}
+        {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
         dispatch(calculateCartTotal())
-    },[cart])
+        // {cart.userLoggedIn && dispatch(setUserCart(cart))}
+    },[cart, quantity])
 
     return(
         <div id='cart-order-card-container' className=" md:flex font-sergioTrendy border-solid border-black border-[1px] rounded-[5px] w-[342px] md:w-[100%] h-[250px] md:h-[160px] mb-[9px] p-[10px] md:p-[0px]">

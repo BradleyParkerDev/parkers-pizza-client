@@ -187,6 +187,7 @@ const PizzaBuilder = () => {
         dispatch(resetPizza())
         handleCrustChange('Deep Dish')
         handleSizeChange('Sm')
+        navigate('/cart')
 
     }
     
