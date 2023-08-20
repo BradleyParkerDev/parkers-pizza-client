@@ -11,6 +11,9 @@ const CartPage = () =>{
     
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
+    const [empty,setEmpty] = useState(true)
+
+
     //Sets local storage cart to contents from cart slice
     const setLocalCart = () =>{
         localStorage.setItem('localCart', JSON.stringify(cart))
@@ -25,17 +28,20 @@ const CartPage = () =>{
         }
     } 
 
-    useEffect(()=>{
-        // checkCartStatusQuantity()
-        dispatch(checkCartStatus())
-        console.log(pizzas)
-        // {((pizzas.length > 0 ||Object.entries(cart.items).length > 0) && auth === false)&& setLocalCart()}
-        // {(( pizzas.length === 0 || Object.entries(cart.items).length === 0) && auth === false)&& getLocalCart()}
-        // {(pizzas.length > 0 && auth === false)&& setLocalCart()}
-        // {(pizzas.length === 0 && auth === false)&& getLocalCart()}
-        dispatch(calculateCartTotal())
-        
-    },[cart,auth])
+    useEffect((props)=>{
+    //     dispatch(checkCartStatus())
+    //     {(cart.itemsInCart === true && cart.userLoggedIn === false) && setLocalCart()}
+    //     {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
+    //     dispatch(calculateCartTotal())
+    //     // {cart.userLoggedIn && dispatch(setUserCart(cart))}
+    
+    console.log('Cart Changed')
+    if(cart.total === 0){
+        setEmpty(true)
+    }else{
+        setEmpty(false)
+    }
+    },[cart])
 
     // Allows user to choose delivery or pickup
     const showDeliveryPickup = () =>{
@@ -207,7 +213,7 @@ const CartPage = () =>{
                         {pizzas.map(pizza=><CartOrderCard cartItem = {pizza}/>)}
                         {displayCartCards(cart)}
 
-                        {cart.total === 0 && <div className="h-[100%] w-[100%] flex justify-center"><p className="mt-[35%] md:mt-[50px] font-sergioTrendy">Cart Empty</p></div>}
+                        {(cart.total === 0 || empty) && <div className="h-[100%] w-[100%] flex justify-center"><p className="mt-[35%] md:mt-[50px] font-sergioTrendy">Cart Empty</p></div>}
         
  
                     </div>

@@ -356,22 +356,14 @@ export const cartSlice = createSlice({
             }
             if(action.payload.type === 'decrease'){
                 for(let i = 0; i < state.pizzas.pizzasArr.length; i++){
-
                     console.log(action.payload)
-
                     if(state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId && state.pizzas.pizzasArr[i].quantity !== 0){
                         state.pizzas.pizzasArr[i].quantity--
-
                         console.log(`Pizza Quantity: ${state.pizzas.pizzasArr[i].quantity}`)
                         console.log(`pizzaId: ${state.pizzas.pizzasArr[i].pizzaId}`)
-
                     }
                     if(state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId && state.pizzas.pizzasArr[i].quantity === 0){
                         state.pizzas.pizzasArr.splice(i,1)
-
-                        // console.log(`Pizza Quantity: ${state.pizzas.pizzasArr[i].quantity}`)
-                        // console.log(`pizzaId: ${state.pizzas.pizzasArr[i].pizzaId}`)
-
                     }
                 }                
             }
@@ -503,13 +495,12 @@ export const cartSlice = createSlice({
                 if(state.lastItem === true && state.items.hotWingsObj.quantity === 0){
                     localStorage.removeItem('localCart')
                     state.itemsInCart = false;
-                    delete state.items.hotWingsObj; 
+                    delete state.items.hotWingsObj;
+                    state.total = 0; 
    
                 }else if(state.items.hotWingsObj.quantity === 0){
                     delete state.items.hotWingsObj;
-                }
-
-                
+                }   
             }
 
             // Bread Sticks
@@ -656,7 +647,6 @@ export const cartSlice = createSlice({
                     delete state.items.twoLiterSpriteObj; 
    
                 }else if(state.items.twoLiterSpriteObj.quantity === 0){
-
                     delete state.items.twoLiterSpriteObj;
                 }
             }
@@ -810,8 +800,9 @@ export const cartSlice = createSlice({
             if(action.payload.type === 'remove' && action.payload.name === '12 Piece Hot Wings'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.hotWingsObj; 
-   
+                    delete state.items.hotWingsObj;
+                    state.lastItem = false;
+                    state.total = 0; 
                 }                
                 delete state.items.hotWingsObj;
             }
@@ -821,8 +812,9 @@ export const cartSlice = createSlice({
             if(action.payload.type === 'remove' && action.payload.name === 'Bread Sticks'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.breadSticksObj; 
-   
+                    delete state.items.breadSticksObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }                
                 delete state.items.breadSticksObj;
             }
@@ -831,8 +823,9 @@ export const cartSlice = createSlice({
             if(action.payload.type === 'remove' && action.payload.name === 'Mozzarella Sticks'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.mozzarellaSticksObj; 
-   
+                    delete state.items.mozzarellaSticksObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }                
                 delete state.items.mozzarellaSticksObj; 
             }
@@ -840,8 +833,9 @@ export const cartSlice = createSlice({
             if(action.payload.type === 'remove' && action.payload.name === 'Calamari'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.calamariObj; 
-   
+                    delete state.items.calamariObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }                
                 delete state.items.calamariObj
             }
@@ -855,23 +849,27 @@ export const cartSlice = createSlice({
             if(action.payload.type === 'remove' && action.payload.name === 'Chocolate Cake'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.chocolateCakeObj; 
-   
+                    delete state.items.chocolateCakeObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }
                 delete state.items.chocolateCakeObj;
             }
             if(action.payload.type === 'remove' && action.payload.name === 'Chocolate Chip Cookie'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.chocolateChipCookieObj; 
-   
+                    delete state.items.chocolateChipCookieObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }
                 delete state.items.chocolateChipCookieObj;
             }
             if(action.payload.type === 'remove' && action.payload.name === 'Vanilla Ice Cream'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.vanillaIceCreamObj; 
+                    delete state.items.vanillaIceCreamObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }
                 delete state.items.vanillaIceCreamObj;
             }
@@ -885,16 +883,18 @@ export const cartSlice = createSlice({
             if(action.payload.type === 'remove' && action.payload.name === '2 Liter Sprite'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.twoLiterSpriteObj; 
-   
+                    delete state.items.twoLiterSpriteObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }
                 delete state.items.twoLiterSpriteObj; 
             }
             if(action.payload.type === 'remove' && action.payload.name === 'Sprite Can'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.spriteCanObj; 
-   
+                    delete state.items.spriteCanObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }
                 delete state.items.spriteCanObj;
             }
@@ -902,23 +902,26 @@ export const cartSlice = createSlice({
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
                     delete state.items.twoLiterCokeObj; 
-   
+                    state.lastItem = false;
+                    state.total = 0; 
                 }
                 delete state.items.twoLiterCokeObj; 
             }
             if(action.payload.type === 'remove' && action.payload.name === 'Coke Can'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.cokeCanObj; 
-   
+                    delete state.items.cokeCanObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }
                 delete state.items.cokeCanObj;
             }
             if(action.payload.type === 'remove' && action.payload.name === '2 Liter Diet Coke'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.twoLiterDietCokeObj; 
-   
+                    delete state.items.twoLiterDietCokeObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }
                 delete state.items.twoLiterDietCokeObj; 
             }
@@ -926,15 +929,17 @@ export const cartSlice = createSlice({
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
                     delete state.items.dietCokeCanObj; 
-   
+                    state.lastItem = false;
+                    state.total = 0; 
                 }
                 delete state.items.dietCokeCanObj;
             }
             if(action.payload.type === 'remove' && action.payload.name === '2 Liter Fanta'){
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
-                    delete state.items.twoLiterFantaObj; 
-   
+                    delete state.items.twoLiterFantaObj;
+                    state.lastItem = false;
+                    state.total = 0;  
                 }                
                 delete state.items.twoLiterFantaObj; 
             }
@@ -942,7 +947,8 @@ export const cartSlice = createSlice({
                 if(state.lastItem === true){
                     localStorage.removeItem('localCart')
                     delete state.items.fantaCanObj; 
-   
+                    state.lastItem = false;
+                    state.total = 0; 
                 }
                 delete state.items.fantaCanObj;
             }
@@ -971,10 +977,6 @@ export const cartSlice = createSlice({
             }else{
                 state.lastItem = false;
             }
-
-            console.log(`Items Length: ${Object.entries(state.items).length}`)
-            console.log(`pizzasArr Length: ${state.pizzas.pizzasArr.length}`)
-            console.log(`Last Item: ${state.lastItem}`)
             
         },
         checkOut:(state, action) =>{
@@ -992,7 +994,6 @@ export const cartSlice = createSlice({
                 }
             }
             state.pizzas.pizzasTotal = pizzasTotal
-
             state.total = cartTotal + pizzasTotal
         }  
     }
