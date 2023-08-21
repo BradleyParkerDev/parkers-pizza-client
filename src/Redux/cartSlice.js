@@ -363,7 +363,15 @@ export const cartSlice = createSlice({
                         console.log(`pizzaId: ${state.pizzas.pizzasArr[i].pizzaId}`)
                     }
                     if(state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId && state.pizzas.pizzasArr[i].quantity === 0){
-                        state.pizzas.pizzasArr.splice(i,1)
+                        if(state.lastItem === true){
+                            console.log('Removing Last Item.')
+                            localStorage.removeItem('localCart')
+                            state.pizzas.pizzasArr.splice(i,1)
+                            state.lastItem = false;
+                            state.total = 0; 
+                        }else{
+                            state.pizzas.pizzasArr.splice(i,1)
+                        }                    
                     }
                 }                
             }
@@ -373,10 +381,36 @@ export const cartSlice = createSlice({
             if(action.payload.type === 'remove'){
                 for(let i = 0; i < state.pizzas.pizzasArr.length; i++){
                     if( state.pizzas.pizzasArr[i].pizzaId === action.payload.pizzaId){
-                        state.pizzas.pizzasArr.splice(i,1)
+                        if(state.lastItem === true){
+                            console.log('Removing Last Item.')
+                            localStorage.removeItem('localCart')
+                            state.pizzas.pizzasArr.splice(i,1)
+                            state.lastItem = false;
+                            state.total = 0; 
+                        }else{
+                            state.pizzas.pizzasArr.splice(i,1)
+                        }
                     }
                 }
             }  
+
+
+
+            // if(state.lastItem === true){
+            //     localStorage.removeItem('localCart')
+            //     delete state.items.hotWingsObj;
+            //     state.lastItem = false;
+            //     state.total = 0; 
+            // }                
+            // delete state.items.hotWingsObj;
+
+
+
+
+
+
+
+
         },
         addItemToCart: (state, action) => {
 
@@ -964,20 +998,23 @@ export const cartSlice = createSlice({
         },
         checkCartStatus: (state, action) =>{
 
+            //Checks if menu items or pizzas are in cartSlice
+            if(Object.entries(state.items).length >= 1 || state.pizzas.pizzasArr.length >= 1){
+                state.itemsInCart = true;
+            }
             //Set lastItem Property
-            if(Object.entries(state.items).length === 1){
+            if((Object.entries(state.items).length === 1 && state.pizzas.pizzasArr.length === 0)|| (state.pizzas.pizzasArr.length === 1 && Object.entries(state.items).length === 0)){
                 state.lastItem = true;
             }else{
                 state.lastItem = false;
             }
 
-            //Checks if menu items or pizzas are in cartSlice
-            if(Object.entries(state.items).length >= 1 || state.pizzas.pizzasArr.length > 0){
-                state.itemsInCart = true;
-            }else{
-                state.lastItem = false;
-            }
             
+            
+
+        },
+        checkUserStatus: (state, action) => {
+            state.userLoggedIn = action.payload;
         },
         checkOut:(state, action) =>{
 
@@ -999,5 +1036,5 @@ export const cartSlice = createSlice({
     }
 })
 
-export const { addPizzaToCart,updatePizzaInCart,updatePizzaQuantity, removePizzaFromCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkCartStatus,checkOut, calculateCartTotal} = cartSlice.actions;
+export const { addPizzaToCart,updatePizzaInCart,updatePizzaQuantity, removePizzaFromCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkCartStatus,checkUserStatus,checkOut, calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;

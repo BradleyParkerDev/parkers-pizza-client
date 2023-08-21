@@ -39,7 +39,15 @@ export const updateUser = createAsyncThunk('user/updateUser', async(userData, th
     }
 })
 
-
+export const updateUserCart = createAsyncThunk('user/updateUserCart', async(userData, thunkAPI) =>{
+    console.log(userData)
+    try{
+        let response = await Axios.put(`/users/update-user-cart/${userData.id}`,userData)
+        console.log(response.data)
+    }catch(error){
+        return thunkAPI.rejectWithValue(error.response.data)
+    }
+})
 
 export const deleteUser = createAsyncThunk('user/deleteUser', async(id, thunkAPI) =>{
 

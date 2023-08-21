@@ -2,7 +2,7 @@ import CartOrderCard from "../Components/CartOrderCard/CartOrderCard";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setCart, checkCartStatus,calculateCartTotal } from "../Redux/cartSlice";
+import { setCart, checkCartStatus,checkUserStatus,calculateCartTotal } from "../Redux/cartSlice";
 const CartPage = () =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -18,20 +18,23 @@ const CartPage = () =>{
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
         console.log(JSON.parse(localCart))
-        if(localCart){
+        if(localCart && !auth){
             dispatch(setCart(JSON.parse(localCart)))   
+        }else if(auth){
+            dispatch(setCart(user.cart))   
         }
     } 
 
     useEffect((props)=>{
+        dispatch(checkUserStatus(auth))
+        console.log(`userLoggedIn: ${cart.userLoggedIn}`)
         {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
-        console.log('Cart Changed')
         if(cart.total === 0){
             setEmpty(true)
         }else{
             setEmpty(false)
         }
-    },[cart])
+    },[cart,auth])
 
     // Allows user to choose delivery or pickup
     const showDeliveryPickup = () =>{

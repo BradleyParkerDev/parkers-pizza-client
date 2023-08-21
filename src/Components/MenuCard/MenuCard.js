@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, updateQuantity,setCart,checkCartStatus, calculateCartTotal } from '../../Redux/cartSlice'
-import { setUserCart } from '../../Redux/usersSlice'
+import { setUserCart, updateUserCart } from '../../Redux/usersSlice'
 import { selectSize, selectCrust } from '../../Redux/pizzaBuilderSlice'
 const MenuCard = (props) =>{
     const dispatch = useDispatch();
@@ -113,15 +113,25 @@ const MenuCard = (props) =>{
     //Gets cart slice items from local storage
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
-        if(localCart){
-            dispatch(setCart(JSON.parse(localCart)))  
-            console.log(JSON.parse(localCart))
+        console.log(JSON.parse(localCart))
+        if(localCart && !auth){
+            dispatch(setCart(JSON.parse(localCart)))   
+        }else if(auth){
+            dispatch(setCart(user.cart))   
         }
     } 
 
     useEffect((props)=>{
         checkCartStatusQuantity()
         dispatch(checkCartStatus())
+        if(auth){
+            let userData = {
+                id: user.id,
+                cart: cart
+            }
+
+            dispatch(updateUserCart(userData))
+        }
         {(cart.itemsInCart === true && cart.userLoggedIn === false) && setLocalCart()}
         {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
         dispatch(calculateCartTotal())
