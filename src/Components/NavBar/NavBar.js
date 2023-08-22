@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'; 
 import { authCheck, logout } from "../../Redux/authSlice"
 import { loginUser } from "../../Redux/usersSlice"
-
+import { resetCart } from "../../Redux/cartSlice"
 const NavBar = (props) =>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -39,6 +39,7 @@ const NavBar = (props) =>{
     }
     const logoutUser = () =>{
         dispatch(logout())
+        dispatch(resetCart())
         navigate('/')
         closeNav()
 

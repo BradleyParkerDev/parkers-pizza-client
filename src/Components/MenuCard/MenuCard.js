@@ -3,8 +3,8 @@ import plus from './plus.png'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart, updateQuantity,setCart,checkCartStatus, calculateCartTotal } from '../../Redux/cartSlice'
-import { setUserCart, updateUserCart } from '../../Redux/usersSlice'
+import { addItemToCart, updateQuantity, updateUserCart,setCart,checkCartStatus, calculateCartTotal } from '../../Redux/cartSlice'
+import { setUserCart } from '../../Redux/usersSlice'
 import { selectSize, selectCrust } from '../../Redux/pizzaBuilderSlice'
 const MenuCard = (props) =>{
     const dispatch = useDispatch();
@@ -114,24 +114,31 @@ const MenuCard = (props) =>{
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
         console.log(JSON.parse(localCart))
-        if(localCart && !auth){
+
+        if(localCart){
             dispatch(setCart(JSON.parse(localCart)))   
-        }else if(auth){
-            dispatch(setCart(user.cart))   
         }
+
+        // if(localCart && !auth){
+        //     dispatch(setCart(JSON.parse(localCart)))   
+        // }else if(auth){
+        //     dispatch(setCart(user.cart))   
+        // }
     } 
 
     useEffect((props)=>{
         checkCartStatusQuantity()
         dispatch(checkCartStatus())
-        if(auth){
-            let userData = {
-                id: user.id,
-                cart: cart
-            }
 
-            dispatch(updateUserCart(userData))
-        }
+        
+        // if(auth){
+        //     let userData = {
+        //         id: user.id,
+        //         cart: cart
+        //     }
+
+        //     dispatch(updateUserCart(userData))
+        // }
         {(cart.itemsInCart === true && cart.userLoggedIn === false) && setLocalCart()}
         {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
         dispatch(calculateCartTotal())

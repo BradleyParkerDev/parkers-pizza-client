@@ -2,13 +2,14 @@ import CartOrderCard from "../Components/CartOrderCard/CartOrderCard";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setCart, checkCartStatus,checkUserStatus,calculateCartTotal } from "../Redux/cartSlice";
-const CartPage = () =>{
+import { setCart, checkCartStatus,checkUserStatus,calculateCartTotal, updateUserCart,resetCart } from "../Redux/cartSlice";
+import {userCheckout, pushUserCartToOrderArr,  clearUserCart} from "../Redux/usersSlice";
+const CartPage = (props) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cart = useSelector((state)=>state.cart)
     const pizzas = useSelector((state)=>state.cart.pizzas.pizzasArr)
-    
+    const [orderType , setOrderType] = useState('')
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
     const [empty,setEmpty] = useState(true)
@@ -18,12 +19,44 @@ const CartPage = () =>{
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
         console.log(JSON.parse(localCart))
-        if(localCart && !auth){
+
+        if(localCart){
             dispatch(setCart(JSON.parse(localCart)))   
-        }else if(auth){
-            dispatch(setCart(user.cart))   
         }
+        
+        // if(localCart && !auth){
+        //     dispatch(setCart(JSON.parse(localCart)))   
+        // }else if(auth){
+        //     dispatch(setCart(user.cart))   
+        // }
     } 
+
+
+
+
+    // Checkout function
+    const checkout = () => {
+        if(empty === false){
+            // dispatch(pushUserCartToOrderArr(orderType))
+            // dispatch(clearUserCart())
+            // dispatch(resetCart())
+            // let userData = {
+            //     id: user.id,
+            //     cart: {},
+            //     orders: user.orders
+            // }
+            // dispatch(updateUserCart(userData))
+            // dispatch(userCheckout(userData))
+            navigate('/user-account')            
+        }
+
+    }
+
+
+
+
+
+
 
     useEffect((props)=>{
         dispatch(checkUserStatus(auth))
@@ -33,8 +66,11 @@ const CartPage = () =>{
             setEmpty(true)
         }else{
             setEmpty(false)
+
         }
-    },[cart,auth])
+
+        console.log(orderType)
+    },[cart,auth, orderType])
 
     // Allows user to choose delivery or pickup
     const showDeliveryPickup = () =>{
@@ -45,7 +81,7 @@ const CartPage = () =>{
                     <div id='delivery' className="font-sergioTrendy  w-[100%] h-[195px]">
                         <div className='flex mb-[21px]' id='delivery-radio-line'>
                             <div id='delivery-radio' className="mr-[6px]">
-                                <input name ='delivery-pickup' type='radio'/>
+                                <input onClick={(e)=>{setOrderType(e.target.value)}} value='delivery' name ='delivery-pickup' type='radio' checked='checked'/>
                             </div>
                             <div id='delivery-text'>
                                 <p>Delivery</p>
@@ -75,7 +111,7 @@ const CartPage = () =>{
                     <div id='pickup' className="font-sergioTrendy w-[100%] h-[195px]">
                         <div className='flex mb-[21px]' id='pickup-radio-line'>
                             <div id='pickup-radio' className="mr-[6px]">
-                                <input name ='delivery-pickup' type='radio'/>
+                                <input onClick={(e)=>{setOrderType(e.target.value)}} value = 'pickup' name ='delivery-pickup' type='radio'/>
                             </div>
                             <div id='pickup-text'>
                                 <p>Pickup</p>
@@ -115,7 +151,7 @@ const CartPage = () =>{
                             {/* Checkout Button */}
                             <div style={{fontSize:'16px',lineHeight:'16px'}} id="button-div-row" className='mt-[22px] mb-[25px] md:mb-[0px] '>
                                 <div id="button-container" className='flex justify-end'>
-                                    <div id="button" className='bg-red-pp w-[141px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
+                                    <div id="button" onClick={()=>{checkout()}} className='bg-red-pp w-[141px] h-[47px] rounded-[5px] font-sergioTrendy flex justify-center'>
                                         <p className='font-sergioTrendy text-white mt-[15px]'>
                                             Checkout
                                         </p>

@@ -10,11 +10,11 @@ import {
     updateQuantity, 
     checkCartStatus ,
     removeItemFromCart, 
+    updateUserCart,
     calculateCartTotal 
 } from '../../Redux/cartSlice'
 import { viewPizzaDetails } from '../../Redux/pizzaBuilderSlice'
 import { useNavigate } from 'react-router-dom'
-import { updateUserCart } from '../../Redux/usersSlice'
 
 const CartOrderCard = (props) =>{
     const dispatch = useDispatch();
@@ -120,11 +120,16 @@ const CartOrderCard = (props) =>{
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
         console.log(JSON.parse(localCart))
-        if(localCart && !auth){
+
+        if(localCart){
             dispatch(setCart(JSON.parse(localCart)))   
-        }else if(auth){
-            dispatch(setCart(user.cart))   
         }
+        
+        // if(localCart && !auth){
+        //     dispatch(setCart(JSON.parse(localCart)))   
+        // }else if(auth){
+        //     dispatch(setCart(user.cart))   
+        // }
     } 
     useEffect((props)=>{
         dispatch(checkCartStatus())

@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import Axios from '../Lib/Axios'
+import { Navigate } from 'react-router-dom'
 import {v4 as uuidv4} from 'uuid'
 import breadSticks from '../MenuImages/Breadsticks.png'
 import calamari from '../MenuImages/Calamari.png'
@@ -294,6 +296,7 @@ const cartBeverageItems = {
 
 const initialState = {
     cartId: uuidv4(),
+    userId: '',
     pizzas:{
         pizzasArr: [],
         pizzasTotal:0
@@ -307,6 +310,17 @@ const initialState = {
     total: 0
 }
 
+
+
+export const updateUserCart = createAsyncThunk('cart/updateUserCart', async(userData, thunkAPI) =>{
+    console.log(userData)
+    try{
+        let response = await Axios.put(`/carts/update-user-cart/${userData.id}`,userData)
+        console.log(response.data)
+    }catch(error){
+        return thunkAPI.rejectWithValue(error.response.data)
+    }
+})
 
 
 export const cartSlice = createSlice({
@@ -1013,6 +1027,13 @@ export const cartSlice = createSlice({
             if(Object.entries(state.items).length >= 1 || state.pizzas.pizzasArr.length >= 1){
                 state.itemsInCart = true;
             }
+
+            if(state.pizzas.pizzasArr.length >= 1){
+                state.pizzasInCart = true;
+            }else{
+                state.pizzasInCart = false;
+            }
+
             //Set lastItem Property
             if((Object.entries(state.items).length === 1 && state.pizzas.pizzasArr.length === 0)|| (state.pizzas.pizzasArr.length === 1 && Object.entries(state.items).length === 0)){
                 state.lastItem = true;
@@ -1029,6 +1050,19 @@ export const cartSlice = createSlice({
         },
         checkOut:(state, action) =>{
 
+        },
+        resetCart: (state, action) => {
+            state.cartId = uuidv4()
+            state.pizzas = {}
+            state.pizzas.pizzasArr= []
+            state.pizzas.pizzasTotal = 0
+            state.items = {}
+            state.lastItem = false
+            state.pizzasInCart= false //Specifically for pizzas
+            state.itemsInCart = false //For pizzas and other menu items
+            state.userLoggedIn= false
+            state.deals={}
+            state.total= 0
         },
         calculateCartTotal: (state, action) => {
             let cartTotal = 0;
@@ -1047,5 +1081,5 @@ export const cartSlice = createSlice({
     }
 })
 
-export const { addPizzaToCart,updatePizzaInCart,updatePizzaQuantity, removePizzaFromCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkCartStatus,checkUserStatus,checkOut, calculateCartTotal} = cartSlice.actions;
+export const {addPizzaToCart,updatePizzaInCart,updatePizzaQuantity, removePizzaFromCart, addItemToCart, updateQuantity,removeItemFromCart,setCart,addDealToCart, checkCartStatus,checkUserStatus,checkOut,resetCart ,calculateCartTotal} = cartSlice.actions;
 export default cartSlice.reducer;

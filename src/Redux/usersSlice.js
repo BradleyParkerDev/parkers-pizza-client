@@ -39,15 +39,17 @@ export const updateUser = createAsyncThunk('user/updateUser', async(userData, th
     }
 })
 
-export const updateUserCart = createAsyncThunk('user/updateUserCart', async(userData, thunkAPI) =>{
-    console.log(userData)
-    try{
-        let response = await Axios.put(`/users/update-user-cart/${userData.id}`,userData)
-        console.log(response.data)
-    }catch(error){
-        return thunkAPI.rejectWithValue(error.response.data)
-    }
-})
+// export const updateUserCart = createAsyncThunk('user/updateUserCart', async(userData, thunkAPI) =>{
+//     console.log(userData)
+//     try{
+//         let response = await Axios.put(`/users/update-user-cart/${userData.id}`,userData)
+//         console.log(response.data)
+//     }catch(error){
+//         return thunkAPI.rejectWithValue(error.response.data)
+//     }
+// })
+
+
 
 export const deleteUser = createAsyncThunk('user/deleteUser', async(id, thunkAPI) =>{
 
@@ -74,7 +76,8 @@ export const usersSlice = createSlice({
         city:'',
         state:'',
         zipcode:'',
-        cart:{},
+        cartId:'',
+        orderSubmitted: false,
         orders:[]
     },
     //syncronous set state
@@ -84,11 +87,7 @@ export const usersSlice = createSlice({
                 ...action.payload,
                 password: ''
             }
-        },
-        setUserCart: (state, action) => {
-            state.cart = action.payload;
-
-        },
+        },               
         resetUser: (state) => {
             return {
                 id: '',
@@ -102,7 +101,7 @@ export const usersSlice = createSlice({
                 city:'',
                 state:'',
                 zipcode:'',
-                cart:{},
+                cart:'',
                 orders:[]
             }
         }
@@ -111,6 +110,6 @@ export const usersSlice = createSlice({
     
 })
 
- export const { setUser, setUserCart ,resetStatus, resetUser } = usersSlice.actions
+ export const { setUser, setUserCart,clearUserCart,pushUserCartToOrderArr ,resetStatus,resetUser } = usersSlice.actions
 
 export default usersSlice.reducer
