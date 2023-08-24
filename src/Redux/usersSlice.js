@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import Axios from '../Lib/Axios'
-import { Navigate } from 'react-router-dom'
 import { authSuccess } from './authSlice'
 
 
@@ -45,6 +44,7 @@ export const deleteUser = createAsyncThunk('user/deleteUser', async(id, thunkAPI
     try{
         let response = await Axios.delete(`/users/delete-user/${id}`)
         console.log(response.data)
+        localStorage.removeItem('jwtToken')
     }catch(error){
         return thunkAPI.rejectWithValue(error.response.data)
     }
