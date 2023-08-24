@@ -86,7 +86,7 @@ const CartPage = (props) =>{
             setEmpty(false)
         }
 
-    },[cart])
+    },[cart,orderType])
 
     // Allows user to choose delivery or pickup
     const showDeliveryPickup = () =>{
