@@ -39,17 +39,6 @@ export const updateUser = createAsyncThunk('user/updateUser', async(userData, th
     }
 })
 
-// export const updateUserCart = createAsyncThunk('user/updateUserCart', async(userData, thunkAPI) =>{
-//     console.log(userData)
-//     try{
-//         let response = await Axios.put(`/users/update-user-cart/${userData.id}`,userData)
-//         console.log(response.data)
-//     }catch(error){
-//         return thunkAPI.rejectWithValue(error.response.data)
-//     }
-// })
-
-
 
 export const deleteUser = createAsyncThunk('user/deleteUser', async(id, thunkAPI) =>{
 
@@ -61,55 +50,41 @@ export const deleteUser = createAsyncThunk('user/deleteUser', async(id, thunkAPI
     }
 })
 
-
+const initialState = {
+    id: '',
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    phoneNumber:'',
+    streetAddress:'',
+    unitApartment:'',
+    city:'',
+    state:'',
+    zipcode:'',
+}
 export const usersSlice = createSlice({
     name: 'user',
-    initialState: {
-        id: '',
-        email: '',
-        password: '',
-        firstName: '',
-        lastName: '',
-        phoneNumber:'',
-        streetAddress:'',
-        unitApartment:'',
-        city:'',
-        state:'',
-        zipcode:'',
-        cartId:'',
-        orderSubmitted: false,
-        orders:[]
-    },
-    //syncronous set state
+    initialState,
     reducers: {
         setUser: (state, action) => {
             return {
                 ...action.payload,
                 password: ''
             }
+        },
+        saveOrderId: (state, action) => {
+            // state.orders.push(action.payload)
         },               
-        resetUser: (state) => {
-            return {
-                id: '',
-                email: '',
-                password: '',
-                firstname: '',
-                lastname: '',
-                phoneNumber:'',
-                streetAddress:'',
-                unitApartment:'',
-                city:'',
-                state:'',
-                zipcode:'',
-                cart:'',
-                orders:[]
-            }
+        resetUser: (state,) =>{ 
+            return initialState
         }
-    },
+        
+    }
     
     
 })
 
- export const { setUser, setUserCart,clearUserCart,pushUserCartToOrderArr ,resetStatus,resetUser } = usersSlice.actions
+ export const { setUser, saveOrderId,resetStatus,resetUser } = usersSlice.actions
 
 export default usersSlice.reducer

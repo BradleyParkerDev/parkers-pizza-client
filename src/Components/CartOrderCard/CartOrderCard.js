@@ -13,6 +13,7 @@ import {
     updateUserCart,
     calculateCartTotal 
 } from '../../Redux/cartSlice'
+
 import { viewPizzaDetails } from '../../Redux/pizzaBuilderSlice'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,7 +24,7 @@ const CartOrderCard = (props) =>{
     const user = useSelector((state)=>state.user)
     const auth = useSelector((state)=>state.auth.isAuth)
 
-    console.log(cart)
+    // console.log(cart)
 
     const {
         cartItem
@@ -120,16 +121,9 @@ const CartOrderCard = (props) =>{
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
         console.log(JSON.parse(localCart))
-
-        if(localCart){
+        if(localCart && auth === false){
             dispatch(setCart(JSON.parse(localCart)))   
         }
-        
-        // if(localCart && !auth){
-        //     dispatch(setCart(JSON.parse(localCart)))   
-        // }else if(auth){
-        //     dispatch(setCart(user.cart))   
-        // }
     } 
     useEffect((props)=>{
         dispatch(checkCartStatus())
@@ -145,7 +139,6 @@ const CartOrderCard = (props) =>{
         {(cart.itemsInCart === true && cart.userLoggedIn === false) && setLocalCart()}
         {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
         dispatch(calculateCartTotal())
-        // {cart.userLoggedIn && dispatch(setCart(user.cart))}
     },[cart, auth, quantity])
 
     return(

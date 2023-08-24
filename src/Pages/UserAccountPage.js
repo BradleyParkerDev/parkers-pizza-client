@@ -1,13 +1,28 @@
 import UserForm from "../Components/UserForm/UserForm";
 import OrderHistoryCard from "../Components/OrderHistoryCard/OrderHistoryCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { deleteUser } from "../Redux/usersSlice";
+import { createUserCart } from "../Redux/cartSlice";
 const UserAccountPage = (props) => {
     const auth = useSelector((state)=>state.auth.isAuth)
     const user = useSelector((state)=>state.users)
+    const cart = useSelector((state)=>state.cart)
     const dispatch = useDispatch()
     const [updateInfo, setUpdateInfo] = useState('update')
+
+
+    useEffect((props)=>{
+
+
+        // if(auth === true && user.cartId.length !== 0){
+
+
+        //     dispatch(createUserCart(cart))
+
+        // }
+    },[cart,auth])
+
 
     return(
         <div id='user-account-page-container' className="min-h-screen w-full ">

@@ -19,17 +19,15 @@ const LoginPage = () =>{
     
     useEffect(()=>{
 
-        console.log(userLoginObj)
+        // console.log(userLoginObj)
 
 
     },[userLoginObj])
 
 
     const login = (obj) => {
-
         dispatch(loginUser(obj))
         navigate("/");
-
     }
 
     const handleEmailChange = (e) =>{

@@ -22,7 +22,7 @@ const UserForm = (props) => {
     const [state, setState] = useState('');
     const [zipcode, setZipcode] = useState('');
     const [inputType, setInputType] = useState('password')
-
+    const [borderColor, setBorderColor] = useState('black')
     const { 
         updateInfo,
         auth,
@@ -70,13 +70,27 @@ const UserForm = (props) => {
     },[auth])
 
     const signUp = () =>{
-        dispatch(registerUser(userObj))
-        navigate('/login');
+        if(password !== reEnteredPassword){
+            setBorderColor('red')
+            alert('Passwords dont match.')
+            
+        }else{
+            setBorderColor('black')
+            dispatch(registerUser(userObj))
+            navigate('/login');            
+        }
+
 
     }
 
     const updateUserInfo = () =>{
-        dispatch(updateUser(userObj))
+        if(password !== reEnteredPassword){
+            setBorderColor('red')
+            alert('Passwords dont match.')
+        }else{
+            setBorderColor('black')
+            dispatch(updateUser(userObj))
+        }
 
     }
 
@@ -175,7 +189,7 @@ const UserForm = (props) => {
                         <div id='password-reenterPassword' className="mt-[18px] md:mt-[0px] flex">
                             <div id='password'>
                                 <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy">Password</p>
-                                <input type={`${inputType}`} value={password} onChange={handlePasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                                <input  type={`${inputType}`} value={password} onChange={handlePasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px", borderColor:`${borderColor}`}} className="pl-[3px] pr-[3px] md:mr-[26px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                                 <div id="show-password" className="flex mt-[5px]">
                                     <input onClick={()=>{showPassword()}} type="checkbox" />
 
@@ -187,7 +201,7 @@ const UserForm = (props) => {
                             </div>
                             <div id='reenter-password'>
                                 <p style={{fontSize:"14px", lineHeight:"14px"}}className="mb-[10px] font-sergioTrendy"> Reenter Password</p>
-                                <input type={`${inputType}`} value={reEnteredPassword} onChange={handleReEnteredPasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px"}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
+                                <input type={`${inputType}`} value={reEnteredPassword} onChange={handleReEnteredPasswordChange} style={{height:"33px", fontSize:"24px", lineHeight:"24px", borderColor:`${borderColor}`}} className="pl-[3px] pr-[3px] mr-[14px] w-[150px] md:w-[190px] border-black border-[1px] border-solid  rounded-[5px]"/>
                             </div>
                         </div>
                     </div>   

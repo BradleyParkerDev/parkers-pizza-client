@@ -3,7 +3,17 @@ import plus from './plus.png'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart, updateQuantity, updateUserCart,setCart,checkCartStatus, calculateCartTotal } from '../../Redux/cartSlice'
+import { 
+    addItemToCart, 
+    updateQuantity, 
+    setCart,
+    checkCartStatus, 
+    addUserIdToCart,
+    calculateCartTotal,
+    createUserCart,
+    getUserCart, 
+    updateUserCart,
+} from '../../Redux/cartSlice'
 import { setUserCart } from '../../Redux/usersSlice'
 import { selectSize, selectCrust } from '../../Redux/pizzaBuilderSlice'
 const MenuCard = (props) =>{
@@ -49,6 +59,9 @@ const MenuCard = (props) =>{
                 name: itemObj.name
             }
             dispatch(addItemToCart(payload))
+            if(cart.userId === '' && auth === true){
+                dispatch(addUserIdToCart(user.id))
+            }
 
         }
         if(change === 'increase'){
@@ -57,6 +70,9 @@ const MenuCard = (props) =>{
                 name: itemObj.name
             }
             dispatch(updateQuantity(payload))
+            if(cart.userId === '' && auth === true){
+                dispatch(addUserIdToCart(user.id))
+            }
         }
         if(change === 'decrease'){
             let payload = {
@@ -64,6 +80,9 @@ const MenuCard = (props) =>{
                 name: itemObj.name
             }
             dispatch(updateQuantity(payload))
+            if(cart.userId === '' && auth === true){
+                dispatch(addUserIdToCart(user.id))
+            }
         }
 
     }
@@ -113,36 +132,24 @@ const MenuCard = (props) =>{
     //Gets cart slice items from local storage
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
-        console.log(JSON.parse(localCart))
+        // console.log(JSON.parse(localCart))
 
-        if(localCart){
+        if(localCart && cart.userLoggedIn === false){
             dispatch(setCart(JSON.parse(localCart)))   
         }
-
-        // if(localCart && !auth){
-        //     dispatch(setCart(JSON.parse(localCart)))   
-        // }else if(auth){
-        //     dispatch(setCart(user.cart))   
-        // }
-    } 
+    }
+    
+    
+    const getUserCart = () =>{
+        dispatch(getUserCart(user.id))
+    }
 
     useEffect((props)=>{
         checkCartStatusQuantity()
         dispatch(checkCartStatus())
-
-        
-        // if(auth){
-        //     let userData = {
-        //         id: user.id,
-        //         cart: cart
-        //     }
-
-        //     dispatch(updateUserCart(userData))
-        // }
-        {(cart.itemsInCart === true && cart.userLoggedIn === false) && setLocalCart()}
-        {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
+        {(cart.itemsInCart === true ) && setLocalCart()}
+        {(cart.itemsInCart === false ) && getLocalCart()}
         dispatch(calculateCartTotal())
-        // {cart.userLoggedIn && dispatch(setUserCart(cart))}
     },[cart, inCart, quantity])
 
     //Sets the images and sizes in PizzaBuilder for pizza MenuCards

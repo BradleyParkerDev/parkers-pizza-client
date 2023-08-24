@@ -16,11 +16,11 @@ const HomePage = (props) =>{
     return(
 
         <div id="home-container" className="w-full min-h-screen">
-            <div id='deals-row-container' className="mt-[37px] ml-[34px] mb-[80px] min-h-[auto] w-[auto] border-black border-dashed border-[1px] ">
-                <div id='deals-title' className=" flex mb-[37px] font-sergioTrendy  border-black border-dashed border-[1px]">
+            <div id='deals-row-container' className="mt-[37px] ml-[34px] mb-[80px] min-h-[auto] w-[auto] ">
+                <div id='deals-title' className=" flex mb-[37px] font-sergioTrendy ">
                     <p style={{fontSize:'32px', lineHeight:'32px'}}>Deals</p>
                 </div>
-                <div id='deals-row'  className="flex pr-[34px] justify-center overflow-x-scroll mt-[21px] h-[auto]  border-black border-dashed border-[1px]">
+                <div id='deals-row'  className="flex pr-[34px] justify-center overflow-x-scroll mt-[21px] h-[auto] ">
                     <DealCard />
                     
                 </div>

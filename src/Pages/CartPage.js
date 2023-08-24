@@ -2,33 +2,27 @@ import CartOrderCard from "../Components/CartOrderCard/CartOrderCard";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setCart, checkCartStatus,checkUserStatus,calculateCartTotal, updateUserCart,resetCart } from "../Redux/cartSlice";
-import {userCheckout, pushUserCartToOrderArr,  clearUserCart} from "../Redux/usersSlice";
+import { setCart, checkCartStatus,checkUserStatus,calculateCartTotal, updateUserCart,resetCart,createOrder } from "../Redux/cartSlice";
+import { saveOrderId } from "../Redux/usersSlice";
 const CartPage = (props) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cart = useSelector((state)=>state.cart)
     const pizzas = useSelector((state)=>state.cart.pizzas.pizzasArr)
-    const [orderType , setOrderType] = useState('')
+    const [orderType , setOrderType] = useState('delivery')
     const user = useSelector((state)=>state.users)
     const auth = useSelector((state)=>state.auth.isAuth)
     const [empty,setEmpty] = useState(true)
-
+    const [specialInstructions, setSpecialInstructions] = useState('')
 
     //Gets cart slice items from local storage
     const getLocalCart = () =>{
         let localCart = localStorage.getItem('localCart')
         console.log(JSON.parse(localCart))
 
-        if(localCart){
+        if(localCart && auth === false){
             dispatch(setCart(JSON.parse(localCart)))   
         }
-        
-        // if(localCart && !auth){
-        //     dispatch(setCart(JSON.parse(localCart)))   
-        // }else if(auth){
-        //     dispatch(setCart(user.cart))   
-        // }
     } 
 
 
@@ -37,22 +31,35 @@ const CartPage = (props) =>{
     // Checkout function
     const checkout = () => {
         if(empty === false){
-            // dispatch(pushUserCartToOrderArr(orderType))
-            // dispatch(clearUserCart())
-            // dispatch(resetCart())
-            // let userData = {
-            //     id: user.id,
-            //     cart: {},
-            //     orders: user.orders
-            // }
-            // dispatch(updateUserCart(userData))
-            // dispatch(userCheckout(userData))
+            let order ={
+                orderId: cart.cartId,
+                orderType: orderType,
+                userId: user.id,
+                pizzas: cart.pizzas,
+                items: cart.items,
+                specialInstructions: specialInstructions,
+                total: cart.total,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                phoneNumber: user.phoneNumber,
+                streetAddress: user.streetAddress,
+                unitApartment: user.unitApartment,
+                city: user.city,
+                state: user.state,
+                zipcode: user.zipcode
+            }
+            dispatch(createOrder(order))
+            dispatch(resetCart())
+            localStorage.removeItem('localCart')
+            alert('Order Submitted!')
             navigate('/user-account')            
         }
 
     }
 
-
+    const handleSpecialInstructions = (e) =>{
+        setSpecialInstructions(e.target.value);
+    }
 
 
 
@@ -61,7 +68,10 @@ const CartPage = (props) =>{
     useEffect((props)=>{
         dispatch(checkUserStatus(auth))
         console.log(`userLoggedIn: ${cart.userLoggedIn}`)
-        {(cart.itemsInCart === false && cart.userLoggedIn === false) && getLocalCart()}
+
+        {(cart.itemsInCart === false ) && getLocalCart()}
+        
+        //Checks if cart is empty
         if(cart.total === 0){
             setEmpty(true)
         }else{
@@ -69,6 +79,7 @@ const CartPage = (props) =>{
 
         }
 
+        // setSpecialInstructions(instructions);
         console.log(orderType)
     },[cart,auth, orderType])
 
@@ -224,7 +235,7 @@ const CartPage = (props) =>{
         )
     }   
 
-    console.log(pizzas)
+    // console.log(pizzas)
     return(
         // Page Container
         <div id="cartPage-container" className="w-full min-h-screen">
@@ -256,7 +267,7 @@ const CartPage = (props) =>{
                                 Special Instructions
                             </p>
                         </div>
-                        <textarea id="special-instructions" className='p-[5px] w-full h-[106px] border-solid border-black border-[1px]'/>
+                        <textarea onChange={handleSpecialInstructions} id="special-instructions" className='p-[5px] w-full h-[106px] border-solid border-black border-[1px]'/>
                     </div>
             </div>
             <div id="cp-container-4" className="flex justify-center ">
