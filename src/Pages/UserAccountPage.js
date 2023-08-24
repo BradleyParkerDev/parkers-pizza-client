@@ -3,12 +3,14 @@ import OrderHistoryCard from "../Components/OrderHistoryCard/OrderHistoryCard";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { deleteUser } from "../Redux/usersSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 import { createUserCart } from "../Redux/cartSlice";
 const UserAccountPage = (props) => {
     const auth = useSelector((state)=>state.auth.isAuth)
     const user = useSelector((state)=>state.users)
     const cart = useSelector((state)=>state.cart)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [updateInfo, setUpdateInfo] = useState('update')
 
 
@@ -22,7 +24,12 @@ const UserAccountPage = (props) => {
 
         // }
     },[cart,auth])
+    const deleteUserButton = () =>{
+        dispatch(deleteUser(user.id))
+        alert('User account deleted.')
+        navigate('/')
 
+    }
 
     return(
         <div id='user-account-page-container' className="min-h-screen w-full ">
@@ -86,7 +93,7 @@ const UserAccountPage = (props) => {
 
                 <div id="user-account-body-div4" className='flex justify-center'>
                     <div className='flex justify-center'>
-                        <div onClick={()=>{dispatch(deleteUser(user.id))}} id='sign-up-button' className="w-[191px] h-[47px] mb-[46px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
+                        <div onClick={()=>{deleteUserButton()}} id='sign-up-button' className="w-[191px] h-[47px] mb-[46px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
                             <p className="mt-[12px] ml-[31px]">Delete Account</p>
                         </div>
                         <div id="button-outer-container" className="flex justify-center">

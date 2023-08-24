@@ -77,6 +77,7 @@ const UserForm = (props) => {
         }else{
             setBorderColor('black')
             dispatch(registerUser(userObj))
+            alert('Account created!')
             navigate('/login');            
         }
 
@@ -90,6 +91,7 @@ const UserForm = (props) => {
         }else{
             setBorderColor('black')
             dispatch(updateUser(userObj))
+            alert('User info updated!')
         }
 
     }
@@ -154,7 +156,7 @@ const UserForm = (props) => {
             )
         }else{
             return(
-                <div id="button-outer-container" className="flex justify-center">
+                <div id="button-outer-container" className="flex justify-center mb-[200px]">
                     <div id="button-inner-container" className="w-[95%] flex justify-end">
                         <div onClick={()=>{signUp()}} id='sign-up-button' className="mt-[26px] w-[120px] h-[50px] rounded-[5px] bg-red-pp text-white font-sergioTrendy">
                             <p className="mt-[15px] ml-[29px]">Sign Up</p>
